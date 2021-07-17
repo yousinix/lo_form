@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 class LoFormState extends ChangeNotifier {
-  final void Function(Map<String, dynamic>) onSubmit;
+  final Map<String, dynamic>? initialValues;
   final Map<String, dynamic> values;
+  final void Function(Map<String, dynamic>) onSubmit;
 
   LoFormState({
+    this.initialValues,
     required this.onSubmit,
-  }) : values = {};
+  }) : values = initialValues ?? {};
 
   void registerField(String name) {
     if (values.containsKey(name)) return;

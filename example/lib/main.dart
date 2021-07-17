@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 
@@ -11,19 +10,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LoForm Demo',
-      home: HelloPage(),
-    );
-  }
-}
-
-class HelloPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Center(
-          child: HelloForm(),
+      home: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Center(
+            child: HelloForm(),
+          ),
         ),
       ),
     );
@@ -34,6 +26,9 @@ class HelloForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoForm(
+      initialValues: {
+        'name': 'whoami',
+      },
       onSubmit: (values) {
         final name = values['name'] as String;
         ScaffoldMessenger.of(context)
@@ -49,7 +44,8 @@ class HelloForm extends StatelessWidget {
           children: [
             LoField<String>(
               name: 'name',
-              builder: (state, onChanged) => TextField(
+              builder: (initialValue, onChanged) => TextFormField(
+                initialValue: initialValue,
                 onChanged: onChanged,
               ),
             ),

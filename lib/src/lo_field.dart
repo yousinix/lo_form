@@ -5,7 +5,7 @@ import 'lo_form_state.dart';
 
 class LoField<T> extends StatelessWidget {
   final String name;
-  final Widget Function(LoFormState, void Function(T)) builder;
+  final Widget Function(T?, void Function(T)) builder;
 
   const LoField({
     Key? key,
@@ -20,7 +20,7 @@ class LoField<T> extends StatelessWidget {
     return Consumer<LoFormState>(
       builder: (_, formState, __) {
         return builder(
-          formState,
+          formState.initialValues?[name] as T ?? null,
           (value) => formState.updateField(name, value),
         );
       },
