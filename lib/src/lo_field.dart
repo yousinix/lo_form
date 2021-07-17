@@ -20,7 +20,7 @@ class LoField<T> extends StatelessWidget {
     return Consumer<LoFormState>(
       builder: (_, formState, __) {
         return builder(
-          formState.initialValues?[name] as T ?? null,
+          formState.initialValues?[name] as T,
           (value) => formState.updateField(name, value),
         );
       },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 
+import 'fake_repo.dart';
+
 void main() {
   runApp(App());
 }
@@ -29,13 +31,15 @@ class HelloForm extends StatelessWidget {
       initialValues: {
         'name': 'whoami',
       },
-      onSubmit: (values) {
+      onSubmit: (values) async {
         final name = values['name'] as String;
+        final message = await FakeRepo.greet(name);
+
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(
             SnackBar(
-              content: Text('Hello, $name! 👋'),
+              content: Text(message),
             ),
           );
       },
@@ -51,7 +55,7 @@ class HelloForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: state.submit,
+              onPressed: state.isSubmitting ? null : state.submit,
               child: Text('Submit'),
             )
           ],
