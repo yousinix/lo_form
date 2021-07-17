@@ -1,0 +1,16 @@
+name: lo_form_exmple
+description: An example demonstrating how to use LoForm.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  lo_form:
+    path: ../
+
+flutter:
+  uses-material-design: true
