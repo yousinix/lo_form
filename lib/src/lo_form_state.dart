@@ -4,6 +4,7 @@ class LoFormState extends ChangeNotifier {
   final Map<String, dynamic>? initialValues;
   final Map<String, dynamic> values;
   final Map<String, String> errors;
+  final Map<String, String>? Function(Map<String, dynamic>)? validate;
   final Future<void> Function(Map<String, dynamic>) onSubmit;
 
   bool isSubmitting;
@@ -11,6 +12,7 @@ class LoFormState extends ChangeNotifier {
   LoFormState({
     this.initialValues,
     required this.onSubmit,
+    this.validate,
   })  : values = {},
         errors = {},
         isSubmitting = false;
@@ -23,14 +25,22 @@ class LoFormState extends ChangeNotifier {
   void updateField<T>(String name, T value, [String? error]) {
     values[name] = value;
 
-    if (error == null) {
-      errors.remove(name);
-    } else {
+    if (error != null) {
       errors[name] = error;
+    } else {
+      final formLevelErrors = validate?.call(values);
+      final secondaryError = formLevelErrors?[name];
+
+      if (secondaryError != null) {
+        errors[name] = secondaryError;
+      } else {
+        errors.remove(name);
+      }
     }
 
     notifyListeners();
   }
+
 
   Future<void> submit() async {
     isSubmitting = true;

@@ -31,6 +31,9 @@ class HelloForm extends StatelessWidget {
       initialValues: const {
         'name': 'whoami',
       },
+      validate: (values) {
+        if (values['name'] == 'someone') return {'name': 'Who are you?'};
+      },
       onSubmit: (values) async {
         final name = values['name'] as String;
         final message = await FakeRepo.greet(name);
