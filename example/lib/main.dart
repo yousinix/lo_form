@@ -69,7 +69,7 @@ class HelloForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: formState.isSubmitting ? null : formState.submit,
+              onPressed: formState.status.isLoading ? null : formState.submit,
               child: const Text('Submit'),
             )
           ],

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'lo_form_status.dart';
+
 typedef ValMap = Map<String, dynamic>;
 typedef ErrMap = Map<String, String>;
 typedef ValToErrFunc = Future<ErrMap?> Function(ValMap);
@@ -11,7 +13,7 @@ class LoFormState extends ChangeNotifier {
   final ValToErrFunc? validate;
   final ValToErrFunc onSubmit;
 
-  bool isSubmitting;
+  LoFormStatus status;
 
   LoFormState({
     this.initialValues,
@@ -19,7 +21,7 @@ class LoFormState extends ChangeNotifier {
     this.validate,
   })  : values = {},
         errors = {},
-        isSubmitting = false;
+        status = LoFormStatus.pure;
 
   void registerField(String name) {
     if (values.containsKey(name)) return;
@@ -47,14 +49,14 @@ class LoFormState extends ChangeNotifier {
 
 
   Future<void> submit() async {
-    isSubmitting = true;
+    status = LoFormStatus.loading;
     notifyListeners();
 
     errors.clear();
     final submitErrors = await onSubmit(values);
     if (submitErrors != null) errors.addAll(submitErrors);
 
-    isSubmitting = false;
+    status = LoFormStatus.idle;
     notifyListeners();
   }
 }
