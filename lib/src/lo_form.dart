@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:lo_form/lo_form.dart';
 import 'package:provider/provider.dart';
+
+import 'lo_form_state.dart';
 
 class LoForm extends StatelessWidget {
   final Map<String, dynamic>? initialValues;

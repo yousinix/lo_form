@@ -12,5 +12,8 @@ dependencies:
   lo_form:
     path: ../
 
+dev_dependencies:
+  lint: ^1.0.0
+
 flutter:
   uses-material-design: true

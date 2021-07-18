@@ -28,7 +28,7 @@ class HelloForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoForm(
-      initialValues: {
+      initialValues: const {
         'name': 'whoami',
       },
       onSubmit: (values) async {
@@ -53,10 +53,10 @@ class HelloForm extends StatelessWidget {
                 onChanged: fieldState.onChanged,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: formState.isSubmitting ? null : formState.submit,
-              child: Text('Submit'),
+              child: const Text('Submit'),
             )
           ],
         );

@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
-import 'package:lo_form/src/lo_field_state.dart';
 import 'package:provider/provider.dart';
 
+import 'lo_field_state.dart';
 import 'lo_form_state.dart';
 
 class LoField<T> extends StatelessWidget {
   final String name;
-  final Widget Function(LoFieldState) builder;
+  final Widget Function(LoFieldState<T>) builder;
 
   const LoField({
     Key? key,
