@@ -43,19 +43,19 @@ class HelloForm extends StatelessWidget {
             ),
           );
       },
-      builder: (state) {
+      builder: (formState) {
         return Column(
           children: [
             LoField<String>(
               name: 'name',
-              builder: (initialValue, onChanged) => TextFormField(
-                initialValue: initialValue,
-                onChanged: onChanged,
+              builder: (fieldState) => TextFormField(
+                initialValue: fieldState.initialValue,
+                onChanged: fieldState.onChanged,
               ),
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: state.isSubmitting ? null : state.submit,
+              onPressed: formState.isSubmitting ? null : formState.submit,
               child: Text('Submit'),
             )
           ],

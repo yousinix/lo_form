@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 class LoFormState extends ChangeNotifier {
   final Map<String, dynamic>? initialValues;
   final Map<String, dynamic> values;
+  final Map<String, String> errors;
   final Future<void> Function(Map<String, dynamic>) onSubmit;
 
   bool isSubmitting;
@@ -11,6 +12,7 @@ class LoFormState extends ChangeNotifier {
     this.initialValues,
     required this.onSubmit,
   })  : values = initialValues ?? {},
+        errors = {},
         isSubmitting = false;
 
   void registerField(String name) {

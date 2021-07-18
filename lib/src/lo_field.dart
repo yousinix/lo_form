@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:lo_form/src/lo_field_state.dart';
 import 'package:provider/provider.dart';
 
 import 'lo_form_state.dart';
 
 class LoField<T> extends StatelessWidget {
   final String name;
-  final Widget Function(T?, void Function(T)) builder;
+  final Widget Function(LoFieldState) builder;
 
   const LoField({
     Key? key,
@@ -19,10 +20,13 @@ class LoField<T> extends StatelessWidget {
 
     return Consumer<LoFormState>(
       builder: (_, formState, __) {
-        return builder(
-          formState.initialValues?[name] as T,
-          (value) => formState.updateField(name, value),
+        final fieldState = LoFieldState<T>(
+          name: name,
+          initialValue: formState.initialValues?[name] as T,
+          onChanged: (value) => formState.updateField(name, value),
         );
+
+        return builder(fieldState);
       },
     );
   }
