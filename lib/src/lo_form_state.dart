@@ -4,7 +4,7 @@ class LoFormState extends ChangeNotifier {
   final Map<String, dynamic>? initialValues;
   final Map<String, dynamic> values;
   final Map<String, String> errors;
-  final Map<String, String>? Function(Map<String, dynamic>)? validate;
+  final Future<Map<String, String>?> Function(Map<String, dynamic>)? validate;
   final Future<void> Function(Map<String, dynamic>) onSubmit;
 
   bool isSubmitting;
@@ -22,13 +22,13 @@ class LoFormState extends ChangeNotifier {
     values[name] = initialValues?[name];
   }
 
-  void updateField<T>(String name, T value, [String? error]) {
+  Future<void> updateField<T>(String name, T value, [String? error]) async {
     values[name] = value;
 
     if (error != null) {
       errors[name] = error;
     } else {
-      final formLevelErrors = validate?.call(values);
+      final formLevelErrors = await validate?.call(values);
       final secondaryError = formLevelErrors?[name];
 
       if (secondaryError != null) {
