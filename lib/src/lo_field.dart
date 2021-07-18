@@ -24,6 +24,7 @@ class LoField<T> extends StatelessWidget {
       builder: (_, formState, __) {
         final fieldState = LoFieldState<T>(
           name: name,
+          status: formState.statuses[name]!,
           initialValue: formState.initialValues?[name] as T,
           error: formState.errors[name],
           onChanged: (value) {

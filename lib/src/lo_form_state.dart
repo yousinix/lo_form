@@ -4,6 +4,7 @@ import 'lo_form_status.dart';
 
 typedef ValMap = Map<String, dynamic>;
 typedef ErrMap = Map<String, String?>;
+typedef StsMap = Map<String, LoFormStatus>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
 typedef SubmitFunc = Future<ErrMap?> Function(ValMap);
 
@@ -11,6 +12,7 @@ class LoFormState extends ChangeNotifier {
   final ValMap? initialValues;
   final ValMap values;
   final ErrMap errors;
+  final StsMap statuses;
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
 
@@ -22,27 +24,31 @@ class LoFormState extends ChangeNotifier {
     this.validate,
   })  : values = {},
         errors = {},
+        statuses = {},
         status = LoFormStatus.pure;
 
   void registerField(String name) {
     if (values.containsKey(name)) return; // Prevent re-registration
     values[name] = initialValues?[name];
     errors[name] = null;
+    statuses[name] = LoFormStatus.pure;
   }
 
   void updateField<T>(String name, T value, [String? error]) {
     values[name] = value;
-    errors[name] = error;
 
     // Check form-level errors only if the field has no errors itself
-    if (error == null) {
-      final formLevelErrors = validate?.call(values);
-      errors[name] = formLevelErrors?[name];
+    errors[name] = error ?? validate?.call(values)?[name];
+
+    if (value == initialValues?[name]) {
+      statuses[name] = LoFormStatus.pure;
+    } else if (errors[name] != null) {
+      statuses[name] = LoFormStatus.invalid;
+    } else {
+      statuses[name] = LoFormStatus.valid;
     }
 
-    final hasErrors = errors.entries.any((f) => f.value != null);
-    status = hasErrors ? LoFormStatus.invalid : LoFormStatus.valid;
-
+    status = statuses.values.reduce((res, x) => res.and(x));
     notifyListeners();
   }
 
@@ -52,7 +58,10 @@ class LoFormState extends ChangeNotifier {
 
     final submitErrors = await onSubmit(values);
     errors.forEach((name, value) {
-      errors[name] = submitErrors?[name] ?? value;
+      if (submitErrors?[name] != null) {
+        errors[name] = submitErrors?[name];
+        statuses[name] = LoFormStatus.invalid;
+      }
     });
 
     final hasErrors = submitErrors?.isNotEmpty ?? false;
