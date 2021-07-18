@@ -35,16 +35,20 @@ class HelloForm extends StatelessWidget {
         if (values['name'] == 'someone') return {'name': 'Who are you?'};
       },
       onSubmit: (values) async {
-        final name = values['name'] as String;
-        final message = await FakeRepo.greet(name);
+        try {
+          final name = values['name'] as String;
+          final message = await FakeRepo.greet(name);
 
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(
-              content: Text(message),
-            ),
-          );
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(message),
+              ),
+            );
+        } catch (e) {
+          return {'name': e.toString()};
+        }
       },
       builder: (formState) {
         return Column(

@@ -5,7 +5,7 @@ class LoFormState extends ChangeNotifier {
   final Map<String, dynamic> values;
   final Map<String, String> errors;
   final Future<Map<String, String>?> Function(Map<String, dynamic>)? validate;
-  final Future<void> Function(Map<String, dynamic>) onSubmit;
+  final Future<Map<String, String>?> Function(Map<String, dynamic>) onSubmit;
 
   bool isSubmitting;
 
@@ -46,7 +46,9 @@ class LoFormState extends ChangeNotifier {
     isSubmitting = true;
     notifyListeners();
 
-    await onSubmit(values);
+    errors.clear();
+    final submitErrors = await onSubmit(values);
+    if (submitErrors != null) errors.addAll(submitErrors);
 
     isSubmitting = false;
     notifyListeners();
