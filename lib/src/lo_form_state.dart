@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'lo_form_status.dart';
 
 typedef ValMap = Map<String, dynamic>;
-typedef ErrMap = Map<String, String>;
+typedef ErrMap = Map<String, String?>;
 typedef ValToErrFunc = Future<ErrMap?> Function(ValMap);
 
 class LoFormState extends ChangeNotifier {
@@ -24,39 +24,38 @@ class LoFormState extends ChangeNotifier {
         status = LoFormStatus.pure;
 
   void registerField(String name) {
-    if (values.containsKey(name)) return;
+    if (values.containsKey(name)) return; // Prevent re-registration
     values[name] = initialValues?[name];
+    errors[name] = null;
   }
 
   Future<void> updateField<T>(String name, T value, [String? error]) async {
     values[name] = value;
+    errors[name] = error;
 
-    if (error != null) {
-      errors[name] = error;
-    } else {
+    // Check form-level errors only if the field has no errors itself
+    if (error == null) {
       final formLevelErrors = await validate?.call(values);
-      final secondaryError = formLevelErrors?[name];
-
-      if (secondaryError != null) {
-        errors[name] = secondaryError;
-      } else {
-        errors.remove(name);
-      }
+      errors[name] = formLevelErrors?[name];
     }
+
+    final hasErrors = errors.entries.any((f) => f.value != null);
+    status = hasErrors ? LoFormStatus.invalid : LoFormStatus.valid;
 
     notifyListeners();
   }
-
 
   Future<void> submit() async {
     status = LoFormStatus.loading;
     notifyListeners();
 
-    errors.clear();
     final submitErrors = await onSubmit(values);
-    if (submitErrors != null) errors.addAll(submitErrors);
+    errors.forEach((name, value) {
+      errors[name] = submitErrors?[name] ?? value;
+    });
 
-    status = LoFormStatus.idle;
+    final hasErrors = submitErrors?.isNotEmpty ?? false;
+    status = hasErrors ? LoFormStatus.invalid : LoFormStatus.submitted;
     notifyListeners();
   }
 }
