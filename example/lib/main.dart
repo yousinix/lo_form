@@ -71,6 +71,8 @@ class HelloForm extends StatelessWidget {
               onPressed: formState.status.isValid ? formState.submit : null,
               child: const Text('Submit'),
             ),
+            const SizedBox(height: 16),
+            Text(formState.touched.toString()),
           ],
         );
       },

@@ -5,6 +5,7 @@ import 'lo_form_status.dart';
 typedef ValMap = Map<String, dynamic>;
 typedef ErrMap = Map<String, String?>;
 typedef StsMap = Map<String, LoFormStatus>;
+typedef TchMap = Map<String, bool>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
 typedef SubmitFunc = Future<ErrMap?> Function(ValMap);
 
@@ -13,6 +14,7 @@ class LoFormState extends ChangeNotifier {
   final ValMap values;
   final ErrMap errors;
   final StsMap statuses;
+  final TchMap touched;
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
 
@@ -25,6 +27,7 @@ class LoFormState extends ChangeNotifier {
   })  : values = {},
         errors = {},
         statuses = {},
+        touched = {},
         status = LoFormStatus.pure;
 
   void registerField(String name) {
@@ -32,10 +35,17 @@ class LoFormState extends ChangeNotifier {
     values[name] = initialValues?[name];
     errors[name] = null;
     statuses[name] = LoFormStatus.pure;
+    touched[name] = false;
+  }
+
+  void markTouched(String name) {
+    touched[name] = true;
+    notifyListeners();
   }
 
   void updateField<T>(String name, T value, [String? error]) {
     values[name] = value;
+    touched[name] = true;
 
     // Check form-level errors only if the field has no errors itself
     errors[name] = error ?? validate?.call(values)?[name];
@@ -68,4 +78,6 @@ class LoFormState extends ChangeNotifier {
     status = hasErrors ? LoFormStatus.invalid : LoFormStatus.submitted;
     notifyListeners();
   }
+
+
 }

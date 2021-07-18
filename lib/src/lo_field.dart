@@ -18,22 +18,28 @@ class LoField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<LoFormState>().registerField(name);
-
     return Consumer<LoFormState>(
-      builder: (_, formState, __) {
-        final fieldState = LoFieldState<T>(
-          name: name,
-          status: formState.statuses[name]!,
-          initialValue: formState.initialValues?[name] as T,
-          error: formState.errors[name],
-          onChanged: (value) {
-            final error = validate?.call(value);
-            formState.updateField(name, value, error);
-          },
-        );
+      builder: (_, state, __) {
+        state.registerField(name);
 
-        return builder(fieldState);
+        return FocusScope(
+          child: Focus(
+            onFocusChange: (focus) => state.markTouched(name),
+            child: builder(
+              LoFieldState<T>(
+                name: name,
+                status: state.statuses[name]!,
+                touched: state.touched[name]!,
+                initialValue: state.initialValues?[name] as T,
+                error: state.errors[name],
+                onChanged: (value) {
+                  final error = validate?.call(value);
+                  state.updateField(name, value, error);
+                },
+              ),
+            ),
+          ),
+        );
       },
     );
   }
