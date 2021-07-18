@@ -11,17 +11,24 @@ class LoFormState extends ChangeNotifier {
   LoFormState({
     this.initialValues,
     required this.onSubmit,
-  })  : values = initialValues ?? {},
+  })  : values = {},
         errors = {},
         isSubmitting = false;
 
   void registerField(String name) {
     if (values.containsKey(name)) return;
-    values[name] = null;
+    values[name] = initialValues?[name];
   }
 
-  void updateField<T>(String name, T value) {
+  void updateField<T>(String name, T value, [String? error]) {
     values[name] = value;
+
+    if (error == null) {
+      errors.remove(name);
+    } else {
+      errors[name] = error;
+    }
+
     notifyListeners();
   }
 

@@ -7,11 +7,13 @@ import 'lo_form_state.dart';
 class LoField<T> extends StatelessWidget {
   final String name;
   final Widget Function(LoFieldState<T>) builder;
+  final String? Function(T)? validate;
 
   const LoField({
     Key? key,
     required this.name,
     required this.builder,
+    this.validate,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,11 @@ class LoField<T> extends StatelessWidget {
         final fieldState = LoFieldState<T>(
           name: name,
           initialValue: formState.initialValues?[name] as T,
-          onChanged: (value) => formState.updateField(name, value),
+          error: formState.errors[name],
+          onChanged: (value) {
+            final error = validate?.call(value);
+            formState.updateField(name, value, error);
+          },
         );
 
         return builder(fieldState);

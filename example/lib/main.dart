@@ -48,9 +48,15 @@ class HelloForm extends StatelessWidget {
           children: [
             LoField<String>(
               name: 'name',
+              validate: (value) {
+                if (value.isEmpty) return 'You cannot be no one';
+              },
               builder: (fieldState) => TextFormField(
                 initialValue: fieldState.initialValue,
                 onChanged: fieldState.onChanged,
+                decoration: InputDecoration(
+                  errorText: fieldState.error,
+                ),
               ),
             ),
             const SizedBox(height: 16),
