@@ -5,8 +5,8 @@ import 'lo_form_state.dart';
 
 class LoForm extends StatelessWidget {
   final ValMap? initialValues;
-  final ValToErrFunc? validate;
-  final ValToErrFunc onSubmit;
+  final ValidateFunc? validate;
+  final SubmitFunc onSubmit;
   final Widget Function(LoFormState) builder;
 
   const LoForm({

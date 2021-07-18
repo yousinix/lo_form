@@ -31,7 +31,7 @@ class HelloForm extends StatelessWidget {
       initialValues: const {
         'name': 'whoami',
       },
-      validate: (values) async {
+      validate: (values) {
         if (values['name'] == 'someone') return {'name': 'Who are you?'};
       },
       onSubmit: (values) async {
@@ -55,9 +55,8 @@ class HelloForm extends StatelessWidget {
           children: [
             LoField<String>(
               name: 'name',
-              validate: (value) async {
+              validate: (value) {
                 if (value.isEmpty) return 'You cannot be no one';
-                if (!await FakeRepo.isUnique(value)) return 'Be Unique!';
               },
               builder: (fieldState) => TextFormField(
                 initialValue: fieldState.initialValue,

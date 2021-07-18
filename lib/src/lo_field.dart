@@ -7,7 +7,7 @@ import 'lo_form_state.dart';
 class LoField<T> extends StatelessWidget {
   final String name;
   final Widget Function(LoFieldState<T>) builder;
-  final Future<String?> Function(T)? validate;
+  final String? Function(T)? validate;
 
   const LoField({
     Key? key,
@@ -26,8 +26,8 @@ class LoField<T> extends StatelessWidget {
           name: name,
           initialValue: formState.initialValues?[name] as T,
           error: formState.errors[name],
-          onChanged: (value) async {
-            final error = await validate?.call(value);
+          onChanged: (value) {
+            final error = validate?.call(value);
             formState.updateField(name, value, error);
           },
         );
