@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
 
+typedef ValMap = Map<String, dynamic>;
+typedef ErrMap = Map<String, String>;
+typedef ValToErrFunc = Future<ErrMap?> Function(ValMap);
+
 class LoFormState extends ChangeNotifier {
-  final Map<String, dynamic>? initialValues;
-  final Map<String, dynamic> values;
-  final Map<String, String> errors;
-  final Future<Map<String, String>?> Function(Map<String, dynamic>)? validate;
-  final Future<Map<String, String>?> Function(Map<String, dynamic>) onSubmit;
+  final ValMap? initialValues;
+  final ValMap values;
+  final ErrMap errors;
+  final ValToErrFunc? validate;
+  final ValToErrFunc onSubmit;
 
   bool isSubmitting;
 

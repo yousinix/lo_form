@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'lo_form_state.dart';
 
 class LoForm extends StatelessWidget {
-  final Map<String, dynamic>? initialValues;
-  final Future<Map<String, String>?> Function(Map<String, dynamic>)? validate;
-  final Future<Map<String, String>?> Function(Map<String, dynamic>) onSubmit;
+  final ValMap? initialValues;
+  final ValToErrFunc? validate;
+  final ValToErrFunc onSubmit;
   final Widget Function(LoFormState) builder;
 
   const LoForm({
