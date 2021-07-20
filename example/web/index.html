@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -25,8 +26,36 @@
 
   <title>LoForm</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      margin: 0
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faded-text {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      opacity: 0.64;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
+
+  <div class="container">
+    <p class="faded-text">
+      Flutter web takes time to load, <br />
+      Please wait until it's ready...
+    </p>
+  </div>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -95,4 +124,5 @@
     }
   </script>
 </body>
+
 </html>
