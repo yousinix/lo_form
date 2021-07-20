@@ -7,6 +7,7 @@ class LoForm extends StatelessWidget {
   final ValMap? initialValues;
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
+  final ValueChanged<LoFormState>? onChanged;
   final Widget Function(LoFormState) builder;
 
   const LoForm({
@@ -14,6 +15,7 @@ class LoForm extends StatelessWidget {
     this.initialValues,
     this.validate,
     required this.onSubmit,
+    this.onChanged,
     required this.builder,
   }) : super(key: key);
 
@@ -23,6 +25,7 @@ class LoForm extends StatelessWidget {
       initialValues: initialValues,
       validate: validate,
       onSubmit: onSubmit,
+      onChanged: onChanged,
     );
 
     return ChangeNotifierProvider(

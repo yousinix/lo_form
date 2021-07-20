@@ -34,6 +34,7 @@ class HelloForm extends StatelessWidget {
       validate: (values) {
         if (values['name'] == 'someone') return {'name': 'Who are you?'};
       },
+      onChanged: (state) => print('Form Changed'),
       onSubmit: (values) async {
         try {
           final name = values['name'] as String;

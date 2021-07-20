@@ -17,12 +17,14 @@ class LoFormState extends ChangeNotifier {
   final TchMap touched;
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
+  final ValueChanged<LoFormState>? onChanged;
 
   LoFormStatus status;
 
   LoFormState({
     this.initialValues,
     required this.onSubmit,
+    this.onChanged,
     this.validate,
   })  : values = {},
         errors = {},
@@ -38,9 +40,14 @@ class LoFormState extends ChangeNotifier {
     touched[name] = false;
   }
 
+  void _notifyChanged() {
+    onChanged?.call(this);
+    notifyListeners();
+  }
+
   void markTouched(String name) {
     touched[name] = true;
-    notifyListeners();
+    _notifyChanged();
   }
 
   void updateField<T>(String name, T value, [String? error]) {
@@ -59,12 +66,12 @@ class LoFormState extends ChangeNotifier {
     }
 
     status = statuses.values.reduce((res, x) => res.and(x));
-    notifyListeners();
+    _notifyChanged();
   }
 
   Future<void> submit() async {
     status = LoFormStatus.loading;
-    notifyListeners();
+    _notifyChanged();
 
     final submitErrors = await onSubmit(values);
     errors.forEach((name, value) {
@@ -76,8 +83,6 @@ class LoFormState extends ChangeNotifier {
 
     final hasErrors = submitErrors?.isNotEmpty ?? false;
     status = hasErrors ? LoFormStatus.invalid : LoFormStatus.submitted;
-    notifyListeners();
+    _notifyChanged();
   }
-
-
 }
