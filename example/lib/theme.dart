@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   ThemeData get data => ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black87,
+        ),
         cardTheme: CardTheme(
           elevation: 6,
           shape: RoundedRectangleBorder(

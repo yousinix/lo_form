@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   lo_form:
     path: ../
+  url_launcher: ^6.0.9
 
 dev_dependencies:
   lint: ^1.0.0
