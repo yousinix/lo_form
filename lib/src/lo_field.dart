@@ -3,13 +3,14 @@ import 'package:provider/provider.dart';
 
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
+import 'lo_form_status.dart';
 
-typedef FieldValidateFunc<T> = String? Function(T)?;
+typedef FieldValidateFunc<T> = String? Function(T?);
 
 class LoField<T> extends StatelessWidget {
   final String name;
   final Widget Function(LoFieldState<T>) builder;
-  final FieldValidateFunc<T> validate;
+  final FieldValidateFunc<T>? validate;
 
   const LoField({
     Key? key,
@@ -26,7 +27,16 @@ class LoField<T> extends StatelessWidget {
 
         return FocusScope(
           child: Focus(
-            onFocusChange: (focus) => state.markTouched(name),
+            onFocusChange: (focus) {
+              if (focus) {
+                state.markTouched(name);
+              } else if (state.statuses[name]!.isPure) {
+                // Validate pure fields when unfocused
+                final value = state.values[name] as T?;
+                final error = validate?.call(value);
+                state.updateField(name, value, error);
+              }
+            },
             child: builder(
               LoFieldState<T>(
                 name: name,

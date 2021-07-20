@@ -47,13 +47,13 @@ class RegisterForm extends StatelessWidget {
           children: [
             LoTextField(
               name: 'Username',
-              validate: (v) => v.isEmpty ? 'Required' : null,
+              validate: (v) => v == null || v.isEmpty ? 'Required' : null,
             ),
             const SizedBox(height: 16),
             LoTextField(
               name: 'Password',
               validate: (v) {
-                if (v.isEmpty) return 'Required';
+                if (v == null || v.isEmpty) return 'Required';
                 if (v.length < 6) {
                   return 'Must be at least 6 characters';
                 }
@@ -63,6 +63,7 @@ class RegisterForm extends StatelessWidget {
             LoTextField(
               name: 'Confirm Password',
               validate: (v) {
+                if (v == null || v.isEmpty) return 'Required';
                 if (v != form.values['Password']) {
                   return 'Passwords do not match';
                 }

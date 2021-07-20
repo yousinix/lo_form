@@ -46,6 +46,7 @@ class LoFormState extends ChangeNotifier {
   }
 
   void markTouched(String name) {
+    if (touched[name]!) return;
     touched[name] = true;
     _notifyChanged();
   }
@@ -57,10 +58,10 @@ class LoFormState extends ChangeNotifier {
     // Check form-level errors only if the field has no errors itself
     errors[name] = error ?? validate?.call(values)?[name];
 
-    if (value == initialValues?[name]) {
-      statuses[name] = LoFormStatus.pure;
-    } else if (errors[name] != null) {
+    if (errors[name] != null) {
       statuses[name] = LoFormStatus.invalid;
+    } else if (value == initialValues?[name]) {
+      statuses[name] = LoFormStatus.pure;
     } else {
       statuses[name] = LoFormStatus.valid;
     }

@@ -4,7 +4,7 @@ import '../src/lo_field.dart';
 
 class LoTextField extends StatelessWidget {
   final String name;
-  final FieldValidateFunc<String> validate;
+  final FieldValidateFunc<String>? validate;
 
   // TODO: add [TextField] fields
 
