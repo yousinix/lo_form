@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
 
+typedef FieldValidateFunc<T> = String? Function(T)?;
+
 class LoField<T> extends StatelessWidget {
   final String name;
   final Widget Function(LoFieldState<T>) builder;
-  final String? Function(T)? validate;
+  final FieldValidateFunc<T> validate;
 
   const LoField({
     Key? key,
