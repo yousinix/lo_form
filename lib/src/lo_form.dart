@@ -3,11 +3,12 @@ import 'package:provider/provider.dart';
 
 import 'lo_form_state.dart';
 
-class LoForm extends StatelessWidget {
+class LoForm extends StatefulWidget {
   final ValMap? initialValues;
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
   final ValueChanged<LoFormState>? onChanged;
+  final ValueChanged<LoFormState>? onReady;
   final Widget Function(LoFormState) builder;
 
   const LoForm({
@@ -16,22 +17,39 @@ class LoForm extends StatelessWidget {
     this.validate,
     required this.onSubmit,
     this.onChanged,
+    this.onReady,
     required this.builder,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final state = LoFormState(
-      initialValues: initialValues,
-      validate: validate,
-      onSubmit: onSubmit,
-      onChanged: onChanged,
+  _LoFormState createState() => _LoFormState();
+}
+
+class _LoFormState extends State<LoForm> {
+  late final LoFormState formState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    formState = LoFormState(
+      initialValues: widget.initialValues,
+      validate: widget.validate,
+      onSubmit: widget.onSubmit,
+      onChanged: widget.onChanged,
     );
 
+    WidgetsBinding.instance!.addPostFrameCallback(
+      (_) => widget.onReady?.call(formState),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => state,
+      create: (_) => formState,
       child: Consumer<LoFormState>(
-        builder: (_, state, __) => builder(state),
+        builder: (_, state, __) => widget.builder(state),
       ),
     );
   }

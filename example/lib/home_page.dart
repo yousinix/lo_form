@@ -111,16 +111,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16),
         child: formState != null
             ? FormStateSummary(formState!)
-            : const Center(
-                child: Text(
-                  'Form State will appear here,\n'
-                  'try changing the form.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black38,
-                  ),
-                ),
-              ),
+            : const SizedBox.shrink(),
       ),
     );
   }

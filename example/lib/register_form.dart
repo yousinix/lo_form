@@ -15,6 +15,7 @@ class RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoForm(
       initialValues: const {'Username': 'yrn'},
+      onReady: onStateChanged,
       onChanged: onStateChanged,
       validate: (values) {
         const weakPasswords = {'123456', 'password'};
