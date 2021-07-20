@@ -11,18 +11,18 @@ class FormStateSummary extends StatelessWidget {
     return DataTable(
       columns: const [
         DataColumn(label: Text('Field')),
+        DataColumn(label: Text('Status')),
         DataColumn(label: Text('Initial')),
         DataColumn(label: Text('Touched')),
-        DataColumn(label: Text('Status')),
       ],
       rows: [
         for (var key in state.values.keys) ...{
           DataRow(
             cells: [
               DataCell(Text(key)),
+              DataCell(_buildStatusChip(state.statuses[key]!)),
               DataCell(Text('${state.initialValues?[key] ?? '-'}')),
               DataCell(_buildBoolIcon(state.touched[key]!)),
-              DataCell(_buildStatusChip(state.statuses[key]!)),
             ],
           )
         },
@@ -37,9 +37,9 @@ class FormStateSummary extends StatelessWidget {
                 ),
               ),
             ),
-            const DataCell(SizedBox.shrink()),
-            const DataCell(SizedBox.shrink()),
             DataCell(_buildStatusChip(state.status)),
+            const DataCell(SizedBox.shrink()),
+            const DataCell(SizedBox.shrink()),
           ],
         )
       ],

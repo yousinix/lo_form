@@ -14,68 +14,85 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 24,
-          right: 24,
-          top: 24,
-        ),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 1080,
-          ),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Flex(
-                mainAxisAlignment: MainAxisAlignment.center,
+    const padding = EdgeInsets.only(
+      left: 24,
+      right: 24,
+      top: 24,
+    );
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 720) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: padding,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                direction: constraints.maxWidth < 720
-                    ? Axis.vertical
-                    : Axis.horizontal,
                 children: [
-                  Expanded(
-                    child: Card(
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: RegisterForm(
-                            onStateChanged: (value) => setState(
-                              () => formState = value,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                    height: 16,
-                  ),
-                  Expanded(
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: formState != null
-                            ? FormStateSummary(formState!)
-                            : const Center(
-                                child: Text(
-                                  'Form State will appear here,\n'
-                                  'try changing the form.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black38,
-                                  ),
-                                ),
-                              ),
-                      ),
-                    ),
-                  ),
+                  _buildFormCard(),
+                  SizedBox(height: padding.top),
+                  _buildStateCard(),
                 ],
-              );
-            },
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 1080,
+              ),
+              child: Padding(
+                padding: padding,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: _buildFormCard(),
+                    ),
+                    SizedBox(width: padding.left),
+                    Expanded(
+                      child: _buildStateCard(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildFormCard() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: RegisterForm(
+          onStateChanged: (value) => setState(
+            () => formState = value,
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildStateCard() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: formState != null
+            ? FormStateSummary(formState!)
+            : const Center(
+                child: Text(
+                  'Form State will appear here,\n'
+                  'try changing the form.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
       ),
     );
   }
