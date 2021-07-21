@@ -27,8 +27,8 @@ class RegisterForm extends StatelessWidget {
       onSubmit: (values) async {
         try {
           final message = await FakeApi.register(
-            username: values['Username'] as String,
-            password: values['Password'] as String,
+            username: values.get('Username'),
+            password: values.get('Password'),
           );
 
           ScaffoldMessenger.of(context)
@@ -60,7 +60,8 @@ class RegisterForm extends StatelessWidget {
               name: 'Confirm Password',
               validate: LoValidation()
                   .required()
-                  .match(form.values['Password'] as String?)
+                  .min(6)
+                  .match(form.get('Password'))
                   .build(),
             ),
             const SizedBox(height: 32),

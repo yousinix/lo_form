@@ -9,6 +9,11 @@ typedef TchMap = Map<String, bool>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
 typedef SubmitFunc = Future<ErrMap?> Function(ValMap);
 
+extension ValMapX on ValMap {
+  /// Shorthand for using "as" to cast the dynamic value
+  T get<T>(String key) => this[key] as T;
+}
+
 class LoFormState extends ChangeNotifier {
   final ValMap? initialValues;
   final ValMap values;
@@ -31,6 +36,9 @@ class LoFormState extends ChangeNotifier {
         statuses = {},
         touched = {},
         status = LoFormStatus.pure;
+
+  /// Gets field value
+  T get<T>(String key) => values[key] as T;
 
   void registerField(String name) {
     if (values.containsKey(name)) return; // Prevent re-registration
