@@ -48,27 +48,20 @@ class RegisterForm extends StatelessWidget {
           children: [
             LoTextField(
               name: 'Username',
-              validate: (v) => v == null || v.isEmpty ? 'Required' : null,
+              validate: LoValidation().required().build(),
             ),
             const SizedBox(height: 16),
             LoTextField(
               name: 'Password',
-              validate: (v) {
-                if (v == null || v.isEmpty) return 'Required';
-                if (v.length < 6) {
-                  return 'Must be at least 6 characters';
-                }
-              },
+              validate: LoValidation().required().min(6).build(),
             ),
             const SizedBox(height: 16),
             LoTextField(
               name: 'Confirm Password',
-              validate: (v) {
-                if (v == null || v.isEmpty) return 'Required';
-                if (v != form.values['Password']) {
-                  return 'Passwords do not match';
-                }
-              },
+              validate: LoValidation()
+                  .required()
+                  .match(form.values['Password'] as String?)
+                  .build(),
             ),
             const SizedBox(height: 32),
             ElevatedButton(
