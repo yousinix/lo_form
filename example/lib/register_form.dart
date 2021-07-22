@@ -31,9 +31,16 @@ class RegisterForm extends StatelessWidget {
       onReady: onStateChanged,
       onChanged: onStateChanged,
       validate: (values) {
-        const weakPasswords = {'123456', 'password'};
-        if (weakPasswords.contains(values.get('Password'))) {
-          return {'Password': 'Weak password'};
+        // This method gets called with any change to all form fields,
+        // it's useful for validating dependent fields to make sure that
+        // they both have the latest value.
+        final password = values.get('Password');
+        final confirmPassword = values.get('Confirm Password');
+
+        if (password != confirmPassword) {
+          return {'Confirm Password': 'Passwords do not match'};
+        } else {
+          return {'Confirm Password': null}; // Clear error
         }
       },
       onSubmit: (values, setErrors) async {
@@ -71,11 +78,7 @@ class RegisterForm extends StatelessWidget {
             const SizedBox(height: 16),
             LoTextField(
               name: 'Confirm Password',
-              validate: LoValidation()
-                  .required()
-                  .min(6)
-                  .match(form.get('Password'))
-                  .build(),
+              validate: LoValidation().required().min(6).build(),
             ),
             const SizedBox(height: 32),
             ElevatedButton(

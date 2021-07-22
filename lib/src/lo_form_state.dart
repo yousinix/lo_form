@@ -64,19 +64,27 @@ class LoFormState extends ChangeNotifier {
     values[name] = value;
     touched[name] = true;
 
-    // Check form-level errors only if the field has no errors itself
-    errors[name] = error ?? validate?.call(values)?[name];
+    // Always remove errors related to this field from the form-level errors,
+    // because they will be handled by this method.
+    final formLevelErrors = validate?.call(values);
+    final formFieldError = formLevelErrors?.remove(name);
+    errors[name] = error ?? formFieldError;
 
+    setErrors(formLevelErrors);
+    updateFieldStatus(name);
+    _notifyChanged();
+  }
+
+  void updateFieldStatus(String name) {
     if (errors[name] != null) {
       statuses[name] = LoFormStatus.invalid;
-    } else if (value == initialValues?[name]) {
+    } else if (values[name] == initialValues?[name]) {
       statuses[name] = LoFormStatus.pure;
     } else {
       statuses[name] = LoFormStatus.valid;
     }
 
     status = statuses.values.reduce((res, x) => res.and(x));
-    _notifyChanged();
   }
 
   Future<void> submit() async {
@@ -93,13 +101,19 @@ class LoFormState extends ChangeNotifier {
     _notifyChanged();
   }
 
-  void setErrors(ErrMap map) {
+  void setErrors(ErrMap? map) {
+    if (map == null) return;
+
     status = LoFormStatus.invalid;
 
     errors.forEach((name, value) {
-      if (map[name] != null) {
+      // Field must be touched to assign errors to it
+      if (touched[name]! && map.containsKey(name)) {
+        // When the map has the key but with a null value,
+        // this means to clear the field's error
+        final clearError = map[name] == null;
+        statuses[name] = clearError ? LoFormStatus.valid : LoFormStatus.invalid;
         errors[name] = map[name];
-        statuses[name] = LoFormStatus.invalid;
       }
     });
   }
