@@ -16,26 +16,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const padding = EdgeInsets.only(
-      left: 24,
-      right: 24,
-      top: 24,
-    );
-
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < 720) {
           return SingleChildScrollView(
             child: Padding(
-              padding: padding,
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _buildFormCard(
                     separator: const SizedBox(height: 16),
+                    padding: 12,
                   ),
-                  SizedBox(height: padding.top),
-                  _buildStateCard(),
+                  const SizedBox(height: 16),
+                  _buildStateCard(
+                    padding: 12,
+                  ),
                 ],
               ),
             ),
@@ -47,16 +44,18 @@ class _HomePageState extends State<HomePage> {
                 maxWidth: 1080,
               ),
               child: Padding(
-                padding: padding,
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                  top: 24,
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
-                      child: _buildFormCard(
-                        separator: const Spacer(),
-                      ),
+                      child: _buildFormCard(),
                     ),
-                    SizedBox(width: padding.left),
+                    const SizedBox(width: 24),
                     Expanded(
                       child: _buildStateCard(),
                     ),
@@ -70,10 +69,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFormCard({required Widget separator}) {
+  Widget _buildFormCard({
+    Widget separator = const Spacer(),
+    double padding = 16,
+  }) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(padding),
         child: Column(
           children: [
             RegisterForm(
@@ -105,10 +107,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildStateCard() {
+  Widget _buildStateCard({
+    double padding = 16,
+  }) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(padding),
         child: formState != null
             ? FormStateSummary(formState!)
             : const SizedBox.shrink(),

@@ -8,41 +8,44 @@ class FormStateSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: const [
-        DataColumn(label: Text('Field')),
-        DataColumn(label: Text('Status')),
-        DataColumn(label: Text('Initial')),
-        DataColumn(label: Text('Touched')),
-      ],
-      rows: [
-        for (var key in state.values.keys) ...{
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: const [
+          DataColumn(label: Text('Field')),
+          DataColumn(label: Text('Status')),
+          DataColumn(label: Text('Initial')),
+          DataColumn(label: Text('Touched')),
+        ],
+        rows: [
+          for (var key in state.values.keys) ...{
+            DataRow(
+              cells: [
+                DataCell(Text(key)),
+                DataCell(_buildStatusChip(state.statuses[key]!)),
+                DataCell(Text('${state.initialValues?[key] ?? '-'}')),
+                DataCell(_buildBoolIcon(state.touched[key]!)),
+              ],
+            )
+          },
           DataRow(
+            selected: true,
             cells: [
-              DataCell(Text(key)),
-              DataCell(_buildStatusChip(state.statuses[key]!)),
-              DataCell(Text('${state.initialValues?[key] ?? '-'}')),
-              DataCell(_buildBoolIcon(state.touched[key]!)),
-            ],
-          )
-        },
-        DataRow(
-          selected: true,
-          cells: [
-            const DataCell(
-              Text(
-                'Form',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
+              const DataCell(
+                Text(
+                  'Form',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-            DataCell(_buildStatusChip(state.status)),
-            const DataCell(SizedBox.shrink()),
-            const DataCell(SizedBox.shrink()),
-          ],
-        )
-      ],
+              DataCell(_buildStatusChip(state.status)),
+              const DataCell(SizedBox.shrink()),
+              const DataCell(SizedBox.shrink()),
+            ],
+          )
+        ],
+      ),
     );
   }
 
