@@ -7,7 +7,8 @@ typedef ErrMap = Map<String, String?>;
 typedef StsMap = Map<String, LoFormStatus>;
 typedef TchMap = Map<String, bool>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
-typedef SubmitFunc = Future<ErrMap?> Function(ValMap);
+typedef SetErrFunc = void Function(ErrMap);
+typedef SubmitFunc = Future<bool?>? Function(ValMap, SetErrFunc);
 
 extension ValMapX on ValMap {
   /// Shorthand for using "as" to cast the dynamic value
@@ -82,16 +83,24 @@ class LoFormState extends ChangeNotifier {
     status = LoFormStatus.loading;
     _notifyChanged();
 
-    final submitErrors = await onSubmit(values);
+    final result = await onSubmit(values, setErrors);
+
+    // When no result is returned, means the form became invalid
+    if (result != null) {
+      status = result ? LoFormStatus.success : LoFormStatus.failure;
+    }
+
+    _notifyChanged();
+  }
+
+  void setErrors(ErrMap map) {
+    status = LoFormStatus.invalid;
+
     errors.forEach((name, value) {
-      if (submitErrors?[name] != null) {
-        errors[name] = submitErrors?[name];
+      if (map[name] != null) {
+        errors[name] = map[name];
         statuses[name] = LoFormStatus.invalid;
       }
     });
-
-    final hasErrors = submitErrors?.isNotEmpty ?? false;
-    status = hasErrors ? LoFormStatus.invalid : LoFormStatus.submitted;
-    _notifyChanged();
   }
 }

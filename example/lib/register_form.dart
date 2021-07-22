@@ -3,6 +3,19 @@ import 'package:lo_form/lo_form.dart';
 
 import 'fake_api.dart';
 
+extension on BuildContext {
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(message),
+        ),
+      );
+  }
+}
+
 class RegisterForm extends StatelessWidget {
   final ValueChanged<LoFormState>? onStateChanged;
 
@@ -19,27 +32,27 @@ class RegisterForm extends StatelessWidget {
       onChanged: onStateChanged,
       validate: (values) {
         const weakPasswords = {'123456', 'password'};
-
-        if (weakPasswords.contains(values['Password'])) {
+        if (weakPasswords.contains(values.get('Password'))) {
           return {'Password': 'Weak password'};
         }
       },
-      onSubmit: (values) async {
-        try {
-          final message = await FakeApi.register(
-            username: values.get('Username'),
-            password: values.get('Password'),
-          );
+      onSubmit: (values, setErrors) async {
+        final response = await FakeApi.register(
+          username: values.get('Username'),
+          password: values.get('Password'),
+        );
 
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(message),
-              ),
-            );
-        } catch (e) {
-          return {'Username': e.toString()};
+        if (!response.isError) {
+          // Successful submission
+          context.showSnackBar('Welcome, ${response.data!}');
+          return true;
+        } else if (response.validationErrors == null) {
+          // Failure submission
+          context.showSnackBar(response.message);
+          return false;
+        } else {
+          // Invalid submission (server responded with validation errors)
+          setErrors(response.validationErrors!);
         }
       },
       builder: (form) {
@@ -66,7 +79,7 @@ class RegisterForm extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: form.status.isValid ? form.submit : null,
+              onPressed: form.status.canSubmit ? form.submit : null,
               child: const Text('Register'),
             ),
           ],

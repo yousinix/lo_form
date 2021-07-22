@@ -28,6 +28,7 @@ class SimpleForm extends StatelessWidget {
       // [2] Implement what happens when the form is submitted.
       onSubmit: (values) async {
         print('Hi, ${values.get('name')}!');
+        return true; // Successful submission
       },
       builder: (form) {
         return Column(

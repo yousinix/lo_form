@@ -1,19 +1,23 @@
 enum LoFormStatus {
   pure,
-  loading,
   valid,
   invalid,
-  submitted,
   mixed, // Valid and Pure
+  loading,
+  success,
+  failure,
 }
 
 extension LoFormStatusX on LoFormStatus {
   bool get isPure => this == LoFormStatus.pure;
-  bool get isLoading => this == LoFormStatus.loading;
   bool get isValid => this == LoFormStatus.valid;
   bool get isInvalid => this == LoFormStatus.invalid;
-  bool get isSubmitted => this == LoFormStatus.submitted;
   bool get isMixed => this == LoFormStatus.mixed;
+  bool get isLoading => this == LoFormStatus.loading;
+  bool get isSuccess => this == LoFormStatus.success;
+  bool get isFailure => this == LoFormStatus.failure;
+
+  bool get canSubmit => isValid || isSuccess || isFailure;
 
   LoFormStatus and(LoFormStatus other) {
     if (isInvalid || other.isInvalid) return LoFormStatus.invalid;
