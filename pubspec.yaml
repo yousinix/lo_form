@@ -1,7 +1,7 @@
 name: lo_form
-description: Flutter forms without all the pain
-version: 0.0.1
+description: Lightweight forms library for Flutter.
 homepage: https://github.com/YoussefRaafatNasry/lo_form
+version: 0.0.1-dev.0
 
 environment:
   sdk: ">=2.13.0 <3.0.0"
