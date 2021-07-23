@@ -39,7 +39,7 @@ class RegisterForm extends StatelessWidget {
 
         if (password != confirmPassword) {
           return {'Confirm Password': 'Passwords do not match'};
-        } else {
+        } else if (password != null && confirmPassword != null) {
           return {'Confirm Password': null}; // Clear error
         }
       },
