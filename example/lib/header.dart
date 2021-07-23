@@ -15,12 +15,12 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         _buildLink(
           name: 'Pub',
-          asset: 'logo-dart.png',
+          asset: 'assets/logo-dart.png',
           url: kLoFormPubUrl,
         ),
         _buildLink(
           name: 'GitHub',
-          asset: 'logo-github.png',
+          asset: 'assets/logo-github.png',
           url: kLoFormGhUrl,
         ),
         const SizedBox(width: 12),
