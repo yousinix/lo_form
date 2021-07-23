@@ -43,6 +43,7 @@ class RegisterForm extends StatelessWidget {
           return {'Confirm Password': null}; // Clear error
         }
       },
+      submittableWhen: (status) => status.isValid || status.isSubmitted,
       onSubmit: (values, setErrors) async {
         final response = await FakeApi.register(
           username: values.get('Username'),
@@ -82,7 +83,7 @@ class RegisterForm extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: form.status.canSubmit ? form.submit : null,
+              onPressed: form.submit,
               child: const Text('Register'),
             ),
           ],

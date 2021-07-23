@@ -9,6 +9,7 @@ typedef TchMap = Map<String, bool>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
 typedef SetErrFunc = void Function(ErrMap);
 typedef SubmitFunc = Future<bool?>? Function(ValMap, SetErrFunc);
+typedef StatusCheckFunc = bool Function(LoFormStatus);
 
 extension ValMapX on ValMap {
   /// Shorthand for using "as" to cast the dynamic value
@@ -24,19 +25,28 @@ class LoFormState extends ChangeNotifier {
   final ValidateFunc? validate;
   final SubmitFunc onSubmit;
   final ValueChanged<LoFormState>? onChanged;
+  final StatusCheckFunc? submittableWhen;
 
   LoFormStatus status;
 
   LoFormState({
     this.initialValues,
+    this.validate,
     required this.onSubmit,
     this.onChanged,
-    this.validate,
+    this.submittableWhen,
   })  : values = {},
         errors = {},
         statuses = {},
         touched = {},
         status = LoFormStatus.pure;
+
+  /// Returns the [handleSubmit] method if [submittableWhen]
+  /// is null or true, otherwise returns null.
+  Future<void> Function()? get submit {
+    final canSubmit = submittableWhen?.call(status) ?? true;
+    return canSubmit ? handleSubmit : null;
+  }
 
   /// Gets field value
   T get<T>(String key) => values[key] as T;
@@ -87,7 +97,7 @@ class LoFormState extends ChangeNotifier {
     status = statuses.values.reduce((res, x) => res.and(x));
   }
 
-  Future<void> submit() async {
+  Future<void> handleSubmit() async {
     status = LoFormStatus.loading;
     _notifyChanged();
 

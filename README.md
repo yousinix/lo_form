@@ -25,7 +25,9 @@ class SimpleForm extends StatelessWidget {
   Widget build(BuildContext context) {
     // [1] Wrap your form with [LoForm] widget.
     return LoForm(
-      // [2] Implement what happens when the form is submitted.
+      // [2] Choose when the submit button is enabled using form status.
+      submittableWhen: (status) => status.isValid || status.isSubmitted,
+      // [3] Implement what happens when the form is submitted.
       onSubmit: (values) async {
         print('Hi, ${values.get('name')}!');
         return true; // Successful submission
@@ -33,17 +35,17 @@ class SimpleForm extends StatelessWidget {
       builder: (form) {
         return Column(
           children: [
-            // [3] Use [LoTextField] instead of the normal [TextField].
+            // [4] Use [LoTextField] instead of the normal [TextField].
             LoTextField(
-              // [4] This name will be used to get the field's value.
+              // [5] This name will be used to get the field's value.
               name: 'name',
-              // [5] Provide a validation scheme using [LoValidation].
+              // [6] Provide a validation scheme using [LoValidation].
               validate: LoValidation().required().build(),
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              // [6] Call the [submit] method depending on form [status].
-              onPressed: form.status.isValid ? form.submit : null,
+              // [7] Call the [submit] method.
+              onPressed: form.submit,
               child: const Text('Submit'),
             ),
           ],

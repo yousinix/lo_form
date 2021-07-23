@@ -9,6 +9,7 @@ class LoForm extends StatefulWidget {
   final SubmitFunc onSubmit;
   final ValueChanged<LoFormState>? onChanged;
   final ValueChanged<LoFormState>? onReady;
+  final StatusCheckFunc? submittableWhen;
   final Widget Function(LoFormState) builder;
 
   const LoForm({
@@ -18,6 +19,7 @@ class LoForm extends StatefulWidget {
     required this.onSubmit,
     this.onChanged,
     this.onReady,
+    this.submittableWhen,
     required this.builder,
   }) : super(key: key);
 
@@ -37,6 +39,7 @@ class _LoFormState extends State<LoForm> {
       validate: widget.validate,
       onSubmit: widget.onSubmit,
       onChanged: widget.onChanged,
+      submittableWhen: widget.submittableWhen,
     );
 
     WidgetsBinding.instance!.addPostFrameCallback(
