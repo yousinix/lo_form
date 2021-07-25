@@ -75,11 +75,17 @@ class RegisterForm extends StatelessWidget {
             LoTextField(
               name: 'Password',
               validate: LoValidation().required().min(6).build(),
+              props: const TextFieldProps(
+                obscureText: true,
+              ),
             ),
             const SizedBox(height: 16),
             LoTextField(
               name: 'Confirm Password',
               validate: LoValidation().required().min(6).build(),
+              props: const TextFieldProps(
+                obscureText: true,
+              ),
             ),
             const SizedBox(height: 32),
             ElevatedButton(
