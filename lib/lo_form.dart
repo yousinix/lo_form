@@ -1,6 +1,7 @@
 library lo_form;
 
 // Fields
+export 'fields/lo_checkbox.dart';
 export 'fields/lo_text_field.dart';
 
 // Core

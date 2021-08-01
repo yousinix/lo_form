@@ -87,6 +87,12 @@ class RegisterForm extends StatelessWidget {
                 obscureText: true,
               ),
             ),
+            const SizedBox(height: 16),
+            LoCheckbox(
+              name: 'Agreement',
+              validate: (value) => value != true ? 'Required' : null,
+              label: const Text('I agree to all the terms and conditions'),
+            ),
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: form.submit,

@@ -43,6 +43,7 @@ class LoField<T> extends StatelessWidget {
                 status: state.statuses[name]!,
                 touched: state.touched[name]!,
                 initialValue: state.initialValues?[name] as T?,
+                value: state.values[name] as T?,
                 error: state.errors[name],
                 onChanged: (value) {
                   final error = validate?.call(value);
