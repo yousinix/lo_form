@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'constants.dart';
+import '../forms/register_form.dart';
+import '../misc/constants.dart';
 import 'form_state_summary.dart';
-import 'register_form.dart';
 
-class HomePage extends StatefulWidget {
+class FormPlayground extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _FormPlaygroundState createState() => _FormPlaygroundState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _FormPlaygroundState extends State<FormPlayground> {
   LoFormState? formState;
 
   @override
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
             separator,
             TextButton.icon(
               onPressed: () => launch(
-                '$kLoFormGhUrl/blob/master/example/lib/register_form.dart',
+                '$kLoFormGhUrl/blob/master/${RegisterForm.kPath}',
               ),
               icon: const Icon(
                 Icons.info_outline,

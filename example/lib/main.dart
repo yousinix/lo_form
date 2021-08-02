@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'footer.dart';
-import 'header.dart';
-import 'home_page.dart';
-import 'theme.dart';
+import 'misc/theme.dart';
+import 'widgets/footer.dart';
+import 'widgets/form_playground.dart';
+import 'widgets/header.dart';
 
 void main() {
   runApp(App());
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: Header(),
-        body: HomePage(),
+        body: FormPlayground(),
         bottomNavigationBar: Footer(),
       ),
     );

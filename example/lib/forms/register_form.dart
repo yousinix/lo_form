@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 
-import 'fake_api.dart';
-
-extension on BuildContext {
-  void showSnackBar(String message) {
-    ScaffoldMessenger.of(this)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          content: Text(message),
-        ),
-      );
-  }
-}
+import '../misc/extensions.dart';
+import '../misc/fake_api.dart';
 
 class RegisterForm extends StatelessWidget {
+  static const kPath = 'example/lib/forms/register_form.dart';
+
   final ValueChanged<LoFormState>? onStateChanged;
 
   const RegisterForm({
