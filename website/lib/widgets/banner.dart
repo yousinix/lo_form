@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lo_form_website/misc/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Banner extends StatelessWidget {
   @override
@@ -12,14 +14,12 @@ class Banner extends StatelessWidget {
         children: [
           Text(
             'LoForm',
-            style: Theme.of(context).textTheme.headline2?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context).textTheme.headline2,
           ),
           const Text("The next-gen lightweight Flutter's form library"),
           const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => launch(kDocsUrl),
             child: const Text('Get Started'),
           )
         ],

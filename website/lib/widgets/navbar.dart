@@ -26,7 +26,9 @@ class Navbar extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   'LoForm',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             ),
