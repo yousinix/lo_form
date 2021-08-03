@@ -17,9 +17,18 @@ class Navbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'LoForm',
-              style: Theme.of(context).textTheme.headline6,
+            Row(
+              children: [
+                Image.asset(
+                  'assets/logo.png',
+                  height: 36,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'LoForm',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
             ),
             Row(
               children: const [
