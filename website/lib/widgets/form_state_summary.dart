@@ -8,44 +8,53 @@ class FormStateSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(
-        columns: const [
-          DataColumn(label: Text('Field')),
-          DataColumn(label: Text('Status')),
-          DataColumn(label: Text('Initial')),
-          DataColumn(label: Text('Touched')),
-        ],
-        rows: [
-          for (var key in state.values.keys) ...{
-            DataRow(
-              cells: [
-                DataCell(Text(key)),
-                DataCell(_buildStatusChip(state.statuses[key]!)),
-                DataCell(Text('${state.initialValues?[key] ?? '-'}')),
-                DataCell(_buildBoolIcon(state.touched[key]!)),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: constraints.maxWidth,
+            ),
+            child: DataTable(
+              columns: const [
+                DataColumn(label: Text('Field')),
+                DataColumn(label: Text('Status')),
+                DataColumn(label: Text('Initial')),
+                DataColumn(label: Text('Touched')),
               ],
-            )
-          },
-          DataRow(
-            selected: true,
-            cells: [
-              const DataCell(
-                Text(
-                  'Form',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              DataCell(_buildStatusChip(state.status)),
-              const DataCell(SizedBox.shrink()),
-              const DataCell(SizedBox.shrink()),
-            ],
-          )
-        ],
-      ),
+              rows: [
+                for (var key in state.values.keys) ...{
+                  DataRow(
+                    cells: [
+                      DataCell(Text(key)),
+                      DataCell(_buildStatusChip(state.statuses[key]!)),
+                      DataCell(Text('${state.initialValues?[key] ?? '-'}')),
+                      DataCell(_buildBoolIcon(state.touched[key]!)),
+                    ],
+                  )
+                },
+                DataRow(
+                  selected: true,
+                  cells: [
+                    const DataCell(
+                      Text(
+                        'Form',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    DataCell(_buildStatusChip(state.status)),
+                    const DataCell(SizedBox.shrink()),
+                    const DataCell(SizedBox.shrink()),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -75,6 +84,7 @@ class FormStateSummary extends StatelessWidget {
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 12,
+          fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
       ),
