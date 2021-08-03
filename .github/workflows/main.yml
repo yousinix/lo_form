@@ -15,4 +15,4 @@ jobs:
           flutter-version: '2.2.3'
       - uses: erickzanardo/flutter-gh-pages@v6
         with:
-          workingDir: example
+          workingDir: website

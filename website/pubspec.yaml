@@ -1,5 +1,5 @@
-name: lo_form_exmple
-description: An example demonstrating how to use LoForm.
+name: lo_form_website
+description: LoForm's website.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^2.1.0
   lo_form:
     path: ../
+  sliver_tools: ^0.2.5
   url_launcher: ^6.0.9
 
 dev_dependencies:
@@ -18,6 +20,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/

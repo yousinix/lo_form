@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../misc/constants.dart';
 import '../misc/extensions.dart';
 import '../misc/fake_api.dart';
 
 class RegisterForm extends StatelessWidget {
-  static const kPath = 'example/lib/forms/register_form.dart';
+  static const kPath = 'website/lib/forms/register_form.dart';
 
   final ValueChanged<LoFormState>? onStateChanged;
 
@@ -25,12 +27,12 @@ class RegisterForm extends StatelessWidget {
         // it's useful for validating dependent fields to make sure that
         // they both have the latest value.
         final password = values.get('Password');
-        final confirmPassword = values.get('Confirm Password');
+        final confirmPassword = values.get('Confirm');
 
         if (password != confirmPassword) {
-          return {'Confirm Password': 'Passwords do not match'};
+          return {'Confirm': 'Passwords do not match'};
         } else if (password != null && confirmPassword != null) {
-          return {'Confirm Password': null}; // Clear error
+          return {'Confirm': null}; // Clear error
         }
       },
       submittableWhen: (status) => status.isValid || status.isSubmitted,
@@ -57,6 +59,8 @@ class RegisterForm extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            _buildHeader(context),
+            const SizedBox(height: 16),
             LoTextField(
               name: 'Username',
               validate: LoValidation().required().build(),
@@ -71,10 +75,13 @@ class RegisterForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             LoTextField(
-              name: 'Confirm Password',
+              name: 'Confirm',
               validate: LoValidation().required().min(6).build(),
               props: const TextFieldProps(
                 obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Confirm Password',
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -83,7 +90,7 @@ class RegisterForm extends StatelessWidget {
               validate: (value) => value != true ? 'Required' : null,
               label: const Text('I agree to all the terms and conditions'),
             ),
-            const SizedBox(height: 32),
+            const Spacer(),
             ElevatedButton(
               onPressed: form.submit,
               child: const Text('Register'),
@@ -91,6 +98,31 @@ class RegisterForm extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Register Form',
+          style: Theme.of(context).textTheme.subtitle1,
+        ),
+        TextButton(
+          onPressed: () => launch(
+            '$kLoFormGhUrl/blob/master/${RegisterForm.kPath}',
+          ),
+          child: const Tooltip(
+            message: 'View Code',
+            child: Icon(
+              Icons.code,
+              size: 18,
+              color: Colors.black45,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
