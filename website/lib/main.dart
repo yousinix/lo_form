@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Banner;
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'misc/theme.dart';
+import 'theme.dart';
 import 'widgets/banner.dart';
 import 'widgets/footer.dart';
 import 'widgets/form_playground.dart';

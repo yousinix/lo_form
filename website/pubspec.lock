@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  example:
+    dependency: "direct main"
+    description:
+      path: "../example"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   ffi:
     dependency: transitive
     description:
@@ -96,7 +103,7 @@ packages:
     source: hosted
     version: "1.5.3"
   lo_form:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: ".."
       relative: true

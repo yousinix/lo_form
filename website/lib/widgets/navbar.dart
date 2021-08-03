@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../misc/constants.dart';
+import '../constants.dart';
 
 class Navbar extends StatelessWidget {
   @override

@@ -16,7 +16,7 @@ inspired by [**Formik**](https://formik.org/) — _the world's most popular form
 
 ## Simple Usage
 
-This is a simple example, for a more complex one see the [`RegisterForm`](./example/lib/register_form.dart) widget.
+This is a simple example, for a more complex one see the [`RegisterForm`](./example/lib/main.dart) widget.
 
 ```dart
 class SimpleForm extends StatelessWidget {

@@ -7,11 +7,11 @@ environment:
   sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
+  example:
+    path: ../example
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
-  lo_form:
-    path: ../
   sliver_tools: ^0.2.5
   url_launcher: ^6.0.9
 

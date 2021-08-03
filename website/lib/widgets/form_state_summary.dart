@@ -8,54 +8,44 @@ class FormStateSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Form State',
-          style: Theme.of(context).textTheme.subtitle1,
-        ),
-        const SizedBox(height: 16),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DataTable(
-            columns: const [
-              DataColumn(label: Text('Field')),
-              DataColumn(label: Text('Status')),
-              DataColumn(label: Text('Initial')),
-              DataColumn(label: Text('Touched')),
-            ],
-            rows: [
-              for (var key in state.values.keys) ...{
-                DataRow(
-                  cells: [
-                    DataCell(Text(key)),
-                    DataCell(_buildStatusChip(state.statuses[key]!)),
-                    DataCell(Text('${state.initialValues?[key] ?? '-'}')),
-                    DataCell(_buildBoolIcon(state.touched[key]!)),
-                  ],
-                )
-              },
-              DataRow(
-                selected: true,
-                cells: [
-                  const DataCell(
-                    Text(
-                      'Form',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: const [
+          DataColumn(label: Text('Field')),
+          DataColumn(label: Text('Status')),
+          DataColumn(label: Text('Initial')),
+          DataColumn(label: Text('Touched')),
+        ],
+        rows: [
+          for (var key in state.values.keys) ...{
+            DataRow(
+              cells: [
+                DataCell(Text(key)),
+                DataCell(_buildStatusChip(state.statuses[key]!)),
+                DataCell(Text('${state.initialValues?[key] ?? '-'}')),
+                DataCell(_buildBoolIcon(state.touched[key]!)),
+              ],
+            )
+          },
+          DataRow(
+            selected: true,
+            cells: [
+              const DataCell(
+                Text(
+                  'Form',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
                   ),
-                  DataCell(_buildStatusChip(state.status)),
-                  const DataCell(SizedBox.shrink()),
-                  const DataCell(SizedBox.shrink()),
-                ],
-              )
+                ),
+              ),
+              DataCell(_buildStatusChip(state.status)),
+              const DataCell(SizedBox.shrink()),
+              const DataCell(SizedBox.shrink()),
             ],
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 
