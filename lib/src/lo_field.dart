@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
-import 'lo_form_status.dart';
 import 'types.dart';
 
 class LoField<T> extends StatefulWidget {
@@ -39,20 +38,15 @@ class _LoFieldState<T> extends State<LoField<T>> {
   Widget build(BuildContext context) {
     return Consumer<LoFormState>(
       builder: (_, form, __) {
-        final field = form.fields.get<T>(widget.name);
-
         return FocusScope(
           child: Focus(
-            onFocusChange: (focus) {
-              if (focus) {
-                form.markTouched<T>(widget.name);
-              } else if (field.status.isPure) {
-                // Validate pure fields when unfocused
-                final value = form.get<T>(widget.name);
-                form.updateField<T>(widget.name, value);
-              }
-            },
-            child: widget.builder(field),
+            onFocusChange: (focus) => form.onFieldFocusChanged<T>(
+              widget.name,
+              focus,
+            ),
+            child: widget.builder(
+              form.fields.get<T>(widget.name),
+            ),
           ),
         );
       },

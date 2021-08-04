@@ -30,6 +30,11 @@ class LoFormState extends ChangeNotifier {
     return canSubmit ? handleSubmit : null;
   }
 
+  void _notifyChanged() {
+    onChanged?.call(this);
+    notifyListeners();
+  }
+
   /// Gets field value
   T? get<T>(String key) => fields[key]!.value as T?;
 
@@ -45,24 +50,25 @@ class LoFormState extends ChangeNotifier {
       name: name,
       status: LoFormStatus.pure,
       touched: false,
-      onChanged: (v) => updateField(name, v),
+      onChanged: (v) => onFieldValueChanged(name, v),
       validate: validate,
     );
   }
 
-  void _notifyChanged() {
-    onChanged?.call(this);
-    notifyListeners();
-  }
-
-  void markTouched<T>(String name) {
+  void onFieldFocusChanged<T>(String name, bool isFocused) {
     final field = fields.get<T>(name);
-    if (field.touched) return;
-    field.touched = true;
-    _notifyChanged();
+
+    if (isFocused) {
+      field.touched = true;
+      _notifyChanged();
+    } else if (field.status.isPure) {
+      // Validate pure fields when unfocused
+      final value = get<T>(name);
+      onFieldValueChanged<T>(name, value);
+    }
   }
 
-  void updateField<T>(String name, T? value) {
+  void onFieldValueChanged<T>(String name, T? value) {
     final field = fields.get<T>(name);
 
     field.value = value;
@@ -76,11 +82,11 @@ class LoFormState extends ChangeNotifier {
     field.error = fieldLevelError ?? formFieldError;
 
     setErrors(formLevelErrors);
-    updateFieldStatus<T>(name);
+    _updateFieldStatus<T>(name);
     _notifyChanged();
   }
 
-  void updateFieldStatus<T>(String name) {
+  void _updateFieldStatus<T>(String name) {
     final field = fields.get<T>(name);
 
     if (field.error != null) {

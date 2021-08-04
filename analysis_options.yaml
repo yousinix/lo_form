@@ -7,3 +7,6 @@ linter:
 
     # Better to know what's imported from local files and what's from dependencies
     prefer_relative_imports: true
+
+    # Sometimes it's okay to use it
+    avoid_positional_boolean_parameters: false
