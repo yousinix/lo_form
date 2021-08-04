@@ -24,13 +24,13 @@ class FormStateSummary extends StatelessWidget {
                 DataColumn(label: Text('Touched')),
               ],
               rows: [
-                for (var key in state.values.keys) ...{
+                for (var field in state.fields.values) ...{
                   DataRow(
                     cells: [
-                      DataCell(Text(key)),
-                      DataCell(_buildStatusChip(state.statuses[key]!)),
-                      DataCell(Text('${state.initialValues?[key] ?? '-'}')),
-                      DataCell(_buildBoolIcon(state.touched[key]!)),
+                      DataCell(Text(field.name)),
+                      DataCell(_buildStatusChip(field.status)),
+                      DataCell(Text('${field.initialValue ?? '-'}')),
+                      DataCell(_buildBoolIcon(field.touched)),
                     ],
                   )
                 },

@@ -10,6 +10,7 @@ export 'src/lo_field_state.dart';
 export 'src/lo_form.dart';
 export 'src/lo_form_state.dart';
 export 'src/lo_form_status.dart';
+export 'src/types.dart';
 
 // Validation
 export 'validation/lo_validation.dart';

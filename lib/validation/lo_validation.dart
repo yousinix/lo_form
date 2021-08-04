@@ -1,4 +1,4 @@
-import '../src/lo_field.dart';
+import '../src/types.dart';
 
 // Credits to form-validator (https://github.com/TheMisir/form-validator)
 // for inspiring this class's implementation.

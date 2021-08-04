@@ -4,53 +4,55 @@ import 'package:provider/provider.dart';
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
 import 'lo_form_status.dart';
+import 'types.dart';
 
-typedef FieldValidateFunc<T> = String? Function(T?);
-
-class LoField<T> extends StatelessWidget {
+class LoField<T> extends StatefulWidget {
   final String name;
+  final T? initialValue;
   final Widget Function(LoFieldState<T>) builder;
   final FieldValidateFunc<T>? validate;
 
   const LoField({
     Key? key,
     required this.name,
+    this.initialValue,
     required this.builder,
     this.validate,
   }) : super(key: key);
 
   @override
+  _LoFieldState<T> createState() => _LoFieldState<T>();
+}
+
+class _LoFieldState<T> extends State<LoField<T>> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LoFormState>().registerField(
+          name: widget.name,
+          initialValue: widget.initialValue,
+          validate: widget.validate,
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<LoFormState>(
-      builder: (_, state, __) {
-        state.registerField(name);
+      builder: (_, form, __) {
+        final field = form.fields.get<T>(widget.name);
 
         return FocusScope(
           child: Focus(
             onFocusChange: (focus) {
               if (focus) {
-                state.markTouched(name);
-              } else if (state.statuses[name]!.isPure) {
+                form.markTouched<T>(widget.name);
+              } else if (field.status.isPure) {
                 // Validate pure fields when unfocused
-                final value = state.values[name] as T?;
-                final error = validate?.call(value);
-                state.updateField(name, value, error);
+                final value = form.get<T>(widget.name);
+                form.updateField<T>(widget.name, value);
               }
             },
-            child: builder(
-              LoFieldState<T>(
-                name: name,
-                status: state.statuses[name]!,
-                touched: state.touched[name]!,
-                initialValue: state.initialValues?[name] as T?,
-                value: state.values[name] as T?,
-                error: state.errors[name],
-                onChanged: (value) {
-                  final error = validate?.call(value);
-                  state.updateField(name, value, error);
-                },
-              ),
-            ),
+            child: widget.builder(field),
           ),
         );
       },

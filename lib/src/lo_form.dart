@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'lo_form_state.dart';
+import 'types.dart';
 
 class LoForm extends StatefulWidget {
   final ValMap? initialValues;
