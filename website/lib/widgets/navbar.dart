@@ -21,9 +21,9 @@ class Navbar extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/logo.png',
-                  height: 36,
+                  height: 24,
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 8),
                 Text(
                   'LoForm',
                   style: Theme.of(context).textTheme.headline6?.copyWith(
