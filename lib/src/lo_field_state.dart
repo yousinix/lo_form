@@ -1,26 +1,33 @@
 import 'package:flutter/foundation.dart';
 
-import 'lo_form_status.dart';
+import 'lo_status.dart';
 import 'types.dart';
 
 class LoFieldState<T> {
   final String name;
-  final T? initialValue;
   final ValueChanged<T> onChanged;
   final FieldValidateFunc<T>? validate;
-  LoFormStatus status;
+  final T? initialValue;
   bool touched;
   T? value;
   String? error;
 
   LoFieldState({
     required this.name,
-    this.initialValue,
     required this.onChanged,
     required this.validate,
-    required this.status,
-    required this.touched,
-    this.value,
-    this.error,
-  });
+    this.initialValue,
+  })  : touched = false,
+        value = initialValue,
+        error = null;
+
+  LoStatus get status {
+    if (error != null) {
+      return LoStatus.invalid;
+    } else if (value == initialValue) {
+      return LoStatus.pure;
+    } else {
+      return LoStatus.valid;
+    }
+  }
 }

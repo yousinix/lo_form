@@ -66,15 +66,15 @@ class FormStateSummary extends StatelessWidget {
     );
   }
 
-  Chip _buildStatusChip(LoFormStatus status) {
+  Chip _buildStatusChip(LoStatus status) {
     final colors = {
-      LoFormStatus.pure: Colors.blue[700],
-      LoFormStatus.valid: Colors.green[600],
-      LoFormStatus.invalid: Colors.red[700],
-      LoFormStatus.mixed: Colors.indigo[900],
-      LoFormStatus.loading: Colors.blueGrey,
-      LoFormStatus.success: Colors.green[800],
-      LoFormStatus.failure: Colors.red[900],
+      LoStatus.pure: Colors.blue[700],
+      LoStatus.valid: Colors.green[600],
+      LoStatus.invalid: Colors.red[700],
+      LoStatus.mixed: Colors.indigo[900],
+      LoStatus.loading: Colors.blueGrey,
+      LoStatus.success: Colors.green[800],
+      LoStatus.failure: Colors.red[900],
     };
 
     return Chip(

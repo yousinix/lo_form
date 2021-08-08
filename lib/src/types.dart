@@ -1,5 +1,5 @@
 import 'lo_field_state.dart';
-import 'lo_form_status.dart';
+import 'lo_status.dart';
 
 typedef FieldsMap = Map<String, LoFieldState>;
 typedef ValMap = Map<String, dynamic>;
@@ -8,7 +8,7 @@ typedef ErrMap = Map<String, String?>;
 typedef ValidateFunc = ErrMap? Function(ValMap);
 typedef FieldValidateFunc<T> = String? Function(T?);
 
-typedef StatusCheckFunc = bool Function(LoFormStatus);
+typedef StatusCheckFunc = bool Function(LoStatus);
 typedef SetErrFunc = void Function(ErrMap);
 typedef SubmitFunc = Future<bool?>? Function(ValMap, SetErrFunc);
 
@@ -27,7 +27,7 @@ extension FieldsMapX on FieldsMap {
     return map((key, field) => MapEntry(key, field.value));
   }
 
-  List<LoFormStatus> getStatuses() {
+  List<LoStatus> getStatuses() {
     return values.map((field) => field.status).toList();
   }
 }
