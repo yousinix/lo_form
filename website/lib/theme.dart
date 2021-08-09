@@ -1,12 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppTheme {
-  static const _primary = Color(0xFF007BFF);
+class AppColors {
+  static const blue400 = Color(0xFF1389FD);
+  static const blue600 = Color(0xFF0175C2);
+  static const blue700 = Color(0xFF02569B);
+  static const yellow700 = Color(0xFFFFC108);
+  static const grey100 = Color(0xFFD5D7DA);
+  static const grey600 = Color(0xFF60646B);
+  static const grey900 = Color(0xFF202124);
+}
 
-  ThemeData get data => ThemeData(
-        // Base
-        canvasColor: const Color(0xFFF8F9FA),
+class AppTheme {
+  ThemeData get light => ThemeData.light().copyWith(
+        primaryColor: base.primaryColor,
+        toggleableActiveColor: base.toggleableActiveColor,
+        textTheme: base.textTheme,
+        checkboxTheme: base.checkboxTheme,
+        cardTheme: base.cardTheme,
+        inputDecorationTheme: base.inputDecorationTheme,
+        elevatedButtonTheme: base.elevatedButtonTheme,
+      );
+
+  ThemeData get dark => ThemeData.dark().copyWith(
+        errorColor: Colors.red[200],
+        primaryColor: base.primaryColor,
+        toggleableActiveColor: base.toggleableActiveColor,
+        textTheme: base.textTheme.apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+        ),
+        checkboxTheme: base.checkboxTheme,
+        cardTheme: base.cardTheme,
+        inputDecorationTheme: base.inputDecorationTheme,
+        elevatedButtonTheme: base.elevatedButtonTheme,
+      );
+
+  ThemeData get base => ThemeData(
+        // Colors
+        primaryColor: AppColors.blue600,
+        toggleableActiveColor: AppColors.blue400,
+
+        // Text
         textTheme: GoogleFonts.openSansTextTheme().copyWith(
           headline1: const TextStyle(fontWeight: FontWeight.w900),
           headline2: const TextStyle(fontWeight: FontWeight.w900),
@@ -18,18 +53,22 @@ class AppTheme {
           subtitle2: const TextStyle(fontWeight: FontWeight.w600),
         ),
 
+        // Checkbox
+        checkboxTheme: const CheckboxThemeData(
+          shape: CircleBorder(),
+        ),
+
         // Cards
         cardTheme: CardTheme(
           elevation: 1,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
 
         // Text Fields
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFFEBEDEE),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           contentPadding: const EdgeInsets.all(16),
           border: OutlineInputBorder(
@@ -38,11 +77,11 @@ class AppTheme {
           ),
         ),
 
-        // Button
+        // Buttons
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: _primary,
+            primary: AppColors.blue400,
             onPrimary: Colors.white,
             textStyle: const TextStyle(
               fontWeight: FontWeight.w500,

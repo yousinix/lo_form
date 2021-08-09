@@ -4,12 +4,19 @@ import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
 
 class Navbar extends StatelessWidget {
+  final VoidCallback onThemeChange;
+
+  const Navbar({
+    Key? key,
+    required this.onThemeChange,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
       child: Container(
-        color: Colors.white,
+        height: 72,
         padding: const EdgeInsets.symmetric(
           horizontal: 32,
           vertical: 16,
@@ -26,24 +33,30 @@ class Navbar extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'LoForm',
-                  style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: Colors.black54,
-                  ),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ],
             ),
             Row(
-              children: const [
-                _NavLink(
+              children: [
+                const _NavLink(
                   name: 'Pub',
                   asset: 'assets/logo-dart.png',
                   url: kLoFormPubUrl,
                 ),
-                _NavLink(
+                const _NavLink(
                   name: 'GitHub',
                   asset: 'assets/logo-github.png',
                   url: kLoFormGhUrl,
                 ),
+                IconButton(
+                  onPressed: onThemeChange,
+                  icon: Icon(
+                    Theme.of(context).brightness == Brightness.light
+                        ? Icons.nightlight_round
+                        : Icons.wb_sunny_rounded,
+                  ),
+                )
               ],
             )
           ],
@@ -77,7 +90,7 @@ class _NavLink extends StatelessWidget {
           child: Image.asset(
             asset,
             width: 22,
-            color: Colors.black87,
+            color: Theme.of(context).textTheme.bodyText1?.color,
           ),
         ),
       ),

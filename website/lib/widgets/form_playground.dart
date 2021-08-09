@@ -49,7 +49,6 @@ class _FormPlaygroundState extends State<FormPlayground> {
                         icon: const Icon(
                           Icons.code,
                           size: 16,
-                          color: Colors.black45,
                         ),
                       ),
                       child: RegisterForm(

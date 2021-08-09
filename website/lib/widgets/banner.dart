@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
+import '../theme.dart';
 
 class Banner extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class Banner extends StatelessWidget {
     return Container(
       height: 280,
       padding: const EdgeInsets.all(24),
-      color: const Color(0x111389fd),
+      color: AppColors.blue400.withOpacity(0.08),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
