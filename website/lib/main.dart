@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'home_page.dart';
 import 'util/theme.dart';
 
-void main() => runApp(App());
+void main() {
+  setUrlStrategy(PathUrlStrategy());
+  runApp(App());
+}
 
 class App extends StatefulWidget {
   @override
