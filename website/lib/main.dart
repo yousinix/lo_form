@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart' hide Banner;
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
+import 'home_page.dart';
 import 'theme.dart';
-import 'widgets/banner.dart';
-import 'widgets/footer.dart';
-import 'widgets/form_playground.dart';
-import 'widgets/navbar.dart';
 
 void main() => runApp(App());
 
@@ -33,32 +29,13 @@ class _AppState extends State<App> {
       darkTheme: AppTheme().dark,
       themeMode: themeMode,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverPinnedHeader(
-              child: Navbar(
-                onThemeChange: () {
-                  setState(() {
-                    themeMode = themeMode == ThemeMode.light
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
-                  });
-                },
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Banner(),
-                  FormPlayground(),
-                  Footer(),
-                ],
-              ),
-            ),
-          ],
-        ),
+      home: HomePage(
+        onThemeChange: () {
+          setState(() {
+            themeMode =
+                themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+          });
+        },
       ),
     );
   }

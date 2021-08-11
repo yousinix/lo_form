@@ -15,7 +15,10 @@ class AppTheme {
   ThemeData get light => ThemeData.light().copyWith(
         primaryColor: base.primaryColor,
         toggleableActiveColor: base.toggleableActiveColor,
-        textTheme: base.textTheme,
+        textTheme: base.textTheme.apply(
+          bodyColor: Colors.black87,
+          displayColor: Colors.black87,
+        ),
         checkboxTheme: base.checkboxTheme,
         cardTheme: base.cardTheme,
         inputDecorationTheme: base.inputDecorationTheme,
