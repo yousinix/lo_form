@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constants.dart';
+import '../util/constants.dart';
 
 class Banner extends StatelessWidget {
   static const kHeight = 280.0;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'home_page.dart';
-import 'theme.dart';
+import 'util/theme.dart';
 
 void main() => runApp(App());
 

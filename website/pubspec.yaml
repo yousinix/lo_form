@@ -21,4 +21,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
+  fonts:
+    # Icons font using: https://pub.dev/packages/icon_font_generator
+    # Run the following command to generate:
+    # $ icon_font_generator --from=assets/icons --class-name=AppIcons --out-font=assets/fonts/AppIcons.ttf --out-flutter=lib/util/app_icons.dart
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/AppIcons.ttf

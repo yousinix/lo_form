@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Banner;
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'theme.dart';
+import 'util/theme.dart';
 import 'widgets/banner.dart';
 import 'widgets/footer.dart';
 import 'widgets/form_playground.dart';
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'assets/pattern.png',
+                  'assets/images/pattern.png',
                   height: Banner.kHeight + 200,
                   width: double.infinity,
                   color: Theme.of(context)

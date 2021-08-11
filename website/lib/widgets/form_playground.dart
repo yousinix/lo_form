@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constants.dart';
+import '../util/constants.dart';
 import 'form_state_summary.dart';
 
 class FormPlayground extends StatefulWidget {
