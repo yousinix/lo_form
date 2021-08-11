@@ -12,6 +12,8 @@ class AppColors {
 }
 
 class AppTheme {
+  const AppTheme();
+
   ThemeData get light => ThemeData.light().copyWith(
         primaryColor: base.primaryColor,
         toggleableActiveColor: base.toggleableActiveColor,

@@ -8,11 +8,11 @@ import 'widgets/form_playground.dart';
 import 'widgets/navbar.dart';
 
 class HomePage extends StatelessWidget {
-  final VoidCallback onThemeChange;
+  final ValueChanged<ThemeMode> onThemeChanged;
 
   const HomePage({
     Key? key,
-    required this.onThemeChange,
+    required this.onThemeChanged,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
         slivers: [
           SliverPinnedHeader(
             child: Navbar(
-              onThemeChange: onThemeChange,
+              onThemeChanged: onThemeChanged,
             ),
           ),
           SliverToBoxAdapter(

@@ -5,15 +5,17 @@ import '../util/app_icons.dart';
 import '../util/constants.dart';
 
 class Navbar extends StatelessWidget {
-  final VoidCallback onThemeChange;
+  final ValueChanged<ThemeMode> onThemeChanged;
 
   const Navbar({
     Key? key,
-    required this.onThemeChange,
+    required this.onThemeChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+
     return Material(
       elevation: 2,
       child: Container(
@@ -49,9 +51,13 @@ class Navbar extends StatelessWidget {
                   icon: const Icon(AppIcons.github),
                 ),
                 IconButton(
-                  onPressed: onThemeChange,
+                  onPressed: () {
+                    onThemeChanged(
+                      isLightTheme ? ThemeMode.dark : ThemeMode.light,
+                    );
+                  },
                   icon: Icon(
-                    Theme.of(context).brightness == Brightness.light
+                    isLightTheme
                         ? Icons.nightlight_round
                         : Icons.wb_sunny_rounded,
                   ),
