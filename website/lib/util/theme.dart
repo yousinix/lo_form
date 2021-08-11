@@ -89,8 +89,10 @@ class AppTheme {
             primary: AppColors.blue400,
             onPrimary: Colors.white,
             textStyle: const TextStyle(
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
+              fontSize: 15,
             ),
+            minimumSize: const Size(180, 56),
             padding: const EdgeInsets.symmetric(
               horizontal: 56,
               vertical: 20,
