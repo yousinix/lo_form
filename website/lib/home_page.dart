@@ -17,6 +17,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).textTheme.bodyText1!.color!;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -28,20 +30,19 @@ class HomePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Stack(
               children: [
-                Image.asset(
-                  'assets/images/pattern.png',
-                  height: Banner.kHeight + 200,
-                  width: double.infinity,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      ?.color
-                      ?.withOpacity(0.08),
-                  fit: BoxFit.cover,
-                ),
                 Container(
                   height: Banner.kHeight + 200,
-                  color: AppColors.blue400.withOpacity(0.08),
+                  decoration: BoxDecoration(
+                    color: AppColors.blue400.withOpacity(0.08),
+                    image: DecorationImage(
+                      image: const AssetImage('assets/images/pattern.png'),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        textColor.withOpacity(0.08),
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
