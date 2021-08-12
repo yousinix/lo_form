@@ -1,7 +1,9 @@
 name: lo_form
-description: Lightweight forms library for Flutter.
-homepage: https://github.com/YoussefRaafatNasry/lo_form
 version: 0.0.1-dev.0 # update version in website whenever change
+description: Low-code and lightweight Flutter library for forms' state management.
+repository: https://github.com/YoussefRaafatNasry/lo_form
+homepage: https://YoussefRaafatNasry.github.io/lo_form
+documentation: https://docs.page/YoussefRaafatNasry/lo_form
 
 environment:
   sdk: ">=2.13.0 <3.0.0"
