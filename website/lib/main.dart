@@ -3,9 +3,12 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'home_page.dart';
+import 'util/lo_form_info.dart';
 import 'util/theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LoFormInfo.load();
   setUrlStrategy(PathUrlStrategy());
   runApp(App());
 }

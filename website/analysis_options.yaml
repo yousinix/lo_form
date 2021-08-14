@@ -7,3 +7,6 @@ linter:
 
     # Better to know what's imported from local files and what's from dependencies
     prefer_relative_imports: true
+
+    # Needed for LoFormInfo class
+    avoid_classes_with_only_static_members: false

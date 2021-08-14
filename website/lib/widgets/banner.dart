@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../util/constants.dart';
+import '../util/lo_form_info.dart';
 import '../util/theme.dart';
 
 class Banner extends StatelessWidget {
@@ -50,7 +50,7 @@ class Banner extends StatelessWidget {
             children: [
               _InstallButton(),
               ElevatedButton(
-                onPressed: () => launch(kDocsUrl),
+                onPressed: () => launch(LoFormInfo.documentation),
                 child: const Text('Get Started'),
               ),
             ],
@@ -77,7 +77,7 @@ class _InstallButtonState extends State<_InstallButton> {
 
   @override
   Widget build(BuildContext context) {
-    const dependency = 'lo_form: ^$kVersion';
+    final dependency = 'lo_form: ^${LoFormInfo.version}';
 
     return Tooltip(
       message: 'Click to copy',
@@ -91,7 +91,7 @@ class _InstallButtonState extends State<_InstallButton> {
             ),
         onPressed: () {
           Clipboard.setData(
-            const ClipboardData(
+            ClipboardData(
               text: dependency,
             ),
           );

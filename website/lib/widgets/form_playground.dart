@@ -1,10 +1,9 @@
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../util/constants.dart';
+import '../util/lo_form_info.dart';
 import 'form_state_summary.dart';
 
 class FormPlayground extends StatefulWidget {
@@ -45,7 +44,8 @@ class _FormPlaygroundState extends State<FormPlayground> {
                       padding: padding,
                       action: IconButton(
                         onPressed: () => launch(
-                          '$kLoFormGhUrl/blob/master/${RegisterForm.kPath}',
+                          '${LoFormInfo.repository}/'
+                          'blob/master/${RegisterForm.kPath}',
                         ),
                         icon: const Icon(
                           Icons.code,

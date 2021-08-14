@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../util/constants.dart';
+import '../util/lo_form_info.dart';
 
 class Footer extends StatelessWidget {
   @override
@@ -44,7 +44,7 @@ class Footer extends StatelessWidget {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    launch(kYrnGhUrl);
+                    launch(LoFormInfo.author);
                   },
               ),
             ],

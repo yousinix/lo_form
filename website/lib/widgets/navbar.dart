@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../util/app_icons.dart';
-import '../util/constants.dart';
+import '../util/lo_form_info.dart';
 
 class Navbar extends StatelessWidget {
   static const kHeight = 72.0;
@@ -54,11 +54,11 @@ class Navbar extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () => launch(kLoFormPubUrl),
+                  onPressed: () => launch(LoFormInfo.pub),
                   icon: const Icon(AppIcons.dart),
                 ),
                 IconButton(
-                  onPressed: () => launch(kLoFormGhUrl),
+                  onPressed: () => launch(LoFormInfo.repository),
                   icon: const Icon(AppIcons.github),
                 ),
                 IconButton(
