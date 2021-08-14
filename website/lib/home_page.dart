@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Banner;
+import 'package:lo_form_website/widgets/features.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import 'util/theme.dart';
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  height: Banner.kHeight + 240,
+                  height: Banner.kHeight + 250,
                   decoration: BoxDecoration(
                     color: AppColors.blue400.withOpacity(0.08),
                     image: DecorationImage(
@@ -49,6 +50,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     Banner(),
                     FormPlayground(),
+                    Features(),
                     Footer(),
                   ],
                 ),
