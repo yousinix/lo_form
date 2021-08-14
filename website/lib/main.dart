@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'home_page.dart';
 import 'util/theme.dart';
@@ -26,15 +27,19 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'LoForm',
-      theme: theme.light,
-      darkTheme: theme.dark,
-      themeMode: themeMode,
-      debugShowCheckedModeBanner: false,
-      home: HomePage(
-        onThemeChanged: (mode) => setState(() => themeMode = mode),
-      ),
+    return ResponsiveSizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp(
+          title: 'LoForm',
+          theme: theme.light,
+          darkTheme: theme.dark,
+          themeMode: themeMode,
+          debugShowCheckedModeBanner: false,
+          home: HomePage(
+            onThemeChanged: (mode) => setState(() => themeMode = mode),
+          ),
+        );
+      },
     );
   }
 }

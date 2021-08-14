@@ -31,14 +31,14 @@ class HomePage extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  height: Banner.kHeight + 200,
+                  height: Banner.kHeight + 240,
                   decoration: BoxDecoration(
                     color: AppColors.blue400.withOpacity(0.08),
                     image: DecorationImage(
                       image: const AssetImage('assets/images/pattern.png'),
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
-                        textColor.withOpacity(0.08),
+                        textColor.withOpacity(0.064),
                         BlendMode.srcIn,
                       ),
                     ),

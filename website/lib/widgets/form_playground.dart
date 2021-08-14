@@ -1,6 +1,7 @@
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../util/constants.dart';
@@ -39,7 +40,7 @@ class _FormPlaygroundState extends State<FormPlayground> {
                 children: [
                   Flexible(
                     child: _PaddedCard(
-                      title: 'Form Demo',
+                      title: 'Demo Form',
                       height: cardsHeight,
                       padding: padding,
                       action: IconButton(
@@ -115,7 +116,7 @@ class _PaddedCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.subtitle2,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     if (action != null) ...{
                       action!,

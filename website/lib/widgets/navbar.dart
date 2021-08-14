@@ -5,6 +5,7 @@ import '../util/app_icons.dart';
 import '../util/constants.dart';
 
 class Navbar extends StatelessWidget {
+  static const kHeight = 72.0;
   final ValueChanged<ThemeMode> onThemeChanged;
 
   const Navbar({
@@ -17,9 +18,9 @@ class Navbar extends StatelessWidget {
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
 
     return Material(
-      elevation: 2,
+      elevation: 1,
       child: Container(
-        height: 72,
+        height: kHeight,
         padding: const EdgeInsets.symmetric(
           horizontal: 32,
           vertical: 16,
@@ -31,12 +32,22 @@ class Navbar extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/logo.png',
-                  height: 24,
+                  width: 24,
                 ),
                 const SizedBox(width: 8),
                 Text(
                   'LoForm',
                   style: Theme.of(context).textTheme.headline6,
+                ),
+                const SizedBox(width: 6),
+                Tooltip(
+                  message: 'LoForm is still experimental, '
+                      'missing features and bugs are to be expected.',
+                  padding: const EdgeInsets.all(8),
+                  child: ActionChip(
+                    label: const Text('dev'),
+                    onPressed: () {},
+                  ),
                 ),
               ],
             ),

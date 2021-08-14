@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../util/constants.dart';
 import '../util/theme.dart';
 
 class Banner extends StatelessWidget {
-  static const kHeight = 320.0;
+  static final kHeight = 90.h;
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +18,31 @@ class Banner extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'LoForm',
-            style: Theme.of(context).textTheme.headline2,
-          ),
-          Text(
-            'Lightweight Flutter form library',
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.color
-                  ?.withOpacity(0.64),
+          SizedBox(
+            width: 720,
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1?.color,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.sp,
+                ),
+                children: const [
+                  TextSpan(
+                    text: 'Lightweight Forms for ',
+                  ),
+                  TextSpan(
+                    text: 'Flutter',
+                    style: TextStyle(
+                      color: AppColors.blue400,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 8.h),
           Wrap(
             alignment: WrapAlignment.center,
             spacing: 24,
@@ -99,7 +108,7 @@ class _InstallButtonState extends State<_InstallButton> {
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (child, animation) {
               return FadeTransition(
-                opacity:  Tween<double>(
+                opacity: Tween<double>(
                   begin: 0.0,
                   end: 1,
                 ).animate(animation),

@@ -47,7 +47,7 @@ class AppTheme {
         toggleableActiveColor: AppColors.blue400,
 
         // Text
-        textTheme: GoogleFonts.openSansTextTheme().copyWith(
+        textTheme: GoogleFonts.interTextTheme().copyWith(
           headline1: const TextStyle(fontWeight: FontWeight.w900),
           headline2: const TextStyle(fontWeight: FontWeight.w900),
           headline3: const TextStyle(fontWeight: FontWeight.w800),
