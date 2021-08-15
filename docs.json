@@ -1,6 +1,12 @@
 {
-  "name": "LoForm",
-  "theme": "#000000",
+  "name": "LoForm Docs",
+  "theme": "#1389FD",
   "favicon": "../website/web/favicon.ico",
-  "logo": "../logo/Logo.png"
+  "logo": "../logo/Logo.png",
+  "sidebar": [
+    ["Introduction", "/"],
+    ["Getting Started", "/getting-started"],
+    ["API Docs", "/api-docs"],
+    ["Changelog", "/changelog"]
+  ]
 }
