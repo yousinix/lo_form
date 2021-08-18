@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   example:
-    path: ../example
+    path: ../package/example
   flutter:
     sdk: flutter
   flutter_web_plugins:

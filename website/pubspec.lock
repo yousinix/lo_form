@@ -39,7 +39,7 @@ packages:
   example:
     dependency: "direct main"
     description:
-      path: "../example"
+      path: "../package/example"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -105,7 +105,7 @@ packages:
   lo_form:
     dependency: transitive
     description:
-      path: ".."
+      path: "../package"
       relative: true
     source: path
     version: "0.0.1-dev.1"
