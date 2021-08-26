@@ -1,8 +1,12 @@
-name: Main
+name: GitHub Pages
 
 on:
   push:
     branches: [ master ]
+    tags:
+      - '**'
+    paths:
+      - 'website/**'
 
 jobs:
   build:
