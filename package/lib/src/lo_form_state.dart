@@ -9,7 +9,7 @@ class LoFormState extends ChangeNotifier {
   final FieldsMap fields;
   final ValMap? initialValues;
   final ValidateFunc? validate;
-  final SubmitFunc onSubmit;
+  final SubmitFunc? onSubmit;
   final ValueChanged<LoFormState>? onChanged;
   final StatusCheckFunc? submittableWhen;
 
@@ -18,7 +18,7 @@ class LoFormState extends ChangeNotifier {
   LoFormState({
     this.initialValues,
     this.validate,
-    required this.onSubmit,
+    this.onSubmit,
     this.onChanged,
     this.submittableWhen,
   })  : fields = {},
@@ -93,7 +93,7 @@ class LoFormState extends ChangeNotifier {
     status = LoStatus.loading;
     notifyListeners();
 
-    final result = await onSubmit(fields.getValues(), setErrors);
+    final result = await onSubmit?.call(fields.getValues(), setErrors);
 
     // When no result is returned, means the form became invalid
     if (result != null) {
