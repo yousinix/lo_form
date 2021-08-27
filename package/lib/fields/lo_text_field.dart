@@ -39,7 +39,8 @@ class LoTextField extends StatelessWidget {
         focusNode: props?.focusNode,
         keyboardType: props?.keyboardType,
         textInputAction: props?.textInputAction,
-        textCapitalization: props?.textCapitalization ?? TextCapitalization.none,
+        textCapitalization:
+            props?.textCapitalization ?? TextCapitalization.none,
         style: props?.style,
         strutStyle: props?.strutStyle,
         textAlign: props?.textAlign ?? TextAlign.start,

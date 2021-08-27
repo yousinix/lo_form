@@ -73,7 +73,9 @@ class LoValidation {
 
   /// String must be a valid email
   LoValidation email([String? error]) {
-    final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
     return regExp(emailRegExp, 'Invalid email format');
   }
 }

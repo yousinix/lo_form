@@ -9,7 +9,6 @@ enum LoStatus {
 }
 
 extension LoStatusX on LoStatus {
-
   bool get isPure => this == LoStatus.pure;
   bool get isValid => this == LoStatus.valid;
   bool get isInvalid => this == LoStatus.invalid;
@@ -27,5 +26,4 @@ extension LoStatusX on LoStatus {
     if (isValid && other.isValid) return LoStatus.valid;
     return LoStatus.mixed;
   }
-
 }
