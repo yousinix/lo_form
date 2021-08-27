@@ -5,12 +5,8 @@ import 'lo_field_state.dart';
 import 'lo_form_state.dart';
 import 'types.dart';
 
+/// All form fields inside [LoForm] must be wrapped inside this.
 class LoField<T> extends StatefulWidget {
-  final String name;
-  final T? initialValue;
-  final Widget Function(LoFieldState<T>) builder;
-  final FieldValidateFunc<T>? validate;
-
   const LoField({
     Key? key,
     required this.name,
@@ -18,6 +14,18 @@ class LoField<T> extends StatefulWidget {
     required this.builder,
     this.validate,
   }) : super(key: key);
+
+  /// {@macro LoFieldState.name}
+  final String name;
+
+  /// {@macro LoFieldState.initialValue}
+  final T? initialValue;
+
+  /// {@macro LoFieldState.validate}
+  final FieldValidateFunc<T>? validate;
+
+  /// Builder for the field widget using [LoFieldState].
+  final Widget Function(LoFieldState<T>) builder;
 
   @override
   _LoFieldState<T> createState() => _LoFieldState<T>();
