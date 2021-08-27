@@ -1,6 +1,13 @@
+## 0.0.1-dev.2
+
+* Add some unit tests.
+* Add some API reference.
+* Change directory structure.
+* Fix README.
+
 ## 0.0.1-dev.1
 
-* Add `LoCheckBox` field
+* Add `LoCheckBox` field.
 * Add `props` field to pre-built fields, to allow styling and modifying them as regular Flutter fields.
 * Add `submittableWhen` to choose when to make the submit button enabled.
 * Add `email` & `regExp` validators.
