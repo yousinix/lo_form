@@ -1,0 +1,30 @@
+# LoForm vs [FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)
+
+Cons of FormState:
+
+- Requires controllers or state to track fields' values _(i.e. You need to create `TextEditingController` to get `TextField` value)_.
+- Requires a separate state to assign API errors require to fields.
+- Requires extra state to track form's status (Loading, Invalid, etc.).
+
+# LoForm vs [Flutter Form Builder](https://pub.dev/packages/flutter_form_builder)
+
+Cons of Flutter Form Builder:
+
+- Requires a separate state to assign API errors require to fields.
+- Requires a key to be able to access form.
+- Requires explicit calls for `save` and `validate`.
+
+# LoForm vs [Reactive Forms](https://pub.dev/packages/reactive_forms)
+
+Cons of Reactive Forms:
+
+- Requires a lot of boilerplate (due to the model-driven approach).
+- Complex and has a higher learning curve.
+
+# LoForm vs [BLoC](https://bloclibrary.dev/) + [Formz](https://pub.dev/packages/formz)
+
+Cons of BLoC + Formz:
+
+- Requires a lot of boilerplate, really a lot!
+- Complex and has a higher learning curve.
+- Formz doesn't get any more updates.

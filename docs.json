@@ -6,6 +6,7 @@
   "sidebar": [
     ["Introduction", "/"],
     ["Getting Started", "/getting-started"],
+    ["Comparison", "/comparison"],
     ["API Docs", "/api-docs"],
     ["Changelog", "/changelog"]
   ]
