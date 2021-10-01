@@ -6,15 +6,6 @@ import 'lo_status.dart';
 import 'types.dart';
 
 class LoFormState extends ChangeNotifier {
-  final FieldsMap fields;
-  final ValMap? initialValues;
-  final ValidateFunc? validate;
-  final SubmitFunc? onSubmit;
-  final ValueChanged<LoFormState>? onChanged;
-  final StatusCheckFunc? submittableWhen;
-
-  LoStatus status;
-
   LoFormState({
     this.initialValues,
     this.validate,
@@ -23,6 +14,46 @@ class LoFormState extends ChangeNotifier {
     this.submittableWhen,
   })  : fields = {},
         status = LoStatus.pure;
+
+  /// {@template LoFormState.initialValues}
+  /// Map between [LoField.name] and their initial value.
+  /// {@endtemplate}
+  final ValMap? initialValues;
+
+  /// {@template LoFormState.validate}
+  /// Validation function that has all form values as an input,
+  /// Useful for validating form fields that depend on each other
+  /// like "password" and "confirm password".
+  /// {@endtemplate}
+  final ValidateFunc? validate;
+
+  /// {@template LoFormState.onSubmit}
+  /// Callback function that gets executed when [submit] is called with
+  /// fields' values as first parameter and setError function as second one
+  /// which is used to set external API errors.
+  ///
+  /// Should return:
+  ///  - true if the submission has succeeded.
+  ///  - false if the submission has failed.
+  ///  - null if the submission has API errors (use setError to set them).
+  /// {@endtemplate}
+  final SubmitFunc? onSubmit;
+
+  /// {@template LoFormState.onChanged}
+  /// Callback function that gets executed when any field or status are changed.
+  /// {@endtemplate}
+  final ValueChanged<LoFormState>? onChanged;
+
+  /// {@template LoFormState.submittableWhen}
+  /// Predicate that defines when the form can be submitted.
+  /// {@endtemplate}
+  final StatusCheckFunc? submittableWhen;
+
+  /// Map between [LoField.name] and their [LoFieldState].
+  final FieldsMap fields;
+
+  /// Current form status, [LoStatusX.and] method is used to evaluate this.
+  LoStatus status;
 
   /// Returns the [handleSubmit] method if [submittableWhen]
   /// is null or true, otherwise returns null.
@@ -89,6 +120,8 @@ class LoFormState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Submits form using the current values and calls [onSubmit],
+  /// modifies status based on the result.
   Future<void> handleSubmit() async {
     status = LoStatus.loading;
     notifyListeners();

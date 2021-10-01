@@ -5,14 +5,6 @@ import 'lo_form_state.dart';
 import 'types.dart';
 
 class LoForm extends StatefulWidget {
-  final ValMap? initialValues;
-  final ValidateFunc? validate;
-  final SubmitFunc onSubmit;
-  final ValueChanged<LoFormState>? onChanged;
-  final ValueChanged<LoFormState>? onReady;
-  final StatusCheckFunc? submittableWhen;
-  final Widget Function(LoFormState) builder;
-
   const LoForm({
     Key? key,
     this.initialValues,
@@ -23,6 +15,27 @@ class LoForm extends StatefulWidget {
     this.submittableWhen,
     required this.builder,
   }) : super(key: key);
+
+  /// {@macro LoFormState.initialValues}
+  final ValMap? initialValues;
+
+  /// {@macro LoFormState.validate}
+  final ValidateFunc? validate;
+
+  /// {@macro LoFormState.onSubmit}
+  final SubmitFunc onSubmit;
+
+  /// {@macro LoFormState.onChanged}
+  final ValueChanged<LoFormState>? onChanged;
+
+  /// Callback function that gets executed when all fields are registered.
+  final ValueChanged<LoFormState>? onReady;
+
+  /// {@macro LoFormState.submittableWhen}
+  final StatusCheckFunc? submittableWhen;
+
+  /// Builder function for the current [LoFormState].
+  final Widget Function(LoFormState) builder;
 
   @override
   _LoFormState createState() => _LoFormState();
