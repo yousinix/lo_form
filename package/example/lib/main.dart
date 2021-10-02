@@ -8,7 +8,7 @@ import 'fake_api.dart';
 void main() => runApp(App());
 
 class RegisterForm extends StatelessWidget {
-  static const kPath = 'example/lib/main.dart';
+  static const kPath = 'package/example/lib/main.dart#L10';
 
   /// Used in website package to notify for form changes
   final ValueChanged<LoFormState>? onStateChanged;
