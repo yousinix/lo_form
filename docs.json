@@ -7,7 +7,7 @@
     ["Introduction", "/"],
     ["Getting Started", "/getting-started"],
     ["Comparison", "/comparison"],
-    ["API Docs", "/api-docs"],
-    ["Changelog", "/changelog"]
+    ["API Docs", "https://pub.dev/documentation/lo_form/latest"],
+    ["Changelog", "https://pub.dev/packages/lo_form/changelog"]
   ]
 }
