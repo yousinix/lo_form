@@ -39,16 +39,6 @@ class Navbar extends StatelessWidget {
                   'LoForm',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                const SizedBox(width: 6),
-                Tooltip(
-                  message: 'LoForm is still experimental, '
-                      'missing features and bugs are to be expected.',
-                  padding: const EdgeInsets.all(8),
-                  child: ActionChip(
-                    label: const Text('dev'),
-                    onPressed: () {},
-                  ),
-                ),
               ],
             ),
             Row(
