@@ -1,3 +1,7 @@
+## 0.1.0
+
+Initial release.
+
 ## 0.0.1-dev.2
 
 * Add some unit tests.

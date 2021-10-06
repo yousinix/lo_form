@@ -108,7 +108,7 @@ packages:
       path: "../package"
       relative: true
     source: path
-    version: "0.0.1-dev.2"
+    version: "0.1.0"
   meta:
     dependency: transitive
     description:
