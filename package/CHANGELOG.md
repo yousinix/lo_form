@@ -1,3 +1,8 @@
+## 0.1.1
+
+* Update dependencies.
+* Fix email regex.
+
 ## 0.1.0
 
 Initial release.
