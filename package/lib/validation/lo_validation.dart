@@ -73,9 +73,11 @@ class LoValidation {
 
   /// String must be a valid email
   LoValidation email([String? error]) {
-    final emailRegExp = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9-]+\.[a-zA-Z]+",
-    );
+    const pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|'
+        r'(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.'
+        r'[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    final emailRegExp = RegExp(pattern);
     return regExp(emailRegExp, 'Invalid email format');
   }
 }
