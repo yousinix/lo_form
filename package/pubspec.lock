@@ -66,7 +66,7 @@ packages:
       name: lint
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.3"
+    version: "1.7.2"
   matcher:
     dependency: transitive
     description:
@@ -101,7 +101,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -164,5 +164,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
+  dart: ">=2.14.0-360.0.dev <3.0.0"
   flutter: ">=2.0.0"
