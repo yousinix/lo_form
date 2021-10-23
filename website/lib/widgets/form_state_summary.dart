@@ -46,8 +46,8 @@ class FormStateSummary extends StatelessWidget {
                       ),
                     ),
                     DataCell(_buildStatusChip(state.status)),
-                    const DataCell(SizedBox.shrink()),
-                    const DataCell(SizedBox.shrink()),
+                    DataCell.empty,
+                    DataCell.empty,
                   ],
                 )
               ],
