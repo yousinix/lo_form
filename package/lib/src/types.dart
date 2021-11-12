@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'lo_field_state.dart';
 import 'lo_status.dart';
 
@@ -10,7 +12,7 @@ typedef FieldValidateFunc<T> = String? Function(T?);
 
 typedef StatusCheckFunc = bool Function(LoStatus);
 typedef SetErrFunc = void Function(ErrMap);
-typedef SubmitFunc = Future<bool?>? Function(ValMap, SetErrFunc);
+typedef SubmitFunc = FutureOr<bool?>? Function(ValMap, SetErrFunc);
 
 extension ValMapX on ValMap {
   /// Shorthand for using "as" to cast the dynamic value
