@@ -1,3 +1,8 @@
+## 0.1.2
+
+* Change `onSubmit` return type to `FutureOr<bool>`; to eliminate the need for writing `async` in synchronous functions.
+* Add `initialValue` to all pre-built fields.
+
 ## 0.1.1
 
 * Update dependencies.
