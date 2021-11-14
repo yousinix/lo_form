@@ -6,7 +6,7 @@
   "sidebar": [
     ["Introduction", "/"],
     ["Getting Started", "/getting-started"],
-    ["Comparison", "/comparison"],
+    ["Why Not ...?", "/why-not"],
     ["API Docs", "https://pub.dev/documentation/lo_form/latest"],
     ["Changelog", "https://pub.dev/packages/lo_form/changelog"]
   ]
