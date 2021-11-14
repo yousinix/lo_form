@@ -65,7 +65,7 @@ In this example, you will learn how to create a simple form for newsletter subsc
 
     ```dart
     LoForm(
-      onSubmit: (values, setErrors) async {
+      onSubmit: (values, setErrors) {
         print('Welcome ${values.get('Email')}');
         return true;
       },
@@ -89,7 +89,7 @@ In this example, you will learn how to create a simple form for newsletter subsc
     ```dart
     LoForm(
       submittableWhen: (status) => status.isValid,
-      onSubmit: (values, setErrors) async {
+      onSubmit: (values, setErrors) {
         // Rest of code...
       },
       builder: (form) {
@@ -109,7 +109,7 @@ In this example, you will learn how to create a simple form for newsletter subsc
       Widget build(BuildContext context) {
         return LoForm(
           submittableWhen: (status) => status.isValid,
-          onSubmit: (values, setErrors) async {
+          onSubmit: (values, setErrors) {
             print('Welcome ${values.get('Email')}');
             return true;
           },
