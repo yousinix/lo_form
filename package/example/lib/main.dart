@@ -21,7 +21,6 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoForm(
-      initialValues: const {'Username': 'yrn'},
       onReady: onStateChanged,
       onChanged: onStateChanged,
       validate: (values) {
@@ -61,6 +60,7 @@ class RegisterForm extends StatelessWidget {
           children: [
             LoTextField(
               name: 'Username',
+              initialValue: 'yrn',
               validate: LoValidation().required().build(),
             ),
             const SizedBox(height: 16),

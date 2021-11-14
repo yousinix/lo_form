@@ -9,12 +9,14 @@ class TextFieldProps = TextField with Props;
 
 class LoTextField extends StatelessWidget {
   final String name;
+  final String? initialValue;
   final FieldValidateFunc<String>? validate;
   final TextFieldProps? props;
 
   const LoTextField({
     Key? key,
     required this.name,
+    this.initialValue,
     this.validate,
     this.props,
   }) : super(key: key);
@@ -24,6 +26,7 @@ class LoTextField extends StatelessWidget {
     return LoField<String>(
       name: name,
       validate: validate,
+      initialValue: initialValue,
       builder: (state) => TextFormField(
         // [LoField] props
         initialValue: state.initialValue,

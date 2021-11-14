@@ -8,6 +8,7 @@ class CheckboxProps = Checkbox with Props;
 
 class LoCheckbox extends StatelessWidget {
   final String name;
+  final bool? initialValiue;
   final FieldValidateFunc<bool>? validate;
   final CheckboxProps? props;
   final Widget label;
@@ -16,6 +17,7 @@ class LoCheckbox extends StatelessWidget {
   const LoCheckbox({
     Key? key,
     required this.name,
+    this.initialValiue,
     this.validate,
     this.props,
     required this.label,
@@ -27,6 +29,7 @@ class LoCheckbox extends StatelessWidget {
     return LoField<bool?>(
       name: name,
       validate: validate,
+      initialValue: initialValiue,
       builder: (state) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
