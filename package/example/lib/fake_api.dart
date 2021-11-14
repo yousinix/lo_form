@@ -18,7 +18,7 @@ class FakeResponse<T> {
 final Set<String> _usernames = {'bob', 'alice'};
 
 class FakeApi {
-  static Future<FakeResponse<String>> register({
+  Future<FakeResponse<String>> register({
     required String username,
     required String password,
   }) {

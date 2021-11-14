@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lo_form/lo_form.dart';
 
@@ -5,10 +7,10 @@ import 'app.dart';
 import 'extensions.dart';
 import 'fake_api.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
 class RegisterForm extends StatelessWidget {
-  static const kPath = 'package/example/lib/main.dart#L10';
+  static const kPath = 'package/example/lib/main.dart#L12';
 
   /// Used in website package to notify for form changes
   final ValueChanged<LoFormState>? onStateChanged;
@@ -38,7 +40,8 @@ class RegisterForm extends StatelessWidget {
       },
       submittableWhen: (status) => status.isValid || status.isSubmitted,
       onSubmit: (values, setErrors) async {
-        final response = await FakeApi.register(
+        final client = FakeApi();
+        final response = await client.register(
           username: values.get('Username'),
           password: values.get('Password'),
         );
