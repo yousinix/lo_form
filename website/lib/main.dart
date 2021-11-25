@@ -1,4 +1,8 @@
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart';
+
+import 'converters.dart';
 
 void main() => runApp(const App());
 
@@ -9,8 +13,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          child: Text('Form Widget Here'),
+        body: RegisterForm(
+          onStateChanged: (state) {
+            final json = formStateToJson(state);
+            window.parent?.postMessage(json, '*');
+          },
         ),
       ),
     );

@@ -21,8 +21,20 @@
 
 <body>
   <h1>{{ site.title }}</h1>
-  <flutter-app></flutter-app>
+  <flutter-app height="400px"></flutter-app>
+  <table id="state-table">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Status</th>
+        <th>Initial</th>
+        <th>Touched</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
   <script src="flutter-app.js"></script>
+  <script src="assets/js/state-listener.js"></script>
 </body>
 
 </html>
