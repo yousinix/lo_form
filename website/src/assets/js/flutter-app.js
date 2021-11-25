@@ -14,7 +14,7 @@ customElements.define(
           border: none;
         }
       </style>
-      <iframe id="app-container" src="flutter-app.html"></iframe>
+      <iframe id="app-container" src="index-flutter.html"></iframe>
     `;
     }
   }
