@@ -5,3 +5,8 @@ url: "https://YoussefRaafatNasry.github.io/"
 
 # Build Settings
 destination: ../web/
+
+links:
+  github: https://github.com/YoussefRaafatNasry/lo_form
+  pub: https://pub.dev/packages/lo_form
+  docs: https://docs.page/YoussefRaafatNasry/lo_form

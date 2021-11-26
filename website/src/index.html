@@ -3,38 +3,12 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <base href="{{ site.baseurl }}/">
-
-  <!-- Primary Meta Tags -->
-  <title>{{ site.title }}</title>
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="title" content="{{ site.title }}">
-  <meta name="description" content="{{ site.description }}">
-
-  <!-- TODO: add meta tags -->
-
-  <!-- Manifest and Icons -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
-</head>
+{% include head.html %}
 
 <body>
-  <h1>{{ site.title }}</h1>
-  <flutter-app height="400px"></flutter-app>
-  <table id="state-table">
-    <thead>
-      <tr>
-        <th>Field</th>
-        <th>Status</th>
-        <th>Initial</th>
-        <th>Touched</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <script src="assets/js/flutter-app.js"></script>
-  <script src="assets/js/state-listener.js"></script>
+  {% include navbar.html %}
+  {% include demo.html %}
+  {% include scripts.html %}
 </body>
 
 </html>
