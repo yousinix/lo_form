@@ -7,7 +7,15 @@
 
 <body>
   {% include navbar.html %}
-  {% include demo.html %}
+
+  <div class="stacked">
+    <div class="background"></div>
+    <div>
+      {% include hero.html %}
+      {% include demo.html %}
+    </div>
+  </div>
+
   {% include scripts.html %}
 </body>
 

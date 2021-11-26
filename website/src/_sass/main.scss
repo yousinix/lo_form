@@ -3,3 +3,20 @@
 body {
   font-family: "Inter", sans-serif !important;
 }
+
+.background {
+  z-index: -100;
+  height: calc(100vh + 80px);
+  background-image: url("../images/pattern.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.12;
+}
+
+.stacked {
+  display: grid;
+  > * {
+    grid-row: 1;
+    grid-column: 1;
+  }
+}
