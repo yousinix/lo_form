@@ -1,12 +1,56 @@
-<flutter-app height="400px"></flutter-app>
-<table id="state-table">
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Status</th>
-      <th>Initial</th>
-      <th>Touched</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+
+    <div class="col-lg-4 col-md-6 my-2">
+      <div class="card demo-card p-4">
+
+        <flutter-app class="hidden"></flutter-app>
+
+        <div id="flutter-app-placeholder" class="placeholder-glow">
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+        </div>
+
+      </div>
+
+      <span class="row text-muted p-3">
+        <div class="col-1 text-end p-0">
+          ⓘ
+        </div>
+        <div class="col-11">
+          This form is rendered using Flutter Web, it may be slow or contain some janks.
+        </div>
+      </span>
+    </div>
+
+    <div class="col-lg-4 col-md-6 my-2">
+      <div class="card demo-card p-4">
+
+        <table id="state-table" class="table hidden">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Status</th>
+              <th>Initial</th>
+              <th>Touched</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div id="state-table-placeholder" class="placeholder-glow">
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+          <span class="placeholder col-12"></span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

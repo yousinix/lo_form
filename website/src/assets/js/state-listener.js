@@ -1,12 +1,30 @@
+var isInitialized = false;
+
 window.addEventListener("message", (e) => {
   const state = JSON.parse(e.data);
   stateToTable(state);
+  initView();
 });
+
+const initView = () => {
+  if (isInitialized) return;
+
+  const app = document.getElementsByTagName("flutter-app")[0];
+  const appPlaceholder = document.getElementById("flutter-app-placeholder");
+  appPlaceholder.classList.add("hidden");
+  app.classList.remove("hidden");
+
+  const table = document.getElementById("state-table");
+  const tablePlaceHolder = document.getElementById("state-table-placeholder");
+  tablePlaceHolder.classList.add("hidden");
+  table.classList.remove("hidden");
+
+  isInitialized = true;
+};
 
 const stateToTable = (state) => {
   const table = document.getElementById("state-table");
   const tbody = table.getElementsByTagName("tbody")[0];
-  const isInitialized = tbody.rows.length > 0;
 
   // Field rows
   for (var i = 0; i < state.fields.length; i++) {
