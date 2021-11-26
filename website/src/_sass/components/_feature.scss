@@ -1,0 +1,8 @@
+.feature {
+  font-size: 20px;
+  margin: 6px;
+
+  &::before {
+    content: "+ ";
+  }
+}

@@ -9,15 +9,13 @@ window.addEventListener("message", (e) => {
 const initView = () => {
   if (isInitialized) return;
 
-  const app = document.getElementsByTagName("flutter-app")[0];
-  const appPlaceholder = document.getElementById("flutter-app-placeholder");
-  appPlaceholder.classList.add("hidden");
-  app.classList.remove("hidden");
+  const loadingClass = "card--loading";
 
-  const table = document.getElementById("state-table");
-  const tablePlaceHolder = document.getElementById("state-table-placeholder");
-  tablePlaceHolder.classList.add("hidden");
-  table.classList.remove("hidden");
+  const formCard = document.getElementById("form-card");
+  formCard.classList.remove(loadingClass);
+
+  const tableCard = document.getElementById("table-card");
+  tableCard.classList.remove(loadingClass);
 
   isInitialized = true;
 };

@@ -1,56 +1,37 @@
-<div class="container-fluid">
-  <div class="row justify-content-center">
+<section class="section">
+  <div class="section__content section__content--extra">
 
-    <div class="col-lg-4 col-md-6 my-2">
-      <div class="card demo-card p-4">
-
-        <flutter-app class="hidden"></flutter-app>
-
-        <div id="flutter-app-placeholder" class="placeholder-glow">
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
+    <div class="demo-grid">
+      <div>
+        <div id="form-card" class="card card--loading">
+          <flutter-app></flutter-app>
         </div>
 
+        <p class="card__hint">
+          <span>ⓘ</span>
+          <span>This form is rendered using Flutter Web, it may be slow or contain some janks.</span>
+        </p>
       </div>
 
-      <span class="row text-muted p-3">
-        <div class="col-1 text-end p-0">
-          ⓘ
+      <div>
+        <div id="table-card" class="card card--loading">
+
+          <table id="state-table" class="table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Status</th>
+                <th>Initial</th>
+                <th>Touched</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
         </div>
-        <div class="col-11">
-          This form is rendered using Flutter Web, it may be slow or contain some janks.
-        </div>
-      </span>
-    </div>
-
-    <div class="col-lg-4 col-md-6 my-2">
-      <div class="card demo-card p-4">
-
-        <table id="state-table" class="table hidden">
-          <thead>
-            <tr>
-              <th>Field</th>
-              <th>Status</th>
-              <th>Initial</th>
-              <th>Touched</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-
-        <div id="state-table-placeholder" class="placeholder-glow">
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-          <span class="placeholder col-12"></span>
-        </div>
-
       </div>
+
     </div>
 
   </div>
-</div>
+</section>

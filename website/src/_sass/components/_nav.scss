@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    img {
+      height: 28px;
+      margin-right: 12px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    list-style: none;
+    gap: 12px;
+  }
+
+  &__link * {
+    text-decoration: none;
+  }
+}

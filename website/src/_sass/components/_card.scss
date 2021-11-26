@@ -1,0 +1,40 @@
+.card {
+  height: $card-height;
+  border-radius: $card-radius;
+  padding: $card-radius;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgba($color: #000, $alpha: 0.24);
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    font-size: 14.8px;
+    color: rgba($color: #000, $alpha: 0.64);
+  }
+
+  &--loading {
+    * {
+      display: none;
+    }
+
+    background: linear-gradient(to right, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);
+    background-size: 1200px 100%;
+
+    animation-duration: 2.2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}

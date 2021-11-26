@@ -1,0 +1,17 @@
+.title {
+  &__1 {
+    font-size: calc(1.625rem + 4.2vw);
+    text-align: center;
+    line-height: 1;
+  }
+
+  &__2 {
+    font-size: calc(1.5rem + 3.7vw);
+    text-align: center;
+    line-height: 1;
+  }
+
+  &__highlight {
+    color: $primary;
+  }
+}

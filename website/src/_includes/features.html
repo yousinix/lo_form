@@ -1,14 +1,12 @@
-<div class="container">
-  <div class="hero row justify-content-center align-items-center">
-    <div class="col-lg-7 text-center">
-      <h1 class="display-2 fw-bold mb-5">
-        Everything you need <span class="text-primary">in one place</span>
-      </h1>
-      <div class="row">
-        {% for feature in site.data.features %}
-        <h5 class="col-lg-4 col-md-6 text-md-start p-1">+ {{ feature }}</h5>
-        {% endfor %}
-      </div>
+<section class="section">
+  <div class="section__content">
+    <h1 class="title__2">
+      Everything you need <span class="title__highlight">in one place</span>
+    </h1>
+    <div class="features-grid">
+      {% for feature in site.data.features %}
+      <span class="feature">{{ feature }}</span>
+      {% endfor %}
     </div>
   </div>
-</div>
+</section>

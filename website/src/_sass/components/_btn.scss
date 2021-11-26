@@ -1,0 +1,15 @@
+.btn {
+  padding: 18px 46px;
+  background-color: $primary;
+  border-radius: $card-radius;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+
+  &:hover {
+    background-color: darken($color: $primary, $amount: 10);
+  }
+}
