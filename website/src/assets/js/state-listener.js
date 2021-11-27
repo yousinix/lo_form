@@ -35,24 +35,33 @@ const stateToTable = (state) => {
     cell0.innerHTML = field.name;
 
     const cell1 = row.insertCell(1);
-    cell1.innerHTML = field.status;
+    cell1.appendChild(statusToSpan(field.status));
 
     const cell2 = row.insertCell(2);
     cell2.innerHTML = field.initialValue;
 
     const cell3 = row.insertCell(3);
-    cell3.innerHTML = field.touched;
+    cell3.innerHTML = field.touched ? "✅" : "❌";
   }
 
   // Form row
-  const lastIndex = state.fields.length;
+  const tfoot = table.getElementsByTagName("tfoot")[0];
 
-  if (isInitialized) tbody.deleteRow(lastIndex);
-  const lastRow = tbody.insertRow(lastIndex);
+  if (isInitialized) tfoot.deleteRow(0);
 
-  const cell0 = lastRow.insertCell(0);
+  const row = tfoot.insertRow(0);
+  const cell0 = row.insertCell(0);
   cell0.innerHTML = "Form";
 
-  const cell1 = lastRow.insertCell(1);
-  cell1.innerHTML = state.status;
+  const cell1 = row.insertCell(1);
+  cell1.appendChild(statusToSpan(state.status));
+
+  row.insertCell(2);
+  row.insertCell(3);
+};
+
+const statusToSpan = (status) => {
+  const span = document.createElement("span");
+  span.classList.add(`status--${status}`);
+  return span;
 };

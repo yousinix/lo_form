@@ -1,0 +1,51 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: 1pt solid $grey-300;
+  }
+
+  th {
+    text-align: start;
+    padding: 16px;
+  }
+
+  td {
+    padding: 12px;
+  }
+
+  tfoot {
+    font-weight: bold;
+    background-color: rgba($color: $secondary-600, $alpha: 0.12);
+  }
+}
+
+$statuses: (
+  "pure": blue,
+  "valid": green,
+  "invalid": red,
+  "mixed": indigo,
+  "loading": grey,
+  "success": darkgreen,
+  "failure": darkred,
+);
+
+.status {
+  @each $name, $bg-color in $statuses {
+    &--#{$name} {
+      display: block;
+      width: 56px;
+      padding: 6px 10px;
+      border-radius: 16px;
+      background-color: $bg-color;
+      color: white;
+      text-align: center;
+      font-size: 12.5px;
+
+      &::before {
+        content: $name;
+      }
+    }
+  }
+}
