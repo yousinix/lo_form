@@ -4,6 +4,7 @@
   padding: 24px;
   background-color: white;
   box-shadow: -1px 4px 20px -6px rgba($color: #000, $alpha: 0.24);
+  border: solid 1px $grey-300;
 
   &__hint {
     display: flex;
@@ -19,8 +20,9 @@
       display: none;
     }
 
-    background: linear-gradient(to right, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);
+    background: linear-gradient(to right, #fefefe 0%, #f3f3f3 50%, #fefefe 100%);
     background-size: 1200px 100%;
+    background-repeat: repeat;
 
     animation-duration: 2.2s;
     animation-fill-mode: forwards;

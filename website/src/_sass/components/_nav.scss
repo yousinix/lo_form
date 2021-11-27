@@ -2,11 +2,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 8px;
 
   &__logo {
     display: flex;
     align-items: center;
     text-decoration: none;
+    font-weight: bold;
+    color: rgba($color: #000, $alpha: 0.86);
 
     img {
       height: 28px;
@@ -17,10 +20,13 @@
   &__links {
     display: flex;
     list-style: none;
-    gap: 12px;
+    gap: 16px;
   }
 
   &__link * {
     text-decoration: none;
+    font-weight: bold;
+    color: rgba($color: #000, $alpha: 0.72);
+    font-size: 18px;
   }
 }

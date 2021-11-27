@@ -1,8 +1,7 @@
 .feature {
   font-size: 20px;
-  margin: 6px;
-
-  &::before {
-    content: "+ ";
-  }
+  margin: 8px 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }

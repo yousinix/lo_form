@@ -35,13 +35,15 @@ const stateToTable = (state) => {
     cell0.innerHTML = field.name;
 
     const cell1 = row.insertCell(1);
-    cell1.appendChild(statusToSpan(field.status));
+    cell1.innerHTML = `<span class="status--${field.status}"></span>`;
 
     const cell2 = row.insertCell(2);
-    cell2.innerHTML = field.initialValue;
+    cell2.innerHTML = field.initialValue ?? '-';
 
     const cell3 = row.insertCell(3);
-    cell3.innerHTML = field.touched ? "✅" : "❌";
+    cell3.innerHTML = field.touched
+      ? `<i class="fas fa-check-circle text--green"></i>`
+      : `<i class="fas fa-times-circle text--red"></i>`;
   }
 
   // Form row
@@ -54,14 +56,8 @@ const stateToTable = (state) => {
   cell0.innerHTML = "Form";
 
   const cell1 = row.insertCell(1);
-  cell1.appendChild(statusToSpan(state.status));
+  cell1.innerHTML = `<span class="status--${state.status}"></span>`;
 
   row.insertCell(2);
   row.insertCell(3);
-};
-
-const statusToSpan = (status) => {
-  const span = document.createElement("span");
-  span.classList.add(`status--${status}`);
-  return span;
 };
