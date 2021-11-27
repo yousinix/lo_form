@@ -2,21 +2,38 @@ name: GitHub Pages
 
 on:
   push:
-    branches: [ master ]
-    tags:
-      - '**'
+    branches: [master]
     paths:
-      - 'website/**'
+      - website/**
+      - package/example/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Install gems
+        run: bundle
+        working-directory: website/src/
+
+      - name: Build Jekyll
+        run: bundle exec jekyll build
+        working-directory: website/src/
+
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.5.2'
-      - uses: erickzanardo/flutter-gh-pages@v6
+          flutter-version: 2.5.3
+
+      - uses: bluefireteam/flutter-gh-pages@v7
         with:
           workingDir: website
