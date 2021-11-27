@@ -2,9 +2,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap");
 
-@import "variables";
-@import "reset";
-@import "layout";
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+@import "base/reset";
+@import "base/layout";
+
 @import "components/btn";
 @import "components/card";
 @import "components/nav";

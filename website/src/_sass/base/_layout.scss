@@ -26,14 +26,26 @@
 
 .demo-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
+
+  @include min-width(lg) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0px 24px;
+
+  @include min-width(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include min-width(lg) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .footer {

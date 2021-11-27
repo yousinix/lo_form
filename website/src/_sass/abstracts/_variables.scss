@@ -4,3 +4,11 @@ $section-height: 80vh;
 $section-max-width: 800px;
 $card-height: 460px;
 $card-radius: 16px;
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
