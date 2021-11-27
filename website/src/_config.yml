@@ -1,7 +1,8 @@
 title: LoForm
-description: "Lightweight forms for Flutter"
-baseurl: "/lo_form"
-url: "https://YoussefRaafatNasry.github.io/"
+description: Lightweight forms for Flutter
+baseurl: /lo_form
+url: https://YoussefRaafatNasry.github.io
+meta_image: https://raw.githubusercontent.com/YoussefRaafatNasry/lo_form/master/website/src/assets/images/preview.png
 
 # Build Settings
 destination: ../web/
@@ -13,4 +14,4 @@ links:
 
 author:
   username: YoussefRaafatNasry
-  website: https://YoussefRaafatNasry.github.io/
+  website: https://YoussefRaafatNasry.github.io

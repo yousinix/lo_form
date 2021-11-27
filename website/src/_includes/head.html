@@ -1,21 +1,33 @@
 <head>
-  <title>{{ site.title }}</title>
   <base href="{{ site.baseurl }}/">
-
-  <!-- Primary Meta Tags -->
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Primary Meta Tags -->
+  <title>{{ site.title }}</title>
   <meta name="title" content="{{ site.title }}">
   <meta name="description" content="{{ site.description }}">
-  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
 
-  <!-- TODO: add meta tags -->
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ '' | absolute_url }}">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:image" content="{{ site.meta_image }}">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ '' | absolute_url }}">
+  <meta property="twitter:title" content="{{ site.title }}">
+  <meta property="twitter:description" content="{{ site.description }}">
+  <meta property=" twitter:image" content="{{ site.meta_image }}">
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
