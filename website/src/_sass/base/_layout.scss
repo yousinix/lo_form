@@ -42,10 +42,12 @@
 
   @include min-width(md) {
     grid-template-columns: 1fr 1fr;
+    padding-left: 16px;
   }
 
   @include min-width(lg) {
     grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 24px;
   }
 }
 
@@ -56,5 +58,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba($color: $primary-300, $alpha: 0.08);
+  background-color: rgba($color: $primary-300, $alpha: 0.04);
+  border-top: solid 1px $primary-300;
 }

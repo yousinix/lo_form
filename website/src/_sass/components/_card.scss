@@ -4,14 +4,14 @@
   padding: 24px;
   background-color: white;
   box-shadow: -1px 4px 20px -6px rgba($color: #000, $alpha: 0.24);
-  border: solid 1px $grey-300;
+  border: solid 1px $primary-300;
 
   &__hint {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 12px;
-    font-size: 14.8px;
+    font-size: 14px;
     color: rgba($color: #000, $alpha: 0.64);
   }
 
