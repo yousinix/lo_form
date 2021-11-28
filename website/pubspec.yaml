@@ -1,37 +1,21 @@
-name: lo_form_website
-description: LoForm's website.
-publish_to: 'none'
+name: website
+description: website app for LoForm.
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   example:
     path: ../package/example
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
-  google_fonts: ^2.1.0
   lo_form:
     path: ../package
-  responsive_sizer: ^3.0.4+4
-  sliver_tools: ^0.2.5
-  url_launcher: ^6.0.9
-  yaml: ^3.1.0
+  universal_html: ^2.0.8
 
 dev_dependencies:
-  lint: ^1.0.0
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
-  fonts:
-    # Icons font using: https://pub.dev/packages/icon_font_generator
-    # Run the following command to generate:
-    # $ icon_font_generator --from=assets/icons --class-name=AppIcons --out-font=assets/fonts/AppIcons.ttf --out-flutter=lib/util/app_icons.dart
-    - family: AppIcons
-      fonts:
-        - asset: assets/fonts/AppIcons.ttf

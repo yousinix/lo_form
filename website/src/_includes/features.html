@@ -1,0 +1,12 @@
+<section class="section">
+  <div class="section__content">
+    <h1 class="text--title-2">
+      Everything you need <span class="text--primary">in one place</span>
+    </h1>
+    <div class="features-grid">
+      {% for feature in site.data.features %}
+      <span class="feature"><i class="fas fa-plus-circle"></i> {{ feature }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
