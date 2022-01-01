@@ -1,4 +1,4 @@
-## [unreleased]
+## 0.2.0
 
 * Add `debounceTime` property for debouncing field's changes.
 * Add `LoConfig` to configure the package defaults.
