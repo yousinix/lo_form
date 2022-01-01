@@ -57,7 +57,10 @@ In this example, you will learn how to create a simple form for newsletter subsc
     ```dart
     LoTextField(
       name: 'Email',
-      validate: LoValidation().required().email().build(),
+      validators: [
+        LoRequiredValidator(),
+        LoRegExpValidator.email(),
+      ],
     )
     ```
 
@@ -118,7 +121,10 @@ In this example, you will learn how to create a simple form for newsletter subsc
               children: [
                 LoTextField(
                   name: 'Email',
-                  validate: LoValidation().required().email().build(),
+                  validators: [
+                    LoRequiredValidator(),
+                    LoRegExpValidator.email(),
+                  ],
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
