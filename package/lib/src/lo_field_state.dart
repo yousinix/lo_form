@@ -10,7 +10,7 @@ class LoFieldState<T> {
     this.initialValue,
     this.validate,
     required ValueChanged<T> onChanged,
-    Duration? debounceTime,
+    this.debounceTime,
   })  : _onValueChanged = onChanged,
         _debouncer = debounceTime == null ? null : Debouncer(debounceTime),
         value = initialValue,
@@ -25,6 +25,16 @@ class LoFieldState<T> {
   /// Function that should be called with every change
   /// to update the state accordingly.
   final ValueChanged<T> _onValueChanged;
+
+  /// {@template LoFieldState.debounceTime}
+  /// The [Duration] used to debounce changes.
+  ///
+  /// See also:
+  ///
+  /// - [LoConfig.debounceTimes], a way to set a default debounce time
+  ///   for a sepecefic field type,
+  /// {@endtemplate}
+  final Duration? debounceTime;
 
   /// A timer responsible for depouncing changes.
   final Debouncer? _debouncer;

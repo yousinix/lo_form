@@ -25,7 +25,7 @@ class LoField<T> extends StatefulWidget {
   /// {@macro LoFieldState.validate}
   final FieldValidateFunc<T>? validate;
 
-  /// The [Duration] use to debounce changes of [LoFieldState.onChange]
+  /// {@macro LoFieldState.debounceTime}
   final Duration? debounceTime;
 
   /// Builder for the field widget using [LoFieldState].

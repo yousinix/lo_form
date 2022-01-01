@@ -1,6 +1,7 @@
 ## [unreleased]
 
 * Add `debounceTime` property for debouncing field's changes.
+* Add `LoConfig` to configure the package defaults.
 
 ## 0.1.2
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
+import 'lo_config.dart';
 import 'lo_field_state.dart';
 import 'lo_status.dart';
 import 'types.dart';
@@ -87,7 +88,7 @@ class LoFormState extends ChangeNotifier {
       onChanged: (v) => onFieldValueChanged(name, v),
       validate: validate,
       initialValue: initialValue ?? initialValues?[name] as T?,
-      debounceTime: debounceTime,
+      debounceTime: debounceTime ?? LoConfig.debounceTimes[T],
     );
   }
 
