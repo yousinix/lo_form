@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
@@ -76,6 +78,7 @@ class LoFormState extends ChangeNotifier {
     required String name,
     T? initialValue,
     required FieldValidateFunc<T>? validate,
+    Duration? debounceTime,
   }) {
     if (fields.containsKey(name)) return; // Prevent re-registration
 
@@ -84,6 +87,7 @@ class LoFormState extends ChangeNotifier {
       onChanged: (v) => onFieldValueChanged(name, v),
       validate: validate,
       initialValue: initialValue ?? initialValues?[name] as T?,
+      debounceTime: debounceTime,
     );
   }
 
@@ -150,5 +154,11 @@ class LoFormState extends ChangeNotifier {
     });
 
     status = fields.getStatuses().reduce((res, x) => res.and(x));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    fields.forEach((_, field) => field.dispose());
   }
 }

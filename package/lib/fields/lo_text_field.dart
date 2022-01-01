@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../lo_form.dart';
-import '../src/lo_field.dart';
-import '../src/lo_field_state.dart';
 import 'props.dart';
 
 class TextFieldProps = TextField with Props;
@@ -11,6 +9,7 @@ class LoTextField extends StatelessWidget {
   final String name;
   final String? initialValue;
   final FieldValidateFunc<String>? validate;
+  final Duration? debounceTime;
   final TextFieldProps? props;
 
   const LoTextField({
@@ -18,6 +17,7 @@ class LoTextField extends StatelessWidget {
     required this.name,
     this.initialValue,
     this.validate,
+    this.debounceTime,
     this.props,
   }) : super(key: key);
 
@@ -25,8 +25,9 @@ class LoTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoField<String>(
       name: name,
-      validate: validate,
       initialValue: initialValue,
+      validate: validate,
+      debounceTime: debounceTime,
       builder: (state) => TextFormField(
         // [LoField] props
         initialValue: state.initialValue,

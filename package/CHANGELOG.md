@@ -1,3 +1,7 @@
+## [unreleased]
+
+* Add `debounceTime` property for debouncing field's changes.
+
 ## 0.1.2
 
 * Change `onSubmit` return type to `FutureOr<bool>`; to eliminate the need for writing `async` in synchronous functions.

@@ -1,16 +1,20 @@
 import 'package:flutter/foundation.dart';
 
+import 'debouncer.dart';
 import 'lo_status.dart';
 import 'types.dart';
 
 class LoFieldState<T> {
   LoFieldState({
     required this.name,
-    required this.onChanged,
-    required this.validate,
     this.initialValue,
-  })  : touched = false,
+    this.validate,
+    required ValueChanged<T> onChanged,
+    Duration? debounceTime,
+  })  : _onValueChanged = onChanged,
+        _debouncer = debounceTime == null ? null : Debouncer(debounceTime),
         value = initialValue,
+        touched = false,
         error = null;
 
   /// {@template LoFieldState.name}
@@ -20,7 +24,10 @@ class LoFieldState<T> {
 
   /// Function that should be called with every change
   /// to update the state accordingly.
-  final ValueChanged<T> onChanged;
+  final ValueChanged<T> _onValueChanged;
+
+  /// A timer responsible for depouncing changes.
+  final Debouncer? _debouncer;
 
   /// {@template LoFieldState.validate}
   /// Function that validates new values and returns an error message
@@ -42,6 +49,14 @@ class LoFieldState<T> {
   /// The current error message.
   String? error;
 
+  /// Function that should be called with every change
+  /// to update the state accordingly.
+  ValueChanged<T> get onChanged {
+    return _debouncer == null
+        ? _onValueChanged
+        : (v) => _debouncer?.run(() => _onValueChanged(v));
+  }
+
   /// The current field status:
   ///
   /// * [LoStatus.pure], if the [value] equals [initialValue].
@@ -55,5 +70,9 @@ class LoFieldState<T> {
     } else {
       return LoStatus.valid;
     }
+  }
+
+  void dispose() {
+    _debouncer?.dispose();
   }
 }

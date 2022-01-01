@@ -11,8 +11,9 @@ class LoField<T> extends StatefulWidget {
     Key? key,
     required this.name,
     this.initialValue,
-    required this.builder,
     this.validate,
+    this.debounceTime,
+    required this.builder,
   }) : super(key: key);
 
   /// {@macro LoFieldState.name}
@@ -23,6 +24,9 @@ class LoField<T> extends StatefulWidget {
 
   /// {@macro LoFieldState.validate}
   final FieldValidateFunc<T>? validate;
+
+  /// The [Duration] use to debounce changes of [LoFieldState.onChange]
+  final Duration? debounceTime;
 
   /// Builder for the field widget using [LoFieldState].
   final Widget Function(LoFieldState<T>) builder;
@@ -39,6 +43,7 @@ class _LoFieldState<T> extends State<LoField<T>> {
           name: widget.name,
           initialValue: widget.initialValue,
           validate: widget.validate,
+          debounceTime: widget.debounceTime,
         );
   }
 
