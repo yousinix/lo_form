@@ -13,12 +13,15 @@ void main() {
     form.registerField<String>(
       name: 'username',
       initialValue: 'tester',
-      validate: LoValidation().required().min(4).build(),
+      validators: [
+        LoRequiredValidator(),
+        LoLengthValidator.min(4),
+      ],
     );
 
     form.registerField<String>(
       name: 'password',
-      validate: LoValidation().required().build(),
+      validators: [LoRequiredValidator()],
     );
   });
 

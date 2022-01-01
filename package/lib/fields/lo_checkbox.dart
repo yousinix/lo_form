@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../lo_form.dart';
+import '../src/lo_field.dart';
+import '../src/lo_validator.dart';
 import 'props.dart';
 
 class CheckboxProps = Checkbox with Props;
@@ -8,7 +9,7 @@ class CheckboxProps = Checkbox with Props;
 class LoCheckbox extends StatelessWidget {
   final String name;
   final bool? initialValue;
-  final FieldValidateFunc<bool>? validate;
+  final List<LoValidator<bool>>? validators;
   final Duration? debounceTime;
   final CheckboxProps? props;
   final Widget label;
@@ -18,7 +19,7 @@ class LoCheckbox extends StatelessWidget {
     Key? key,
     required this.name,
     this.initialValue,
-    this.validate,
+    this.validators,
     this.debounceTime,
     this.props,
     required this.label,
@@ -30,7 +31,7 @@ class LoCheckbox extends StatelessWidget {
     return LoField<bool?>(
       name: name,
       initialValue: initialValue,
-      validate: validate,
+      validators: validators,
       debounceTime: debounceTime,
       builder: (state) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,

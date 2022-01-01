@@ -62,12 +62,15 @@ class RegisterForm extends StatelessWidget {
             LoTextField(
               name: 'Username',
               initialValue: 'yrn',
-              validate: LoValidation().required().build(),
+              validators: [LoRequiredValidator()],
             ),
             const SizedBox(height: 16),
             LoTextField(
               name: 'Password',
-              validate: LoValidation().required().min(6).build(),
+              validators: [
+                LoRequiredValidator(),
+                LoLengthValidator.min(6),
+              ],
               props: const TextFieldProps(
                 obscureText: true,
               ),
@@ -75,7 +78,10 @@ class RegisterForm extends StatelessWidget {
             const SizedBox(height: 16),
             LoTextField(
               name: 'Confirm',
-              validate: LoValidation().required().min(6).build(),
+              validators: [
+                LoRequiredValidator(),
+                LoLengthValidator.min(6),
+              ],
               props: const TextFieldProps(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -86,8 +92,10 @@ class RegisterForm extends StatelessWidget {
             const SizedBox(height: 16),
             LoCheckbox(
               name: 'Agreement',
-              validate: (value) => value != true ? 'Required' : null,
               label: const Text('I agree to all the terms and conditions'),
+              validators: [
+                LoCustomValidator((v) => v != true ? 'Required' : null),
+              ],
             ),
             const Spacer(),
             ElevatedButton(

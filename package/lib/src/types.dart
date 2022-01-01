@@ -8,8 +8,6 @@ typedef ValMap = Map<String, dynamic>;
 typedef ErrMap = Map<String, String?>;
 
 typedef ValidateFunc = ErrMap? Function(ValMap);
-typedef FieldValidateFunc<T> = String? Function(T?);
-
 typedef StatusCheckFunc = bool Function(LoStatus);
 typedef SetErrFunc = void Function(ErrMap);
 typedef SubmitFunc = FutureOr<bool?>? Function(ValMap, SetErrFunc);

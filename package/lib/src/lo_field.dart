@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
+import 'lo_validator.dart';
 import 'types.dart';
 
 /// All form fields inside [LoForm] must be wrapped inside this.
@@ -11,7 +12,7 @@ class LoField<T> extends StatefulWidget {
     Key? key,
     required this.name,
     this.initialValue,
-    this.validate,
+    this.validators,
     this.debounceTime,
     required this.builder,
   }) : super(key: key);
@@ -22,8 +23,8 @@ class LoField<T> extends StatefulWidget {
   /// {@macro LoFieldState.initialValue}
   final T? initialValue;
 
-  /// {@macro LoFieldState.validate}
-  final FieldValidateFunc<T>? validate;
+  /// {@macro LoFieldState.validators}
+  final List<LoValidator<T>>? validators;
 
   /// {@macro LoFieldState.debounceTime}
   final Duration? debounceTime;
@@ -42,7 +43,7 @@ class _LoFieldState<T> extends State<LoField<T>> {
     context.read<LoFormState>().registerField(
           name: widget.name,
           initialValue: widget.initialValue,
-          validate: widget.validate,
+          validators: widget.validators,
           debounceTime: widget.debounceTime,
         );
   }

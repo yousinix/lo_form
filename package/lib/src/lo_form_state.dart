@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'lo_config.dart';
 import 'lo_field_state.dart';
 import 'lo_status.dart';
+import 'lo_validator.dart';
 import 'types.dart';
 
 class LoFormState extends ChangeNotifier {
@@ -78,7 +79,7 @@ class LoFormState extends ChangeNotifier {
   void registerField<T>({
     required String name,
     T? initialValue,
-    required FieldValidateFunc<T>? validate,
+    required List<LoValidator<T>>? validators,
     Duration? debounceTime,
   }) {
     if (fields.containsKey(name)) return; // Prevent re-registration
@@ -86,7 +87,7 @@ class LoFormState extends ChangeNotifier {
     fields[name] = LoFieldState<T>(
       name: name,
       onChanged: (v) => onFieldValueChanged(name, v),
-      validate: validate,
+      validators: validators,
       initialValue: initialValue ?? initialValues?[name] as T?,
       debounceTime: debounceTime ?? LoConfig.debounceTimes[T],
     );
@@ -113,7 +114,7 @@ class LoFormState extends ChangeNotifier {
     field.value = value;
     field.touched = true;
 
-    final fieldError = field.validate?.call(value);
+    final fieldError = LoValidator.reduce(field.validators ?? [], value);
     final formErrors = validate?.call(fields.getValues()) ?? {};
     final formError = formErrors.remove(name);
     final errors = {

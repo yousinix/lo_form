@@ -2,6 +2,7 @@
 
 * Add `debounceTime` property for debouncing field's changes.
 * Add `LoConfig` to configure the package defaults.
+* **BREAKING:** Change validation API from a single function called `validate` to a `validators` list.
 
 ## 0.1.2
 

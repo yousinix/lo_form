@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 
 import 'debouncer.dart';
 import 'lo_status.dart';
-import 'types.dart';
+import 'lo_validator.dart';
 
 class LoFieldState<T> {
   LoFieldState({
     required this.name,
     this.initialValue,
-    this.validate,
+    this.validators,
     required ValueChanged<T> onChanged,
     this.debounceTime,
   })  : _onValueChanged = onChanged,
@@ -32,18 +32,21 @@ class LoFieldState<T> {
   /// See also:
   ///
   /// - [LoConfig.debounceTimes], a way to set a default debounce time
-  ///   for a sepecefic field type,
+  ///   for a sepecefic field type.
   /// {@endtemplate}
   final Duration? debounceTime;
 
   /// A timer responsible for depouncing changes.
   final Debouncer? _debouncer;
 
-  /// {@template LoFieldState.validate}
-  /// Function that validates new values and returns an error message
-  /// if invalid they are invalid, or null otherwise.
+  /// {@template LoFieldState.validators}
+  /// List of the validators to run on each change.
+  ///
+  /// See also:
+  ///
+  /// - [LoValidator], used for validation.
   /// {@endtemplate}
-  final FieldValidateFunc<T>? validate;
+  final List<LoValidator<T>>? validators;
 
   /// {@template LoFieldState.initialValue}
   /// The initial value that makes [status] pure.
