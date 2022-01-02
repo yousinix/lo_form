@@ -23,20 +23,18 @@ class RegisterForm extends StatelessWidget {
     return LoForm(
       onReady: onStateChanged,
       onChanged: onStateChanged,
-      validate: (values) {
-        // This method gets called with any change to all form fields,
-        // it's useful for validating dependent fields to make sure that
-        // they both have the latest value.
-        final password = values.get('Password');
-        final confirmPassword = values.get('Confirm');
-
-        if (password != confirmPassword) {
-          return {'Confirm': 'Passwords do not match'};
-        } else if (password != null && confirmPassword != null) {
-          return {'Confirm': null}; // Clear error
-        }
-      },
       submittableWhen: (status) => status.isValid || status.isSubmitted,
+      validators: [
+        LoMatchValidator('Password', 'Confirm'),
+        LoFormValidator(
+          (values) {
+            final username = values.get('Username');
+            return {
+              'Username': username == 'whoami' ? 'Who are you?' : null,
+            };
+          },
+        ),
+      ],
       onSubmit: (values, setErrors) async {
         final client = FakeApi();
         final response = await client.register(
@@ -94,7 +92,7 @@ class RegisterForm extends StatelessWidget {
               name: 'Agreement',
               label: const Text('I agree to all the terms and conditions'),
               validators: [
-                LoCustomValidator((v) => v != true ? 'Required' : null),
+                LoFieldValidator((v) => v != true ? 'Required' : null),
               ],
             ),
             const Spacer(),

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+import 'lo_form_base_validator.dart';
 import 'lo_form_state.dart';
 import 'types.dart';
 
@@ -8,7 +9,7 @@ class LoForm extends StatefulWidget {
   const LoForm({
     Key? key,
     this.initialValues,
-    this.validate,
+    this.validators,
     required this.onSubmit,
     this.onChanged,
     this.onReady,
@@ -19,8 +20,8 @@ class LoForm extends StatefulWidget {
   /// {@macro LoFormState.initialValues}
   final ValMap? initialValues;
 
-  /// {@macro LoFormState.validate}
-  final ValidateFunc? validate;
+  /// {@macro LoFormState.validators}
+  final List<LoFormBaseValidator>? validators;
 
   /// {@macro LoFormState.onSubmit}
   final SubmitFunc onSubmit;
@@ -50,7 +51,7 @@ class _LoFormState extends State<LoForm> {
 
     formState = LoFormState(
       initialValues: widget.initialValues,
-      validate: widget.validate,
+      validators: widget.validators ?? [],
       onSubmit: widget.onSubmit,
       onChanged: widget.onChanged,
       submittableWhen: widget.submittableWhen,

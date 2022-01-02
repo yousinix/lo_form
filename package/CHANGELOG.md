@@ -1,8 +1,14 @@
+## [unreleased]
+
+* **BREAKING:** Change **form** validation API from a single function called `validate` to a `validators` list of type `LoFormBaseValidator`.
+* **BREAKING:** Rename `LoValidator` to `LoFieldBaseValidator`.
+* **BREAKING:** Rename `LoCustomValidator` to `LoFieldValidator`.
+
 ## 0.2.0
 
 * Add `debounceTime` property for debouncing field's changes.
 * Add `LoConfig` to configure the package defaults.
-* **BREAKING:** Change validation API from a single function called `validate` to a `validators` list.
+* **BREAKING:** Change **field** validation API from a single function called `validate` to a `validators` list of type `LoValidator`.
 
 ## 0.1.2
 

@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+import 'lo_field_base_validator.dart';
 import 'lo_field_state.dart';
 import 'lo_form_state.dart';
-import 'lo_validator.dart';
 import 'types.dart';
 
 /// All form fields inside [LoForm] must be wrapped inside this.
@@ -24,7 +24,7 @@ class LoField<T> extends StatefulWidget {
   final T? initialValue;
 
   /// {@macro LoFieldState.validators}
-  final List<LoValidator<T>>? validators;
+  final List<LoFieldBaseValidator<T>>? validators;
 
   /// {@macro LoFieldState.debounceTime}
   final Duration? debounceTime;

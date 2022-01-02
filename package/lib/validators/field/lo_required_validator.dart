@@ -1,7 +1,7 @@
-import '../src/lo_validator.dart';
+import '../../src/lo_field_base_validator.dart';
 
 /// Validates that the given value is not null or empty.
-class LoRequiredValidator<T> implements LoValidator<T> {
+class LoRequiredValidator<T> implements LoFieldBaseValidator<T> {
   final String message;
 
   /// Validates that the given value is not "empty",

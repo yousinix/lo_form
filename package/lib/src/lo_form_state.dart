@@ -4,15 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 import 'lo_config.dart';
+import 'lo_field_base_validator.dart';
 import 'lo_field_state.dart';
+import 'lo_form_base_validator.dart';
 import 'lo_status.dart';
-import 'lo_validator.dart';
 import 'types.dart';
 
 class LoFormState extends ChangeNotifier {
   LoFormState({
     this.initialValues,
-    this.validate,
+    this.validators = const [],
     this.onSubmit,
     this.onChanged,
     this.submittableWhen,
@@ -24,12 +25,14 @@ class LoFormState extends ChangeNotifier {
   /// {@endtemplate}
   final ValMap? initialValues;
 
-  /// {@template LoFormState.validate}
-  /// Validation function that has all form values as an input,
-  /// Useful for validating form fields that depend on each other
-  /// like "password" and "confirm password".
+  /// {@template LoFormState.validators}
+  /// List of the validators to run on each change.
+  ///
+  /// See also:
+  ///
+  /// - [LoFormBaseValidator], used for validation.
   /// {@endtemplate}
-  final ValidateFunc? validate;
+  final List<LoFormBaseValidator> validators;
 
   /// {@template LoFormState.onSubmit}
   /// Callback function that gets executed when [submit] is called with
@@ -79,7 +82,7 @@ class LoFormState extends ChangeNotifier {
   void registerField<T>({
     required String name,
     T? initialValue,
-    required List<LoValidator<T>>? validators,
+    required List<LoFieldBaseValidator<T>>? validators,
     Duration? debounceTime,
   }) {
     if (fields.containsKey(name)) return; // Prevent re-registration
@@ -87,7 +90,7 @@ class LoFormState extends ChangeNotifier {
     fields[name] = LoFieldState<T>(
       name: name,
       onChanged: (v) => onFieldValueChanged(name, v),
-      validators: validators,
+      validators: validators ?? [],
       initialValue: initialValue ?? initialValues?[name] as T?,
       debounceTime: debounceTime ?? LoConfig.debounceTimes[T],
     );
@@ -114,8 +117,8 @@ class LoFormState extends ChangeNotifier {
     field.value = value;
     field.touched = true;
 
-    final fieldError = LoValidator.reduce(field.validators ?? [], value);
-    final formErrors = validate?.call(fields.getValues()) ?? {};
+    final fieldError = LoFieldBaseValidator.run(field.validators, value);
+    final formErrors = LoFormBaseValidator.run(validators, fields.getValues());
     final formError = formErrors.remove(name);
     final errors = {
       ...formErrors,

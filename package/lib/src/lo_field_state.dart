@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 import 'debouncer.dart';
+import 'lo_field_base_validator.dart';
 import 'lo_status.dart';
-import 'lo_validator.dart';
 
 class LoFieldState<T> {
   LoFieldState({
     required this.name,
     this.initialValue,
-    this.validators,
+    this.validators = const [],
     required ValueChanged<T> onChanged,
     this.debounceTime,
   })  : _onValueChanged = onChanged,
@@ -44,9 +44,9 @@ class LoFieldState<T> {
   ///
   /// See also:
   ///
-  /// - [LoValidator], used for validation.
+  /// - [LoFieldBaseValidator], used for validation.
   /// {@endtemplate}
-  final List<LoValidator<T>>? validators;
+  final List<LoFieldBaseValidator<T>> validators;
 
   /// {@template LoFieldState.initialValue}
   /// The initial value that makes [status] pure.

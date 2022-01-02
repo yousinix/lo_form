@@ -1,6 +1,6 @@
-import '../src/lo_validator.dart';
+import '../../src/lo_field_base_validator.dart';
 
-class LoLengthValidator implements LoValidator<String> {
+class LoLengthValidator implements LoFieldBaseValidator<String> {
   final String message;
 
   /// String's length must be more than or equal [min].

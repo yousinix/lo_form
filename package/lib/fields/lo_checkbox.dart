@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../src/lo_field.dart';
-import '../src/lo_validator.dart';
+import '../src/lo_field_base_validator.dart';
 import 'props.dart';
 
 class CheckboxProps = Checkbox with Props;
@@ -9,7 +9,7 @@ class CheckboxProps = Checkbox with Props;
 class LoCheckbox extends StatelessWidget {
   final String name;
   final bool? initialValue;
-  final List<LoValidator<bool>>? validators;
+  final List<LoFieldBaseValidator<bool>>? validators;
   final Duration? debounceTime;
   final CheckboxProps? props;
   final Widget label;
