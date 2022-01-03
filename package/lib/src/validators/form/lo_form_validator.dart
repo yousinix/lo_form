@@ -1,5 +1,4 @@
-import '../../src/lo_form_base_validator.dart';
-import '../../src/types.dart';
+import '../../../core.dart';
 
 class LoFormValidator extends LoFormBaseValidator {
   final ErrMap? Function(ValMap) validateFunction;

@@ -1,4 +1,4 @@
-import '../../src/lo_field_base_validator.dart';
+import '../../../core.dart';
 
 /// Validates that the given value is not null or empty.
 class LoRequiredValidator<T> implements LoFieldBaseValidator<T> {

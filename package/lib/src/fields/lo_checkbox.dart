@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../src/lo_field.dart';
-import '../src/lo_field_base_validator.dart';
+import '../../core.dart';
 import 'props.dart';
 
 class CheckboxProps = Checkbox with Props;

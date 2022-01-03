@@ -1,4 +1,4 @@
-import '../../src/lo_field_base_validator.dart';
+import '../../../core.dart';
 
 class LoRegExpValidator implements LoFieldBaseValidator<String> {
   final String message;

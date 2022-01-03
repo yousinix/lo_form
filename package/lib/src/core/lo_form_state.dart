@@ -35,9 +35,9 @@ class LoFormState extends ChangeNotifier {
   final List<LoFormBaseValidator> validators;
 
   /// {@template LoFormState.onSubmit}
-  /// Callback function that gets executed when [submit] is called with
-  /// fields' values as first parameter and setError function as second one
-  /// which is used to set external API errors.
+  /// Callback function that gets executed when [LoFormState.submit] is called
+  /// with fields' values as first parameter and setError function as second
+  /// one which is used to set external API errors.
   ///
   /// Should return:
   ///  - true if the submission has succeeded.

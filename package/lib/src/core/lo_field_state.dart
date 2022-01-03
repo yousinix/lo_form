@@ -49,7 +49,7 @@ class LoFieldState<T> {
   final List<LoFieldBaseValidator<T>> validators;
 
   /// {@template LoFieldState.initialValue}
-  /// The initial value that makes [status] pure.
+  /// The initial value that makes [LoFieldState.status] pure.
   /// {@endtemplate}
   final T? initialValue;
 

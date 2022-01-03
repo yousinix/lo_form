@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../src/lo_field.dart';
-import '../src/lo_field_base_validator.dart';
-import '../src/lo_field_state.dart';
+import '../../core.dart';
 import 'props.dart';
 
 class TextFieldProps = TextField with Props;
