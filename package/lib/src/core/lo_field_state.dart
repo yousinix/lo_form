@@ -4,12 +4,12 @@ import 'debouncer.dart';
 import 'lo_field_base_validator.dart';
 import 'lo_status.dart';
 
-class LoFieldState<T> {
+class LoFieldState<TKey, TValue> {
   LoFieldState({
-    required this.name,
+    required this.loKey,
     this.initialValue,
     this.validators = const [],
-    required ValueChanged<T> onChanged,
+    required ValueChanged<TValue> onChanged,
     this.debounceTime,
   })  : _onValueChanged = onChanged,
         _debouncer = debounceTime == null ? null : Debouncer(debounceTime),
@@ -17,14 +17,14 @@ class LoFieldState<T> {
         touched = false,
         error = null;
 
-  /// {@template LoFieldState.name}
-  /// Unique name for this across the form.
+  /// {@template LoFieldState.loKey}
+  /// Unique key for this across the form.
   /// {@endtemplate}
-  final String name;
+  final TKey loKey;
 
   /// Function that should be called with every change
   /// to update the state accordingly.
-  final ValueChanged<T> _onValueChanged;
+  final ValueChanged<TValue> _onValueChanged;
 
   /// {@template LoFieldState.debounceTime}
   /// The [Duration] used to debounce changes.
@@ -46,25 +46,25 @@ class LoFieldState<T> {
   ///
   /// - [LoFieldBaseValidator], used for validation.
   /// {@endtemplate}
-  final List<LoFieldBaseValidator<T>> validators;
+  final List<LoFieldBaseValidator<TValue>> validators;
 
   /// {@template LoFieldState.initialValue}
   /// The initial value that makes [LoFieldState.status] pure.
   /// {@endtemplate}
-  final T? initialValue;
+  final TValue? initialValue;
 
   /// An indicator whether the field has been focused or not.
   bool touched;
 
   /// The current value, initialized as [initialValue].
-  T? value;
+  TValue? value;
 
   /// The current error message.
   String? error;
 
   /// Function that should be called with every change
   /// to update the state accordingly.
-  ValueChanged<T> get onChanged {
+  ValueChanged<TValue> get onChanged {
     return _debouncer == null
         ? _onValueChanged
         : (v) => _debouncer?.run(() => _onValueChanged(v));

@@ -32,7 +32,7 @@ const stateToTable = (state) => {
     const row = tbody.insertRow(i);
 
     const cell0 = row.insertCell(0);
-    cell0.innerHTML = field.name;
+    cell0.innerHTML = field.loKey;
 
     const cell1 = row.insertCell(1);
     cell1.innerHTML = `<span class="status--${field.status}"></span>`;

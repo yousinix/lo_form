@@ -1,3 +1,7 @@
+## [unreleased]
+
+- **BREAKING:** Replace `name` with a **generic** `loKey`.
+
 ## 0.3.0
 
 - **BREAKING:** Change **form** validation API from a single function called `validate` to a `validators` list of type `LoFormBaseValidator`.

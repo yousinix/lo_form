@@ -1,14 +1,14 @@
 import '../../../core.dart';
 
-class LoMatchValidator extends LoFormBaseValidator {
+class LoMatchValidator<TKey> extends LoFormBaseValidator<TKey> {
   final String message;
 
-  /// The name of the [master] field
-  final String master;
+  /// The loKey of the [master] field
+  final TKey master;
 
-  /// The name of the [slave] field, it will contain the error
+  /// The loKey of the [slave] field, it will contain the error
   /// if does not match [master].
-  final String slave;
+  final TKey slave;
 
   LoMatchValidator(
     this.master,
@@ -17,7 +17,7 @@ class LoMatchValidator extends LoFormBaseValidator {
   ]);
 
   @override
-  ErrMap? validate(ValMap values) {
+  ErrMap<TKey>? validate(ValMap<TKey> values) {
     final masterValue = values.get(master);
     final slaveValue = values.get(slave);
 

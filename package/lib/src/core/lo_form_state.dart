@@ -10,7 +10,7 @@ import 'lo_form_base_validator.dart';
 import 'lo_status.dart';
 import 'types.dart';
 
-class LoFormState extends ChangeNotifier {
+class LoFormState<TKey> extends ChangeNotifier {
   LoFormState({
     this.initialValues,
     this.validators = const [],
@@ -21,9 +21,9 @@ class LoFormState extends ChangeNotifier {
         status = LoStatus.pure;
 
   /// {@template LoFormState.initialValues}
-  /// Map between [LoField.name] and their initial value.
+  /// Map between [LoField.loKey] and their initial value.
   /// {@endtemplate}
-  final ValMap? initialValues;
+  final ValMap<TKey>? initialValues;
 
   /// {@template LoFormState.validators}
   /// List of the validators to run on each change.
@@ -32,7 +32,7 @@ class LoFormState extends ChangeNotifier {
   ///
   /// - [LoFormBaseValidator], used for validation.
   /// {@endtemplate}
-  final List<LoFormBaseValidator> validators;
+  final List<LoFormBaseValidator<TKey>> validators;
 
   /// {@template LoFormState.onSubmit}
   /// Callback function that gets executed when [LoFormState.submit] is called
@@ -44,20 +44,20 @@ class LoFormState extends ChangeNotifier {
   ///  - false if the submission has failed.
   ///  - null if the submission has API errors (use setError to set them).
   /// {@endtemplate}
-  final SubmitFunc? onSubmit;
+  final SubmitFunc<TKey>? onSubmit;
 
   /// {@template LoFormState.onChanged}
   /// Callback function that gets executed when any field or status are changed.
   /// {@endtemplate}
-  final ValueChanged<LoFormState>? onChanged;
+  final ValueChanged<LoFormState<TKey>>? onChanged;
 
   /// {@template LoFormState.submittableWhen}
   /// Predicate that defines when the form can be submitted.
   /// {@endtemplate}
   final StatusCheckFunc? submittableWhen;
 
-  /// Map between [LoField.name] and their [LoFieldState].
-  final FieldsMap fields;
+  /// Map between [LoField.loKey] and their [LoFieldState].
+  final FieldsMap<TKey> fields;
 
   /// Current form status, [LoStatusX.and] method is used to evaluate this.
   LoStatus status;
@@ -76,53 +76,56 @@ class LoFormState extends ChangeNotifier {
     super.notifyListeners();
   }
 
-  T? valueOf<T>(String key) => fields[key]!.value as T?;
+  TValue? valueOf<TValue>(TKey key) => fields[key]!.value as TValue?;
 
   @internal
-  void registerField<T>({
-    required String name,
-    T? initialValue,
-    required List<LoFieldBaseValidator<T>>? validators,
+  void registerField<TValue>({
+    required TKey loKey,
+    TValue? initialValue,
+    required List<LoFieldBaseValidator<TValue>>? validators,
     Duration? debounceTime,
   }) {
-    if (fields.containsKey(name)) return; // Prevent re-registration
+    if (fields.containsKey(loKey)) return; // Prevent re-registration
 
-    fields[name] = LoFieldState<T>(
-      name: name,
-      onChanged: (v) => onFieldValueChanged(name, v),
+    fields[loKey] = LoFieldState<TKey, TValue>(
+      loKey: loKey,
+      onChanged: (v) => onFieldValueChanged(loKey, v),
       validators: validators ?? [],
-      initialValue: initialValue ?? initialValues?[name] as T?,
-      debounceTime: debounceTime ?? LoConfig.debounceTimes[T],
+      initialValue: initialValue ?? initialValues?[loKey] as TValue?,
+      debounceTime: debounceTime ?? LoConfig.debounceTimes[TValue],
     );
   }
 
   @internal
-  void onFieldFocusChanged<T>(String name, bool isFocused) {
-    final field = fields.get<T>(name);
+  void onFieldFocusChanged<TValue>(TKey loKey, bool isFocused) {
+    final field = fields.get<TValue>(loKey);
 
     if (isFocused) {
       field.touched = true;
       notifyListeners();
     } else if (field.status.isPure) {
       // Validate pure fields when unfocused
-      final value = valueOf<T>(name);
-      onFieldValueChanged<T>(name, value);
+      final value = valueOf<TValue>(loKey);
+      onFieldValueChanged<TValue>(loKey, value);
     }
   }
 
   @internal
-  void onFieldValueChanged<T>(String name, T? value) {
-    final field = fields.get<T>(name);
+  void onFieldValueChanged<T>(TKey loKey, T? value) {
+    final field = fields.get<T>(loKey);
 
     field.value = value;
     field.touched = true;
 
     final fieldError = LoFieldBaseValidator.run(field.validators, value);
-    final formErrors = LoFormBaseValidator.run(validators, fields.getValues());
-    final formError = formErrors.remove(name);
+    final formErrors = LoFormBaseValidator.run<TKey>(
+      validators,
+      fields.getValues(),
+    );
+    final formError = formErrors.remove(loKey);
     final errors = {
       ...formErrors,
-      name: fieldError ?? formError,
+      loKey: fieldError ?? formError,
     };
 
     setErrors(errors);
@@ -146,15 +149,15 @@ class LoFormState extends ChangeNotifier {
   }
 
   @internal
-  void setErrors(ErrMap? map) {
+  void setErrors(ErrMap<TKey>? map) {
     if (map == null) return;
 
-    fields.forEach((name, field) {
+    fields.forEach((loKey, field) {
       // Field must be touched to assign errors to it
-      if (field.touched && map.containsKey(name)) {
+      if (field.touched && map.containsKey(loKey)) {
         // When the map has the key but with a null value,
         // this means to clear the field's error
-        field.error = map[name];
+        field.error = map[loKey];
       }
     });
 

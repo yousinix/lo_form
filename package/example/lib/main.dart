@@ -20,7 +20,7 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoForm(
+    return LoForm<String>(
       onReady: onStateChanged,
       onChanged: onStateChanged,
       submittableWhen: (status) => status.isValid || status.isSubmitted,
@@ -58,13 +58,13 @@ class RegisterForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             LoTextField(
-              name: 'Username',
+              loKey: 'Username',
               initialValue: 'yrn',
               validators: [LoRequiredValidator()],
             ),
             const SizedBox(height: 16),
             LoTextField(
-              name: 'Password',
+              loKey: 'Password',
               validators: [
                 LoRequiredValidator(),
                 LoLengthValidator.min(6),
@@ -75,7 +75,7 @@ class RegisterForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             LoTextField(
-              name: 'Confirm',
+              loKey: 'Confirm',
               validators: [
                 LoRequiredValidator(),
                 LoLengthValidator.min(6),
@@ -89,7 +89,7 @@ class RegisterForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             LoCheckbox(
-              name: 'Agreement',
+              loKey: 'Agreement',
               label: const Text('I agree to all the terms and conditions'),
               validators: [
                 LoFieldValidator((v) => v != true ? 'Required' : null),

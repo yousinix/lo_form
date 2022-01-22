@@ -11,7 +11,7 @@ void main() {
 
   setUp(() {
     form.registerField<String>(
-      name: 'username',
+      loKey: 'username',
       initialValue: 'tester',
       validators: [
         LoRequiredValidator(),
@@ -20,7 +20,7 @@ void main() {
     );
 
     form.registerField<String>(
-      name: 'password',
+      loKey: 'password',
       validators: [LoRequiredValidator()],
     );
   });

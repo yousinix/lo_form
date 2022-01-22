@@ -7,41 +7,41 @@ import 'lo_form_state.dart';
 import 'types.dart';
 
 /// All form fields inside [LoForm] must be wrapped inside this.
-class LoField<T> extends StatefulWidget {
+class LoField<TKey, TValue> extends StatefulWidget {
   const LoField({
     Key? key,
-    required this.name,
+    required this.loKey,
     this.initialValue,
     this.validators,
     this.debounceTime,
     required this.builder,
   }) : super(key: key);
 
-  /// {@macro LoFieldState.name}
-  final String name;
+  /// {@macro LoFieldState.loKey}
+  final TKey loKey;
 
   /// {@macro LoFieldState.initialValue}
-  final T? initialValue;
+  final TValue? initialValue;
 
   /// {@macro LoFieldState.validators}
-  final List<LoFieldBaseValidator<T>>? validators;
+  final List<LoFieldBaseValidator<TValue>>? validators;
 
   /// {@macro LoFieldState.debounceTime}
   final Duration? debounceTime;
 
   /// Builder for the field widget using [LoFieldState].
-  final Widget Function(LoFieldState<T>) builder;
+  final Widget Function(LoFieldState<TKey, TValue>) builder;
 
   @override
-  _LoFieldState<T> createState() => _LoFieldState<T>();
+  _LoFieldState<TKey, TValue> createState() => _LoFieldState<TKey, TValue>();
 }
 
-class _LoFieldState<T> extends State<LoField<T>> {
+class _LoFieldState<TKey, TValue> extends State<LoField<TKey, TValue>> {
   @override
   void initState() {
     super.initState();
-    context.read<LoFormState>().registerField(
-          name: widget.name,
+    context.read<LoFormState<TKey>>().registerField<TValue>(
+          loKey: widget.loKey,
           initialValue: widget.initialValue,
           validators: widget.validators,
           debounceTime: widget.debounceTime,
@@ -50,16 +50,16 @@ class _LoFieldState<T> extends State<LoField<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoFormState>(
+    return Consumer<LoFormState<TKey>>(
       builder: (_, form, __) {
         return FocusScope(
           child: Focus(
-            onFocusChange: (focus) => form.onFieldFocusChanged<T>(
-              widget.name,
+            onFocusChange: (focus) => form.onFieldFocusChanged<TValue>(
+              widget.loKey,
               focus,
             ),
             child: widget.builder(
-              form.fields.get<T>(widget.name),
+              form.fields.get<TValue>(widget.loKey),
             ),
           ),
         );

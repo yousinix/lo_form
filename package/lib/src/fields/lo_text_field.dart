@@ -5,8 +5,8 @@ import 'props.dart';
 
 class TextFieldProps = TextField with Props;
 
-class LoTextField extends StatelessWidget {
-  final String name;
+class LoTextField<TKey> extends StatelessWidget {
+  final TKey loKey;
   final String? initialValue;
   final List<LoFieldBaseValidator<String>>? validators;
   final Duration? debounceTime;
@@ -14,7 +14,7 @@ class LoTextField extends StatelessWidget {
 
   const LoTextField({
     Key? key,
-    required this.name,
+    required this.loKey,
     this.initialValue,
     this.validators,
     this.debounceTime,
@@ -23,8 +23,8 @@ class LoTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoField<String>(
-      name: name,
+    return LoField<TKey, String>(
+      loKey: loKey,
       initialValue: initialValue,
       validators: validators,
       debounceTime: debounceTime,
@@ -92,15 +92,18 @@ class LoTextField extends StatelessWidget {
     );
   }
 
-  InputDecoration _mergeDecoration(InputDecoration? other, LoFieldState state) {
+  InputDecoration _mergeDecoration(
+    InputDecoration? other,
+    LoFieldState<TKey, String> state,
+  ) {
     return other == null
         ? InputDecoration(
             errorText: state.error,
-            hintText: state.name,
+            hintText: '${state.loKey}',
           )
         : other.copyWith(
             errorText: state.error,
-            hintText: other.hintText ?? state.name,
+            hintText: other.hintText ?? '${state.loKey}',
           );
   }
 }

@@ -5,7 +5,7 @@ import 'lo_form_base_validator.dart';
 import 'lo_form_state.dart';
 import 'types.dart';
 
-class LoForm extends StatefulWidget {
+class LoForm<TKey> extends StatefulWidget {
   const LoForm({
     Key? key,
     this.initialValues,
@@ -18,38 +18,38 @@ class LoForm extends StatefulWidget {
   }) : super(key: key);
 
   /// {@macro LoFormState.initialValues}
-  final ValMap? initialValues;
+  final ValMap<TKey>? initialValues;
 
   /// {@macro LoFormState.validators}
-  final List<LoFormBaseValidator>? validators;
+  final List<LoFormBaseValidator<TKey>>? validators;
 
   /// {@macro LoFormState.onSubmit}
-  final SubmitFunc onSubmit;
+  final SubmitFunc<TKey> onSubmit;
 
   /// {@macro LoFormState.onChanged}
-  final ValueChanged<LoFormState>? onChanged;
+  final ValueChanged<LoFormState<TKey>>? onChanged;
 
   /// Callback function that gets executed when all fields are registered.
-  final ValueChanged<LoFormState>? onReady;
+  final ValueChanged<LoFormState<TKey>>? onReady;
 
   /// {@macro LoFormState.submittableWhen}
   final StatusCheckFunc? submittableWhen;
 
   /// Builder function for the current [LoFormState].
-  final Widget Function(LoFormState) builder;
+  final Widget Function(LoFormState<TKey>) builder;
 
   @override
-  _LoFormState createState() => _LoFormState();
+  _LoFormState<TKey> createState() => _LoFormState<TKey>();
 }
 
-class _LoFormState extends State<LoForm> {
-  late final LoFormState formState;
+class _LoFormState<TKey> extends State<LoForm<TKey>> {
+  late final LoFormState<TKey> formState;
 
   @override
   void initState() {
     super.initState();
 
-    formState = LoFormState(
+    formState = LoFormState<TKey>(
       initialValues: widget.initialValues,
       validators: widget.validators ?? [],
       onSubmit: widget.onSubmit,
@@ -66,7 +66,7 @@ class _LoFormState extends State<LoForm> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => formState,
-      child: Consumer<LoFormState>(
+      child: Consumer<LoFormState<TKey>>(
         builder: (_, state, __) => widget.builder(state),
       ),
     );

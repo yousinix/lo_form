@@ -21,7 +21,7 @@ Map<String, dynamic> formStateToMap(LoFormState state) {
 
 Map<String, dynamic> fieldStateToMap(LoFieldState state) {
   return {
-    "name": state.name,
+    "loKey": state.loKey,
     "status": statusToString(state.status),
     "touched": state.touched,
     "initialValue": state.initialValue,

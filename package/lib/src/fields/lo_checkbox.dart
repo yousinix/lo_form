@@ -5,8 +5,8 @@ import 'props.dart';
 
 class CheckboxProps = Checkbox with Props;
 
-class LoCheckbox extends StatelessWidget {
-  final String name;
+class LoCheckbox<TKey> extends StatelessWidget {
+  final TKey loKey;
   final bool? initialValue;
   final List<LoFieldBaseValidator<bool>>? validators;
   final Duration? debounceTime;
@@ -16,7 +16,7 @@ class LoCheckbox extends StatelessWidget {
 
   const LoCheckbox({
     Key? key,
-    required this.name,
+    required this.loKey,
     this.initialValue,
     this.validators,
     this.debounceTime,
@@ -27,8 +27,8 @@ class LoCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoField<bool?>(
-      name: name,
+    return LoField<TKey, bool?>(
+      loKey: loKey,
       initialValue: initialValue,
       validators: validators,
       debounceTime: debounceTime,
