@@ -1,8 +1,11 @@
+import 'lo_validator.dart';
 import 'types.dart';
 
-abstract class LoFormBaseValidator<TKey> {
+abstract class LoFormBaseValidator<TKey>
+    implements LoValidator<ValMap<TKey>, ErrMap<TKey>?> {
   /// Returns [ErrMap] containing the error messages for each field depedning
   /// on each its value from [ValMap].
+  @override
   ErrMap<TKey>? validate(ValMap<TKey> values);
 
   /// Runs all [validators] on [values], then return the error messages or

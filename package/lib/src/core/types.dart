@@ -7,6 +7,7 @@ typedef FieldsMap<TKey> = Map<TKey, LoFieldState<TKey, dynamic>>;
 typedef ValMap<TKey> = Map<TKey, dynamic>;
 typedef ErrMap<TKey> = Map<TKey, String?>;
 
+typedef ValidateFunc<TIn, TOut> = TOut? Function(TIn);
 typedef StatusCheckFunc = bool Function(LoStatus);
 typedef SetErrFunc<TKey> = void Function(ErrMap<TKey>);
 typedef SubmitFunc<TKey> = FutureOr<bool?>? Function(

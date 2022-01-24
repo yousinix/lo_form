@@ -60,7 +60,18 @@ class RegisterForm extends StatelessWidget {
             LoTextField(
               loKey: 'Username',
               initialValue: 'yrn',
-              validators: [LoRequiredValidator()],
+              validators: [
+                LoRequiredValidator(),
+                LoFieldValidator.any([
+                  LoRegExpValidator(r'^[a-z][a-z_]{2,}$'),
+                  LoRegExpValidator.email(),
+                ])
+              ],
+              props: const TextFieldProps(
+                decoration: InputDecoration(
+                  hintText: 'Username or Email',
+                ),
+              ),
             ),
             const SizedBox(height: 16),
             LoTextField(
