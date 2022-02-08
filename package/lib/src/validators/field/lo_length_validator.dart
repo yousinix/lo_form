@@ -11,20 +11,27 @@ class LoLengthValidator implements LoFieldBaseValidator<String> {
 
   LoLengthValidator(
     this.min,
-    this.max,
-  ) : message = 'Must be between $min and $max characters';
+    this.max, [
+    String? message,
+  ]) : message = message ?? 'Must be between $min and $max characters';
 
-  LoLengthValidator.exact(int length)
-      : message = 'Must be $length characters',
+  LoLengthValidator.exact(
+    int length, [
+    String? message,
+  ])  : message = message ?? 'Must be $length characters',
         min = length,
         max = length;
 
-  LoLengthValidator.min(this.min)
-      : message = 'Must be $min or more characters',
+  LoLengthValidator.min(
+    this.min, [
+    String? message,
+  ])  : message = message ?? 'Must be $min or more characters',
         max = null;
 
-  LoLengthValidator.max(this.max)
-      : message = 'Must be $max or less characters',
+  LoLengthValidator.max(
+    this.max, [
+    String? message,
+  ])  : message = message ?? 'Must be $max or less characters',
         min = null;
 
   @override

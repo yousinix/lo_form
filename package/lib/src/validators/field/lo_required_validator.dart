@@ -11,10 +11,13 @@ class LoRequiredValidator<T> implements LoFieldBaseValidator<T> {
   /// - `String`: ''
   final bool validateEmpty;
 
-  LoRequiredValidator({
-    this.validateEmpty = true,
+  LoRequiredValidator([
     this.message = 'Required',
-  });
+  ])  : validateEmpty = true;
+
+  LoRequiredValidator.nullOnly([
+    this.message = 'Required',
+  ])  : validateEmpty = false;
 
   @override
   String? validate(T? value) {
