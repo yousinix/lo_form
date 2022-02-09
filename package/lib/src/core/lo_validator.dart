@@ -5,16 +5,17 @@ abstract class LoValidator<TIn, TOut> {
 
   /// {@template LoValidator.all}
   /// Checks whether all validators have no error (Like AND).
-  /// Returns first error otherwise.
+  /// Returns first error (or [defaultError] if not null) otherwise.
   /// {@endtemplate}
   static ValidateFunc<TIn, TOut> all<TIn, TOut>(
-    List<LoValidator<TIn, TOut>> validators,
-  ) {
+    List<LoValidator<TIn, TOut>> validators, [
+    TOut? defaultError,
+  ]) {
     return (input) {
       for (final validator in validators) {
         final error = validator.validate(input);
         if (error != null) {
-          return error;
+          return defaultError ?? error;
         }
       }
 
@@ -24,11 +25,12 @@ abstract class LoValidator<TIn, TOut> {
 
   /// {@template LoValidator.any}
   /// Checks whether any validator has no error (Like OR).
-  /// Returns first error otherwise.
+  /// Returns first error (or [defaultError] if not null) otherwise.
   /// {@endtemplate}
   static ValidateFunc<TIn, TOut> any<TIn, TOut>(
-    List<LoValidator<TIn, TOut>> validators,
-  ) {
+    List<LoValidator<TIn, TOut>> validators, [
+    TOut? defaultError,
+  ]) {
     return (input) {
       TOut? firstError;
 
@@ -41,7 +43,9 @@ abstract class LoValidator<TIn, TOut> {
         }
       }
 
-      return firstError;
+      if (firstError != null) {
+        return defaultError ?? firstError;
+      }
     };
   }
 }

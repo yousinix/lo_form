@@ -7,13 +7,21 @@ class LoFormValidator<TKey> extends LoFormBaseValidator<TKey> {
 
   /// {@template LoValidator.all}
   LoFormValidator.all(
-    List<LoFormBaseValidator<TKey>> validators,
-  ) : validateImpl = LoValidator.all<ValMap<TKey>, ErrMap<TKey>?>(validators);
+    List<LoFormBaseValidator<TKey>> validators, [
+    ErrMap<TKey>? errors,
+  ]) : validateImpl = LoValidator.all<ValMap<TKey>, ErrMap<TKey>?>(
+          validators,
+          errors,
+        );
 
   /// {@template LoValidator.any}
   LoFormValidator.any(
-    List<LoFormBaseValidator<TKey>> validators,
-  ) : validateImpl = LoValidator.any<ValMap<TKey>, ErrMap<TKey>?>(validators);
+    List<LoFormBaseValidator<TKey>> validators, [
+    ErrMap<TKey>? errors,
+  ]) : validateImpl = LoValidator.any<ValMap<TKey>, ErrMap<TKey>?>(
+          validators,
+          errors,
+        );
 
   @override
   ErrMap<TKey>? validate(ValMap<TKey> values) => validateImpl(values);
