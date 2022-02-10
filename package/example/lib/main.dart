@@ -30,7 +30,7 @@ class RegisterForm extends StatelessWidget {
           (values) {
             final username = values.get('Username');
             return {
-              'Username': username == 'whoami' ? 'Who are you?' : null,
+              if (username == 'whoami') 'Username': 'Who are you?',
             };
           },
         ),
