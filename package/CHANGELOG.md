@@ -1,4 +1,4 @@
-## [unreleased]
+## 0.4.0
 
 - Add `all` (like AND operator) and `any` (like OR operator) named constructors to validators.
 - **BREAKING:** Replace `name` with a **generic** `loKey`.
