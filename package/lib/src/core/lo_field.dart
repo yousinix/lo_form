@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 import 'lo_field_base_validator.dart';
 import 'lo_field_state.dart';
-import 'lo_form_state.dart';
+import 'lo_scope.dart';
 import 'types.dart';
 
 /// All form fields inside [LoForm] must be wrapped inside this.
@@ -38,32 +37,31 @@ class LoField<TKey, TValue> extends StatefulWidget {
 
 class _LoFieldState<TKey, TValue> extends State<LoField<TKey, TValue>> {
   @override
-  void initState() {
-    super.initState();
-    context.read<LoFormState<TKey>>().registerField<TValue>(
-          loKey: widget.loKey,
-          initialValue: widget.initialValue,
-          validators: widget.validators,
-          debounceTime: widget.debounceTime,
-        );
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final state = LoScope.of<TKey>(context);
+    state.registerField<TValue>(
+      loKey: widget.loKey,
+      initialValue: widget.initialValue,
+      validators: widget.validators,
+      debounceTime: widget.debounceTime,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoFormState<TKey>>(
-      builder: (_, form, __) {
-        return FocusScope(
-          child: Focus(
-            onFocusChange: (focus) => form.onFieldFocusChanged<TValue>(
-              widget.loKey,
-              focus,
-            ),
-            child: widget.builder(
-              form.fields.get<TValue>(widget.loKey),
-            ),
-          ),
-        );
-      },
+    final state = LoScope.of<TKey>(context);
+
+    return FocusScope(
+      child: Focus(
+        onFocusChange: (focus) => state.onFieldFocusChanged<TValue>(
+          widget.loKey,
+          focus,
+        ),
+        child: widget.builder(
+          state.fields.get<TValue>(widget.loKey),
+        ),
+      ),
     );
   }
 }

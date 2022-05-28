@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 import 'lo_form_base_validator.dart';
 import 'lo_form_state.dart';
+import 'lo_scope.dart';
 import 'types.dart';
 
 class LoForm<TKey> extends StatefulWidget {
@@ -64,10 +64,13 @@ class _LoFormState<TKey> extends State<LoForm<TKey>> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => formState,
-      child: Consumer<LoFormState<TKey>>(
-        builder: (_, state, __) => widget.builder(state),
+    return LoScope<TKey>(
+      state: formState,
+      child: Builder(
+        builder: (context) {
+          final state = LoScope.of<TKey>(context);
+          return widget.builder(state);
+        },
       ),
     );
   }
