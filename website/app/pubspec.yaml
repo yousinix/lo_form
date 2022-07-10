@@ -8,11 +8,11 @@ environment:
 
 dependencies:
   example:
-    path: ../package/example
+    path: ../../package/example
   flutter:
     sdk: flutter
   lo_form:
-    path: ../package
+    path: ../../package
   universal_html: ^2.0.8
 
 dev_dependencies:

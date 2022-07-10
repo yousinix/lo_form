@@ -14,21 +14,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
-
-      - name: Install bundler
-        run: gem install bundler
-
-      - name: Install gems
-        run: bundle
-        working-directory: website/src/
-
-      - name: Build Jekyll
-        run: bundle exec jekyll build
-        working-directory: website/src/
+      - name: Build 11ty
+        run: yarn install && yarn build
+        working-directory: website
 
       - uses: subosito/flutter-action@v1
         with:
@@ -36,4 +24,4 @@ jobs:
 
       - uses: erickzanardo/flutter-gh-pages@v6
         with:
-          workingDir: website
+          workingDir: website/app

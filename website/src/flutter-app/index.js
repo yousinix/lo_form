@@ -4,7 +4,7 @@ customElements.define(
     constructor() {
       super();
       this.innerHTML = `
-        <iframe id="app" src="index-flutter.html"></iframe>
+        <iframe id="app" src="flutter-app/index.html"></iframe>
       `;
     }
   }

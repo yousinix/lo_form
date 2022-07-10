@@ -1,7 +1,0 @@
-source "https://rubygems.org"
-
-gem "jekyll", "~> 3.9.1"
-gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
-
-# For LiveReload: https://robbinespu.gitlab.io/posts/jekyll-unable-load-eventmachine/
-gem 'eventmachine', '1.2.7', github: 'eventmachine/eventmachine', tag: 'v1.2.7'
