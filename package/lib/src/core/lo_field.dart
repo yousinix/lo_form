@@ -53,13 +53,12 @@ class _LoFieldState<TKey, TValue> extends State<LoField<TKey, TValue>> {
     final state = LoScope.of<TKey>(context);
     // Focus is needed to use onFocusChanged to mark fields as touched
     return Focus(
-      skipTraversal:
-          true, // ignore this Focus becase TextField already has one of its own
+      // Ignore this Focus because LoFields already have their own
+      skipTraversal: true,
       onFocusChange: (focus) => state.onFieldFocusChanged<TValue>(
         widget.loKey,
         focus,
       ),
-      debugLabel: 'LoForm:${widget.loKey.toString()}',
       child: widget.builder(
         state.fields.get<TValue>(widget.loKey),
       ),
