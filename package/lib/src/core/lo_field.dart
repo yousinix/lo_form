@@ -32,6 +32,7 @@ class LoField<TKey, TValue> extends StatefulWidget {
   final Widget Function(LoFieldState<TKey, TValue>) builder;
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoFieldState<TKey, TValue> createState() => _LoFieldState<TKey, TValue>();
 }
 

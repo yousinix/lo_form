@@ -39,5 +39,6 @@ class LoLengthValidator implements LoFieldBaseValidator<String> {
     if (value == null) return null;
     if (min != null && value.length < min!) return message;
     if (max != null && value.length > max!) return message;
+    return null;
   }
 }

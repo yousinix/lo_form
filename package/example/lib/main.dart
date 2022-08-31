@@ -51,6 +51,7 @@ class RegisterForm extends StatelessWidget {
         } else {
           // Invalid submission (API errors)
           setErrors(response.validationErrors!);
+          return null;
         }
       },
       builder: (form) {

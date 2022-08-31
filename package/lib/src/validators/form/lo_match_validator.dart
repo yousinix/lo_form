@@ -26,5 +26,7 @@ class LoMatchValidator<TKey> extends LoFormBaseValidator<TKey> {
     } else if (masterValue != null && slaveValue != null) {
       return {slave: null}; // Clear error
     }
+
+    return null;
   }
 }

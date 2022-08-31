@@ -46,6 +46,8 @@ abstract class LoValidator<TIn, TOut> {
       if (firstError != null) {
         return defaultError ?? firstError;
       }
+
+      return null;
     };
   }
 }
