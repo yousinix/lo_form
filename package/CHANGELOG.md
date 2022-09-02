@@ -1,3 +1,9 @@
+## 0.5.0
+
+- Support Flutter 3.
+- Drop dependency on [provider](https://pub.dev/packages/provider).
+- Fix tab traversal issue from [@Leviatanus](https://github.com/Leviatanus).
+
 ## 0.4.0
 
 - Add `all` (like AND operator) and `any` (like OR operator) named constructors to validators.
