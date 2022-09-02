@@ -3,9 +3,6 @@ name: GitHub Pages
 on:
   push:
     branches: [master]
-    paths:
-      - website/**
-      - package/example/**
 
 jobs:
   build:
