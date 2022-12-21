@@ -1,0 +1,346 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;900&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+#app,
+flutter-app {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.stacked {
+  display: grid;
+}
+.stacked > * {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.section {
+  display: flex;
+  padding: 12px;
+}
+.section__content {
+  margin: auto;
+  max-width: 800px;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.section__content--extra {
+  max-width: calc(800px + 200px);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media screen and (min-width: 992px) {
+  .demo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0px 24px;
+}
+@media screen and (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    padding-left: 16px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 24px;
+  }
+}
+
+.footer {
+  padding: 16px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(19, 137, 253, 0.04);
+  border-top: solid 1px #1389fd;
+}
+
+.text--title-1 {
+  font-size: calc(1.625rem + 4.2vw);
+  text-align: center;
+  line-height: 1;
+}
+.text--title-2 {
+  font-size: calc(1.5rem + 3.7vw);
+  text-align: center;
+  line-height: 1;
+}
+.text--primary {
+  color: #1389fd;
+}
+.text--red {
+  color: red;
+}
+.text--green {
+  color: #349634;
+}
+.text--no-decoration {
+  text-decoration: none;
+}
+
+.btn {
+  padding: 16px 40px;
+  background-color: #1389fd;
+  border-radius: 16px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+}
+.btn:hover {
+  background-color: #0175c2;
+}
+
+.card {
+  position: relative;
+  height: 360px;
+  border-radius: 16px;
+  padding: 24px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.24);
+  border: solid 1px #1389fd;
+}
+.card:hover .card__action {
+  display: inline;
+}
+.card__action {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  padding: 10px;
+  background-color: white;
+  border: solid 1px #1389fd;
+  border-radius: 100%;
+  font-size: 12px;
+  color: #222;
+}
+.card__action:hover {
+  border-color: #02569b;
+}
+.card__hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.64);
+}
+.card--loading {
+  background: linear-gradient(to right, #fefefe 0%, #f3f3f3 50%, #fefefe 100%);
+  background-size: 1200px 100%;
+  background-repeat: repeat;
+  animation-duration: 2.2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+}
+.card--loading * {
+  display: none !important;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+  box-shadow: -1px 2px 10px -3px rgba(0, 0, 0, 0.24);
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+}
+.nav__logo img {
+  height: 24px;
+  margin-right: 12px;
+}
+.nav__links {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+}
+.nav__link * {
+  text-decoration: none;
+  font-weight: bold;
+  color: #222;
+}
+
+.pattern {
+  z-index: -100;
+  height: calc(80vh * 1.5);
+  background-image: url("../images/pattern.svg");
+  background-repeat: repeat;
+  opacity: 0.08;
+  box-shadow: inset 0 -100px 100px -50px #fff;
+}
+
+.feature {
+  font-size: 18px;
+  margin: 8px 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table tr {
+  border-bottom: 1pt solid #d5d7da;
+}
+.table th {
+  padding: 16px;
+  padding-top: 0;
+  text-align: start;
+}
+.table th:nth-child(2) {
+  width: 90px;
+}
+.table td {
+  padding: 14px;
+}
+.table thead {
+  font-size: 15px;
+}
+.table tbody,
+.table tfoot {
+  font-size: 14px;
+}
+.table tfoot {
+  font-weight: bold;
+  background-color: rgba(19, 137, 253, 0.12);
+}
+.table tfoot tr {
+  border: none;
+}
+
+.status--pure {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--pure::before {
+  content: "pure";
+}
+.status--valid {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: green;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--valid::before {
+  content: "valid";
+}
+.status--invalid {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--invalid::before {
+  content: "invalid";
+}
+.status--mixed {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: indigo;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--mixed::before {
+  content: "mixed";
+}
+.status--loading {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--loading::before {
+  content: "loading";
+}
+.status--success {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: darkgreen;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--success::before {
+  content: "success";
+}
+.status--failure {
+  padding: 6px 16px;
+  border-radius: 16px;
+  background-color: darkred;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status--failure::before {
+  content: "failure";
+}
+
+/*# sourceMappingURL=main.css.map */
