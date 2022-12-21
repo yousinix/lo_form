@@ -66,17 +66,17 @@ void main() {
     () {
       test('[username] should be invalid for short value', () {
         form.onFieldValueChanged('username', 'x');
-        expect(form.fields['username']!.status, LoStatus.invalid);
+        expect(form.fields['username']!.status, LoFieldStatus.invalid);
       });
 
       test('[username] should be pure for initial value', () {
         form.onFieldValueChanged('username', 'tester');
-        expect(form.fields['username']!.status, LoStatus.pure);
+        expect(form.fields['username']!.status, LoFieldStatus.pure);
       });
 
       test('[username] should be valid for long value', () {
         form.onFieldValueChanged('username', 'long_name');
-        expect(form.fields['username']!.status, LoStatus.valid);
+        expect(form.fields['username']!.status, LoFieldStatus.valid);
       });
     },
   );

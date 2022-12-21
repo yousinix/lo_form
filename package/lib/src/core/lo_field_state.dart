@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'debouncer.dart';
 import 'lo_field_base_validator.dart';
-import 'lo_status.dart';
+import 'lo_field_status.dart';
 
 class LoFieldState<TKey, TValue> {
   LoFieldState({
@@ -72,16 +72,16 @@ class LoFieldState<TKey, TValue> {
 
   /// The current field status:
   ///
-  /// * [LoStatus.pure], if the [value] equals [initialValue].
-  /// * [LoStatus.valid], if the [error] is null.
-  /// * [LoStatus.invalid], if the [error] is not null.
-  LoStatus get status {
+  /// * [LoFieldStatus.pure], if the [value] equals [initialValue].
+  /// * [LoFieldStatus.valid], if the [error] is null.
+  /// * [LoFieldStatus.invalid], if the [error] is not null.
+  LoFieldStatus get status {
     if (error != null) {
-      return LoStatus.invalid;
+      return LoFieldStatus.invalid;
     } else if (value == initialValue) {
-      return LoStatus.pure;
+      return LoFieldStatus.pure;
     } else {
-      return LoStatus.valid;
+      return LoFieldStatus.valid;
     }
   }
 

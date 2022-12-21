@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'lo_field_state.dart';
-import 'lo_status.dart';
+import 'lo_field_status.dart';
+import 'lo_form_status.dart';
 
 typedef FieldsMap<TKey> = Map<TKey, LoFieldState<TKey, dynamic>>;
 typedef ValMap<TKey> = Map<TKey, dynamic>;
 typedef ErrMap<TKey> = Map<TKey, String?>;
 
 typedef ValidateFunc<TIn, TOut> = TOut? Function(TIn);
-typedef StatusCheckFunc = bool Function(LoStatus);
+typedef StatusCheckFunc = bool Function(LoFormStatus);
 typedef SetErrFunc<TKey> = void Function(ErrMap<TKey>);
 typedef SubmitFunc<TKey> = FutureOr<bool?>? Function(
   ValMap<TKey>,
@@ -30,7 +31,7 @@ extension FieldsMapX<TKey> on FieldsMap<TKey> {
     return map((key, field) => MapEntry(key, field.value));
   }
 
-  List<LoStatus> getStatuses() {
+  List<LoFieldStatus> getStatuses() {
     return values.map((field) => field.status).toList();
   }
 }

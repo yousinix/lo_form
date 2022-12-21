@@ -6,8 +6,9 @@ import 'package:meta/meta.dart';
 import 'lo_config.dart';
 import 'lo_field_base_validator.dart';
 import 'lo_field_state.dart';
+import 'lo_field_status.dart';
 import 'lo_form_base_validator.dart';
-import 'lo_status.dart';
+import 'lo_form_status.dart';
 import 'types.dart';
 
 class LoFormState<TKey> extends ChangeNotifier {
@@ -18,7 +19,7 @@ class LoFormState<TKey> extends ChangeNotifier {
     this.onChanged,
     this.submittableWhen,
   })  : fields = {},
-        status = LoStatus.pure;
+        status = LoFormStatus.pure;
 
   /// {@template LoFormState.initialValues}
   /// Map between [LoField.loKey] and their initial value.
@@ -60,7 +61,7 @@ class LoFormState<TKey> extends ChangeNotifier {
   final FieldsMap<TKey> fields;
 
   /// Current form status, [LoStatusX.and] method is used to evaluate this.
-  LoStatus status;
+  LoFormStatus status;
 
   /// Returns the [handleSubmit] method if [submittableWhen]
   /// is null or true, otherwise returns null.
@@ -135,14 +136,14 @@ class LoFormState<TKey> extends ChangeNotifier {
   /// Submits form using the current values and calls [onSubmit],
   /// modifies status based on the result.
   Future<void> handleSubmit() async {
-    status = LoStatus.loading;
+    status = LoFormStatus.loading;
     notifyListeners();
 
     final result = await onSubmit?.call(fields.getValues(), setErrors);
 
     // When no result is returned, means the form became invalid
     if (result != null) {
-      status = result ? LoStatus.success : LoStatus.failure;
+      status = result ? LoFormStatus.success : LoFormStatus.failure;
     }
 
     notifyListeners();
@@ -161,7 +162,10 @@ class LoFormState<TKey> extends ChangeNotifier {
       }
     });
 
-    status = fields.getStatuses().reduce((res, x) => res.and(x));
+    status = fields
+        .getStatuses()
+        .map((e) => e.toFormStatus())
+        .reduce((x, y) => x.and(y));
   }
 
   @override

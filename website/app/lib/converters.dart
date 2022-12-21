@@ -8,7 +8,7 @@ String formStateToJson(LoFormState state) {
   return encoder.convert(map);
 }
 
-String statusToString(LoStatus status) {
+String statusToString(Enum status) {
   return status.toString().split('.')[1];
 }
 
