@@ -69,7 +69,7 @@ class RegisterForm extends StatelessWidget {
                     LoRegExpValidator.email(),
                   ],
                   'Invalid username or email',
-                )
+                ),
               ],
               props: const TextFieldProps(
                 decoration: InputDecoration(

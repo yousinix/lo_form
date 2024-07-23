@@ -7,7 +7,7 @@ import 'types.dart';
 
 class LoForm<TKey> extends StatefulWidget {
   const LoForm({
-    Key? key,
+    super.key,
     this.initialValues,
     this.validators,
     required this.onSubmit,
@@ -15,7 +15,7 @@ class LoForm<TKey> extends StatefulWidget {
     this.onReady,
     this.submittableWhen,
     required this.builder,
-  }) : super(key: key);
+  });
 
   /// {@macro LoFormState.initialValues}
   final ValMap<TKey>? initialValues;
@@ -83,7 +83,7 @@ class _LoFormState<TKey> extends State<LoForm<TKey>> {
 /// We use this so that APIs that have become
 /// non-nullable can still be used with `!` and `?`
 /// to support older versions of the API as well.
-/// 
+///
 /// For more info:
 /// https://docs.flutter.dev/development/tools/sdk/release-notes/release-notes-3.0.0
 T? _ambiguate<T>(T? value) => value;

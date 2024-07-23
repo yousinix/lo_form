@@ -6,6 +6,7 @@ class LoFieldValidator<T> implements LoFieldBaseValidator<T> {
   LoFieldValidator(this.validateImpl);
 
   /// {@template LoValidator.all}
+  /// {@endtemplate}
   LoFieldValidator.all(
     List<LoFieldBaseValidator<T>> validators, [
     String? message,
@@ -15,6 +16,7 @@ class LoFieldValidator<T> implements LoFieldBaseValidator<T> {
         );
 
   /// {@template LoValidator.any}
+  /// {@endtemplate}
   LoFieldValidator.any(
     List<LoFieldBaseValidator<T>> validators, [
     String? message,

@@ -67,7 +67,7 @@ class LoFieldState<TKey, TValue> {
   ValueChanged<TValue> get onChanged {
     return _debouncer == null
         ? _onValueChanged
-        : (v) => _debouncer?.run(() => _onValueChanged(v));
+        : (v) => _debouncer.run(() => _onValueChanged(v));
   }
 
   /// The current field status:

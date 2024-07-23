@@ -15,7 +15,7 @@ class LoCheckbox<TKey> extends StatelessWidget {
   final TextStyle? errorStyle;
 
   const LoCheckbox({
-    Key? key,
+    super.key,
     required this.loKey,
     this.initialValue,
     this.validators,
@@ -23,7 +23,7 @@ class LoCheckbox<TKey> extends StatelessWidget {
     this.props,
     required this.label,
     this.errorStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +70,15 @@ class LoCheckbox<TKey> extends StatelessWidget {
                     Text(
                       state.error!,
                       style: errorStyle ??
-                          Theme.of(context).textTheme.caption!.copyWith(
-                                color: Theme.of(context).errorColor,
+                          Theme.of(context).textTheme.labelLarge!.copyWith(
+                                color: Theme.of(context).colorScheme.error,
                               ),
                     ),
-                  }
+                  },
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

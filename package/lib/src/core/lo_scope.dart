@@ -4,13 +4,11 @@ import '../../core.dart';
 
 class LoScope<TKey> extends InheritedNotifier<LoFormState<TKey>> {
   const LoScope({
-    Key? key,
+    super.key,
     required LoFormState<TKey> state,
-    required Widget child,
+    required super.child,
   }) : super(
-          key: key,
           notifier: state,
-          child: child,
         );
 
   static LoFormState<TKey> of<TKey>(BuildContext context) {

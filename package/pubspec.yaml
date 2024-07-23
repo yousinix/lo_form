@@ -6,8 +6,8 @@ homepage: https://YoussefRaafatNasry.github.io/lo_form
 documentation: https://docs.page/YoussefRaafatNasry/lo_form
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
-  flutter: ">=2.0.0"
+  sdk: '>=3.3.1 <4.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
