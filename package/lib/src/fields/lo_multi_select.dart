@@ -27,19 +27,21 @@ class LoMultiSelect<T> extends StatelessWidget {
       builder: (state) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...options.map((option) => CheckboxListTile(
-                title: Text(option.label),
-                value: state.value?.contains(option.value) ?? false,
-                onChanged: (bool? value) {
-                  final newValue = List<T>.from(state.value ?? []);
-                  if (value == true) {
-                    newValue.add(option.value);
-                  } else {
-                    newValue.remove(option.value);
-                  }
-                  state.onChanged(newValue);
-                },
-              )),
+          ...options.map(
+            (option) => CheckboxListTile(
+              title: Text(option.label),
+              value: state.value?.contains(option.value) ?? false,
+              onChanged: (bool? value) {
+                final newValue = List<T>.from(state.value ?? []);
+                if (value == true) {
+                  newValue.add(option.value);
+                } else {
+                  newValue.remove(option.value);
+                }
+                state.onChanged(newValue);
+              },
+            ),
+          ),
           if (state.error != null)
             Text(
               state.error!,
