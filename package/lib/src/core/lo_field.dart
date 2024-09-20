@@ -8,13 +8,13 @@ import 'types.dart';
 /// All form fields inside [LoForm] must be wrapped inside this.
 class LoField<TKey, TValue> extends StatefulWidget {
   const LoField({
-    Key? key,
+    super.key,
     required this.loKey,
     this.initialValue,
     this.validators,
     this.debounceTime,
     required this.builder,
-  }) : super(key: key);
+  });
 
   /// {@macro LoFieldState.loKey}
   final TKey loKey;

@@ -3,7 +3,43 @@ import 'package:flutter/material.dart';
 import '../../core.dart';
 import 'props.dart';
 
-class CheckboxProps = Checkbox with Props;
+class CheckboxProps implements Props {
+  final Key? key;
+  final bool? tristate;
+  final MouseCursor? mouseCursor;
+  final Color? activeColor;
+  final WidgetStateProperty<Color?>? fillColor;
+  final Color? checkColor;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final WidgetStateProperty<Color?>? overlayColor;
+  final double? splashRadius;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final VisualDensity? visualDensity;
+  final FocusNode? focusNode;
+  final bool? autofocus;
+  final OutlinedBorder? shape;
+  final BorderSide? side;
+
+  const CheckboxProps({
+    this.key,
+    this.tristate,
+    this.mouseCursor,
+    this.activeColor,
+    this.fillColor,
+    this.checkColor,
+    this.focusColor,
+    this.hoverColor,
+    this.overlayColor,
+    this.splashRadius,
+    this.materialTapTargetSize,
+    this.visualDensity,
+    this.focusNode,
+    this.autofocus,
+    this.shape,
+    this.side,
+  });
+}
 
 class LoCheckbox<TKey> extends StatelessWidget {
   final TKey loKey;
@@ -15,7 +51,7 @@ class LoCheckbox<TKey> extends StatelessWidget {
   final TextStyle? errorStyle;
 
   const LoCheckbox({
-    Key? key,
+    super.key,
     required this.loKey,
     this.initialValue,
     this.validators,
@@ -23,7 +59,7 @@ class LoCheckbox<TKey> extends StatelessWidget {
     this.props,
     required this.label,
     this.errorStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +106,15 @@ class LoCheckbox<TKey> extends StatelessWidget {
                     Text(
                       state.error!,
                       style: errorStyle ??
-                          Theme.of(context).textTheme.caption!.copyWith(
-                                color: Theme.of(context).errorColor,
+                          Theme.of(context).textTheme.labelLarge!.copyWith(
+                                color: Theme.of(context).colorScheme.error,
                               ),
                     ),
-                  }
+                  },
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

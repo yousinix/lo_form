@@ -13,13 +13,13 @@ class LoTextField<TKey> extends StatelessWidget {
   final TextFieldProps? props;
 
   const LoTextField({
-    Key? key,
+    super.key,
     required this.loKey,
     this.initialValue,
     this.validators,
     this.debounceTime,
     this.props,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class LoTextField<TKey> extends StatelessWidget {
         textAlignVertical: props?.textAlignVertical,
         textDirection: props?.textDirection,
         readOnly: props?.readOnly ?? false,
-        toolbarOptions: props?.toolbarOptions,
+        contextMenuBuilder: props?.contextMenuBuilder,
         showCursor: props?.showCursor,
         autofocus: props?.autofocus ?? false,
         obscuringCharacter: props?.obscuringCharacter ?? '•',
