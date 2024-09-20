@@ -3,7 +3,43 @@ import 'package:flutter/material.dart';
 import '../../core.dart';
 import 'props.dart';
 
-class CheckboxProps = Checkbox with Props;
+class CheckboxProps implements Props {
+  final Key? key;
+  final bool? tristate;
+  final MouseCursor? mouseCursor;
+  final Color? activeColor;
+  final WidgetStateProperty<Color?>? fillColor;
+  final Color? checkColor;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final WidgetStateProperty<Color?>? overlayColor;
+  final double? splashRadius;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final VisualDensity? visualDensity;
+  final FocusNode? focusNode;
+  final bool? autofocus;
+  final OutlinedBorder? shape;
+  final BorderSide? side;
+
+  const CheckboxProps({
+    this.key,
+    this.tristate,
+    this.mouseCursor,
+    this.activeColor,
+    this.fillColor,
+    this.checkColor,
+    this.focusColor,
+    this.hoverColor,
+    this.overlayColor,
+    this.splashRadius,
+    this.materialTapTargetSize,
+    this.visualDensity,
+    this.focusNode,
+    this.autofocus,
+    this.shape,
+    this.side,
+  });
+}
 
 class LoCheckbox<TKey> extends StatelessWidget {
   final TKey loKey;

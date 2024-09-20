@@ -1,9 +1,58 @@
 import 'package:flutter/material.dart';
 
 import '../../core.dart';
-import 'props.dart';
 
-class LoDropdownProps = DropdownButton with Props;
+class DropdownProps {
+  final Key? key;
+  final FocusNode? focusNode;
+  final TextStyle? style;
+  final bool autofocus;
+  final VoidCallback? onTap;
+  final Color? dropdownColor;
+  final Widget? disabledHint;
+  final bool isDense;
+  final bool isExpanded;
+  final double? itemHeight;
+  final Color? focusColor;
+  final Widget? icon;
+  final Color? iconDisabledColor;
+  final Color? iconEnabledColor;
+  final double iconSize;
+  final int elevation;
+  final double? menuMaxHeight;
+  final bool? enableFeedback;
+  final AlignmentGeometry alignment;
+  final BorderRadius? borderRadius;
+  final EdgeInsetsGeometry? padding;
+  final InputDecoration? decoration;
+  final List<Widget> Function(BuildContext)? selectedItemBuilder;
+
+  const DropdownProps({
+    this.key,
+    this.focusNode,
+    this.style,
+    this.autofocus = false,
+    this.onTap,
+    this.dropdownColor,
+    this.disabledHint,
+    this.isDense = false,
+    this.isExpanded = false,
+    this.itemHeight,
+    this.focusColor,
+    this.icon,
+    this.iconDisabledColor,
+    this.iconEnabledColor,
+    this.iconSize = 24.0,
+    this.elevation = 8,
+    this.menuMaxHeight,
+    this.enableFeedback,
+    this.alignment = AlignmentDirectional.centerStart,
+    this.borderRadius,
+    this.padding,
+    this.decoration,
+    this.selectedItemBuilder,
+  });
+}
 
 class LoDropdown<TValue> extends StatelessWidget {
   final String loKey;
@@ -11,7 +60,7 @@ class LoDropdown<TValue> extends StatelessWidget {
   final List<LoFieldBaseValidator<TValue>>? validators;
   final Duration? debounceTime;
   final List<DropdownMenuItem<TValue>> items;
-  final LoDropdownProps? props;
+  final DropdownProps? props;
 
   const LoDropdown({
     super.key,
@@ -30,11 +79,11 @@ class LoDropdown<TValue> extends StatelessWidget {
       initialValue: initialValue,
       validators: validators,
       debounceTime: debounceTime,
-      builder: (state) => DropdownButton<TValue?>(
+      builder: (state) => DropdownButtonFormField<TValue?>(
         value: state.value,
         onChanged: (value) => state.onChanged(value as TValue),
-        selectedItemBuilder: props?.selectedItemBuilder,
         items: items,
+        // Apply all properties from DropdownProps
         key: props?.key,
         focusNode: props?.focusNode,
         style: props?.style,
@@ -56,11 +105,12 @@ class LoDropdown<TValue> extends StatelessWidget {
         alignment: props?.alignment ?? AlignmentDirectional.centerStart,
         borderRadius: props?.borderRadius,
         padding: props?.padding,
-        underline: props?.underline ??
-            Text(
-              state.error ?? '',
-              style: const TextStyle(color: Colors.red, fontSize: 12),
-            ),
+        selectedItemBuilder: props?.selectedItemBuilder,
+        decoration: (props?.decoration ??
+                InputDecoration(
+                  errorText: state.error,
+                ))
+            .applyDefaults(Theme.of(context).inputDecorationTheme),
       ),
     );
   }

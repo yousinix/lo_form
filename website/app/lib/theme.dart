@@ -16,9 +16,7 @@ class AppTheme {
   ThemeData get theme => ThemeData(
         // Colors
         primaryColor: AppColors.primary600,
-        toggleableActiveColor: AppColors.primary300,
         canvasColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
 
         // Checkbox
         checkboxTheme: const CheckboxThemeData(
@@ -63,6 +61,31 @@ class AppTheme {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-        ),
+        ), checkboxTheme: const CheckboxThemeData(
+          shape: CircleBorder(),
+        ).copyWith(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return AppColors.primary300; }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return AppColors.primary300; }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return AppColors.primary300; }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return AppColors.primary300; }
+ return null;
+ }),
+ ), colorScheme: ColorScheme(background: Colors.transparent),
       );
 }
